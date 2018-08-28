@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#003333"
         android:orientation="vertical"
         android:paddingBottom="70dp"
         android:paddingLeft="70dp"
@@ -20,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:background="@color/colorPrimaryDark"
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_account_circle_white_48" />
 
@@ -37,6 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/usernam" />
 
             <EditText
@@ -44,6 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
+                android:layout_marginTop="16dp"
                 android:hint="User name"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -52,7 +54,7 @@
             android:id="@+id/id_pass"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -74,90 +76,57 @@
                 android:textSize="10dp" />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/btnRememberPass"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="#003333"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="right|center_vertical"
+            android:text="Forgot Password"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="italic" />
 
-            <CheckBox
-                android:id="@+id/ckbRemmemberPass"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="0dp"
-                android:layout_weight="1.5"
-                android:text="Remember Password"
-                android:textColor="#FFFFFF"
-                android:textSize="10dp" />
 
-            <Button
-                android:id="@+id/btnRememberPass"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center"
-                android:layout_marginRight="0dp"
-                android:layout_weight="1"
-                android:background="#003333"
-                android:gravity="right|center"
-                android:text="Forgot Password"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="10dp"
-                android:textStyle="italic" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="#003333"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txtNeuChuaCoAcc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="0dp"
-                android:layout_weight="1"
-                android:text="Nếu chưa có tài khoản"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="italic" />
-
-            <Button
-                android:id="@+id/btnNhapVaoDay"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center"
-                android:layout_marginLeft="0dp"
-                android:layout_weight="1"
-                android:background="#003333"
-                android:gravity="left|center"
-                android:text="Nhấn vào đây"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="italic" />
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/ckbRemmemberPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="0dp"
+            android:text="Remember Password"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="#929894"
             android:text="Log in"
             android:textAllCaps="true"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/txtNeuChuaCoAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
+            android:text="Nếu chưa có tài khoản Nhấn vào đây"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="italic" />
+        />
     </LinearLayout>
+
 
 
 

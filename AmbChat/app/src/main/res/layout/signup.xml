@@ -20,7 +20,7 @@
             android:layout_weight="0.5"
             android:background="#95a39a"
             android:scaleType="fitCenter"
-            android:src="@drawable/baseline_account_circle_white_48" />
+            android:src="@drawable/baseline_person_pin_white_48" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +65,7 @@
                 android:textColor="#000000" />
 
             <RadioGroup
-                android:id="@+id/spnGender"
+
                 android:layout_width="0dp"
                 android:layout_weight="8"
                 android:layout_height="wrap_content"
@@ -74,12 +74,14 @@
                 android:layout_marginLeft="20dp">
 
                 <RadioButton
+                    android:id="@+id/radMale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
                     android:layout_marginRight="16sp"
                     android:layout_marginLeft="16sp"/>
                 <RadioButton
+                    android:id="@+id/radFemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FeMale"

@@ -21,7 +21,7 @@
             android:layout_weight="2"
             android:background="@color/colorPrimaryDark"
             android:scaleType="fitCenter"
-            android:src="@drawable/baseline_account_circle_white_48" />
+            android:src="@drawable/baseline_person_pin_white_48" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/usernam" />
+                android:src="@drawable/baseline_person_white_48" />
 
             <EditText
                 android:id="@+id/edtUserName"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
-                android:src="@drawable/password" />
+                android:src="@drawable/outline_lock_white_48" />
 
             <EditText
                 android:id="@+id/edtPass"

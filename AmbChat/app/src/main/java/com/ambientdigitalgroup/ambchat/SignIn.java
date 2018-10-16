@@ -2,6 +2,7 @@ package com.ambientdigitalgroup.ambchat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +43,15 @@ public class SignIn extends AppCompatActivity{
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword,txtRegisterAcount;
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
+     int res;
+
+
+    public static String SHA256(String pass) throws NoSuchAlgorithmException{
+        MessageDigest messageDigest=MessageDigest.getInstance("SHA-256");
+        messageDigest.update(pass.getBytes());
+        byte[] digest = messageDigest.digest();
+        return android.util.Base64.encodeToString(digest, android.util.Base64.DEFAULT);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +60,11 @@ public class SignIn extends AppCompatActivity{
         addControls();
        // if(CheckInvalidData()==true){
             addEvent();
-       // }
-      //  else{
+       // }-
+       //  else{
           //  Toast.makeText(getBaseContext(),"User name or password Invalid",Toast.LENGTH_SHORT).show();
          //   return;
-      //  }
-
+       //  }
     }
 
     public void addControls(){
@@ -62,6 +74,14 @@ public class SignIn extends AppCompatActivity{
        txtRegisterAcount=(TextView) findViewById(R.id.txtRegisterAcount);
        ckbRememberpass=(CheckBox) findViewById(R.id.ckbRemmemberPass);
        btnSigIn=(Button) findViewById(R.id.btnLogIn);
+       //Test encode SHA256
+       String pass= edtPassWord.getText().toString();
+        try {
+            String encodeSHA256=SHA256(pass);
+            Toast.makeText(SignIn.this,encodeSHA256,Toast.LENGTH_LONG).show();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     public  void addEvent(){
@@ -72,6 +92,15 @@ public class SignIn extends AppCompatActivity{
                 // new DoLogIn("nana","6B4F2790D01A6815EC2C7AC8D0AF0F6862A012EDEA70D28FD73997E33DC393A7").execute();
                 //execut class dologin
                 new DoLogIn(edtUserName.getText().toString().trim(),edtPassWord.getText().toString().trim()).execute();
+
+                if(res==0){
+
+                    Intent intHomeActivity=new Intent(SignIn.this,HomeActivity.class);
+                    startActivity(intHomeActivity);
+                }
+                else {
+                        ShowMessage(getBaseContext(),"Else is run");
+                }
             }
         });
     }
@@ -139,7 +168,20 @@ public class SignIn extends AppCompatActivity{
                     try {
                         JSONObject json = new JSONObject(s);
                         final String serverResponse = json.getString("message");
-                        ShowMessage(getBaseContext(),serverResponse);
+                        res=json.getInt("error");
+                        //get profile user
+                        JSONObject ob_user=json.getJSONObject("data");
+                        ProfileUser.username=ob_user.getString("user_name");
+                        ProfileUser.fullname=ob_user.getString("full_name");
+                     //   ProfileUser.gender=ob_user.getInt("gender");
+                        ProfileUser.email=ob_user.getString("email");
+                        ProfileUser.userid=ob_user.getInt("user_id");
+                     /*   ProfileUser.username="ngoc danh";
+                        ProfileUser.fullname="Bui Ngoc Danh";
+                        //   ProfileUser.gender=ob_user.getInt("gender");
+                        ProfileUser.email="buingocdanh97@gmail.com";
+                        ProfileUser.userid=1;
+*/
                     } catch (Exception e){
                         e.printStackTrace();
                     }

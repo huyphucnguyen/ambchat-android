@@ -22,16 +22,17 @@
             android:layout_height="wrap_content"
             android:hint="Search mess"
             android:layout_weight="3"/>
+
         <Button
             android:id="@+id/btnSearchFr"
-            android:layout_width="0dp"
+            android:layout_width="53dp"
             android:layout_height="wrap_content"
-            android:hint="Search"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
+            android:hint="Search"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:layout_weight="1"/>
+            android:textSize="24sp" />
 
     </LinearLayout>
 

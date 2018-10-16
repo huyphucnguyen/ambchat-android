@@ -2,9 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
     android:background="@color/colorAccent"
     android:orientation="vertical">
 
@@ -14,6 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:scaleType="centerCrop"
+        android:background="@color/colorPrimary"
         android:src="@drawable/baseline_person_pin_white_48dp" />
 
     <LinearLayout
@@ -21,28 +19,35 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="horizontal">
+        <TextView
 
-        <EditText
-            android:id="@+id/edtUserName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.3"
             android:gravity="left"
-            android:text="Tên của bạn"
+            android:text="Name: "
             android:textColor="#000000"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txtUpdateUserName"
+        <EditText
+            android:id="@+id/edtFullNameInfor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+<<<<<<< Updated upstream
             android:layout_marginLeft="16dp"
             android:layout_weight="0.5"
-            android:gravity="right"
+            android:gravity="center"
             android:text="Cập nhật"
+=======
+            android:layout_weight="0.7"
+            android:gravity="left"
+            android:text="full name"
+>>>>>>> Stashed changes
             android:textColor="#000000"
             android:textSize="20sp" />
     </LinearLayout>
@@ -50,20 +55,91 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+<<<<<<< Updated upstream
         android:layout_gravity="left"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1">
+=======
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+>>>>>>> Stashed changes
 
         <TextView
-            android:id="@+id/txtGender"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.3"
+            android:gravity="left"
+            android:text="UserName"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/edtUserNameInfor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.7"
             android:gravity="left"
-            android:text="Giới tính"
+            android:text="user name"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_marginTop="1dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.3"
+            android:gravity="left"
+            android:text="Password: "
             android:textColor="#000000"
             android:textSize="20sp" />
+        <EditText
+            android:id="@+id/edtPassWordInfor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.7"
+            android:gravity="left"
+            android:text="pass ne"
+            android:textColor="#000000"
+            android:password="true"
+            android:textSize="20sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="left"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="5dp"
+            android:gravity="left"
+            android:text="Gender"
+            android:textColor="#000000"
+            android:textSize="20sp" />
         <RadioGroup
 
             android:layout_width="0dp"
@@ -74,7 +150,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radMale"
+                android:id="@+id/radMaleInfor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -82,112 +158,58 @@
                 android:text="Male" />
 
             <RadioButton
-                android:id="@+id/radFemale"
+                android:id="@+id/radFemaleInfor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="FeMale" />
         </RadioGroup>
-
-        <TextView
-            android:id="@+id/txtUpdateGender"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.7"
-            android:gravity="center"
-            android:text="Cập nhật"
-            android:textColor="#000000"
-            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
         android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="horizontal">
-
         <TextView
-            android:id="@+id/txtAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.4"
             android:gravity="left"
-            android:text="Địa chỉ"
+            android:text="Email: "
             android:textColor="#000000"
             android:textSize="20sp" />
-
         <EditText
-            android:id="@+id/edtAddress"
+            android:id="@+id/edtEmailInfor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Địa chỉ" />
-
-        <TextView
-            android:id="@+id/txtUpdateAddress"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="Cập nhật"
+            android:layout_weight="0.8"
+            android:gravity="left"
+            android:hint="Email ne"
             android:textColor="#000000"
             android:textSize="20sp" />
     </LinearLayout>
+<<<<<<< Updated upstream
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="left"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:gravity="left"
-            android:text="Số điện thoại"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/edtPhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Số điện thoại" />
-
-        <TextView
-            android:id="@+id/txtUpdatePhone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:text="Cập nhật"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/txtDelete"
+</LinearLayout>
+=======
+    <Button
+        android:id="@+id/btnUpdateInfor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Xóa liên hệ"
+        android:text="Update infor"
         android:textColor="#000000"
-        android:textSize="20sp" />
-</LinearLayout>
+        android:textSize="20sp"
+        android:layout_margin="10dp"/>
+    </LinearLayout>
+>>>>>>> Stashed changes

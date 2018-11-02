@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#d6cfcf"
     android:orientation="vertical"
-    tools:context=".InforUserFragment">
-  <!--  <include layout="@layout/app_bar_layout" android:id="@+id/infor_user_toolbar" />-->
+    tools:context=".fragments.InforUserFragment">
+    <!--  <include layout="@layout/app_bar_layout" android:id="@+id/infor_user_toolbar" />-->
     <ImageView
         android:id="@+id/imgAvatar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:scaleType="centerCrop"
         android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
         android:src="@drawable/baseline_person_pin_white_48dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,11 +40,10 @@
             android:id="@+id/edtFullNameInfor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:text="full name"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            />
+            android:layout_weight="0.7"
+            android:text="full name" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,20 +70,19 @@
             android:gravity="left"
             android:text="UserName"
             android:textColor="#000000"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/edtUserNameInfor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="1dp"
             android:layout_weight="0.7"
             android:gravity="left"
             android:text="user name"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:layout_marginTop="1dp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -91,10 +90,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -105,6 +105,7 @@
             android:text="Password: "
             android:textColor="#000000"
             android:textSize="20sp" />
+
         <EditText
             android:id="@+id/edtPassWordInfor"
             android:layout_width="0dp"
@@ -112,9 +113,9 @@
             android:layout_gravity="center"
             android:layout_weight="0.7"
             android:gravity="left"
+            android:password="true"
             android:text="pass ne"
             android:textColor="#000000"
-            android:password="true"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -123,19 +124,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="left"
-        android:layout_weight="1"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:layout_weight="1">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.7"
             android:layout_marginLeft="5dp"
+            android:layout_weight="0.7"
             android:gravity="left"
             android:text="Gender"
             android:textColor="#000000"
             android:textSize="20sp" />
+
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -166,10 +169,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -180,6 +184,7 @@
             android:text="Email: "
             android:textColor="#000000"
             android:textSize="20sp" />
+
         <EditText
             android:id="@+id/edtEmailInfor"
             android:layout_width="0dp"
@@ -198,12 +203,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_margin="10dp"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="Update infor"
         android:textColor="#ffffff"
-        android:background="@color/colorPrimary"
-        android:textSize="20sp"
-        android:layout_margin="10dp"/>
+        android:textSize="20sp" />
 </LinearLayout>
 

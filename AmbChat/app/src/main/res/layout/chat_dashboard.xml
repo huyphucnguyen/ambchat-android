@@ -1,92 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#7e97ec"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/imgAvatarUserChat"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_person_white_36"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            />
+            android:layout_weight="2"
+            android:src="@drawable/baseline_person_white_36" />
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/txtNameUserChat"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Tên Người Chat"
-                android:textSize="24sp"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
             <TextView
                 android:id="@+id/txtTimeUserChat"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="Hoạt động 3 giờ trước"
-                android:textSize="24sp"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
         </LinearLayout>
+
         <ImageView
             android:id="@+id/imgPhoneUserChat"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_call_black_18dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_call_black_18dp"
 
             />
+
         <ImageView
             android:id="@+id/imgVideoCallUserChat"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_videocam_black_18dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            />
+            android:layout_weight="1"
+            android:src="@drawable/baseline_videocam_black_18dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="8"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ec90d7"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ec90d7"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgUserChatReceive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center"
                 android:src="@drawable/baseline_person_white_36" />
 
             <TextView
@@ -106,8 +110,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:background="#7e97ec"
             android:orientation="horizontal">
 
@@ -128,9 +132,9 @@
                 android:id="@+id/imgUserChatSend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center"
                 android:src="@drawable/baseline_person_white_36" />
 
         </LinearLayout>
@@ -146,38 +150,38 @@
             android:id="@+id/imgInsertCamera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:scaleType="center"
-            android:src="@drawable/ic_menu_camera"
-            android:layout_gravity="center"
-            />
+            android:src="@drawable/ic_menu_camera" />
 
         <ImageView
             android:id="@+id/imgInsertPhoto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_insert_photo_black_18dp"
             android:layout_gravity="center"
-            android:scaleType="center"
             android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/baseline_insert_photo_black_18dp"
 
             />
 
         <EditText
             android:id="@+id/edtMess"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:hint="Abc"/>
+            android:layout_weight="3"
+            android:hint="Abc" />
+
         <ImageView
             android:id="@+id/imgSend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/ic_menu_send"
-            android:layout_gravity="center"/>
+            android:src="@drawable/ic_menu_send" />
     </LinearLayout>
 
 </LinearLayout>

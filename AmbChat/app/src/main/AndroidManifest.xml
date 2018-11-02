@@ -12,21 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".activities.SignUp" />
+        <activity android:name=".activities.HomeActivity" />
         <!-- <activity android:name=".InforUserFragment" /> -->
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".activities.SignInActivity" />
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".StartActivity" />
-        <activity android:name=".InforUserActivity" />
+            android:name=".activities.MainActivity"
+            android:parentActivityName=".activities.StartActivity" />
+        <activity android:name=".activities.InforUserActivity" />
 
     </application>
 

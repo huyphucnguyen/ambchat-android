@@ -47,11 +47,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:hint="User name"
-                android:textSize="15sp"
                 android:padding="7dp"
                 android:textColor="#000"
-                />
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/id_pass"
             android:layout_width="match_parent"
@@ -74,11 +74,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:hint="Password"
-                android:textSize="15sp"
                 android:padding="7dp"
-                android:textColor="#000"
                 android:password="true"
-                />
+                android:textColor="#000"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <TextView
@@ -99,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:layout_marginTop="16dp"
             android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
             android:text="Remember Password"
             android:textColor="@android:color/black"
             android:textSize="15sp" />

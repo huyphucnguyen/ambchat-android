@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/imgIconSearchFr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@drawable/baseline_search_black_18dp"
-            android:layout_gravity="center"/>
+            android:src="@drawable/baseline_search_black_18dp" />
+
         <EditText
             android:id="@+id/edtSearchFr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Search mess"
-            android:layout_weight="3"/>
+            android:layout_weight="3"
+            android:hint="Search mess" />
 
         <Button
             android:id="@+id/btnSearchFr"
@@ -39,76 +41,80 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:orientation="horizontal"
-        android:layout_weight="8">
+        android:layout_marginTop="16dp"
+        android:layout_weight="8"
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ec90d7"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#ec90d7"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgFriend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:layout_gravity="center"
                 android:src="@drawable/baseline_person_white_36" />
 
             <TextView
                 android:id="@+id/txtNameFr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Tên Người Chat"
-                android:textSize="24sp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:textColor="@android:color/white"/>
+                android:layout_weight="1"
+                android:text="Tên Người Chat"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/imgPhoneFr"
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_call_black_18dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/baseline_call_black_18dp"
 
                 />
+
             <ImageView
                 android:id="@+id/imgVideoCallFr"
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_videocam_black_18dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_weight="0.5"
+                android:src="@drawable/baseline_videocam_black_18dp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/imgListFriend1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_supervisor_account_black_18dp"/>
+            android:layout_weight="1"
+            android:src="@drawable/baseline_supervisor_account_black_18dp" />
+
         <ImageView
             android:id="@+id/imgListMess1"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/baseline_message_black_18dp"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/baseline_message_black_18dp" />
 
 
     </LinearLayout>

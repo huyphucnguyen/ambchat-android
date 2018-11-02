@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="50dp"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    tools:context=".MainActivity">
+    android:paddingTop="50dp"
+    tools:context=".activities.MainActivity">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Wellcom To Abm Chat"
-        android:textSize="30px"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_marginTop="5dp"
         android:layout_weight="0.7"
-        android:textColor="@color/colorPrimary"/>
+        android:gravity="center"
+        android:text="Wellcom To Abm Chat"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30px"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imgGiaoDien"
@@ -33,15 +34,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <Button
@@ -53,9 +54,9 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom"
+                android:text="Đăng Nhập"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:text="Đăng Nhập"/>
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/btnLinkRegister"

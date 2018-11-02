@@ -1,75 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="50dp"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
     tools:context=".MainActivity">
-    <TextView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Wellcom To Abm Chat"
-        android:textSize="30px"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.7"
-        android:textColor="@color/colorPrimary"/>
-
-    <ImageView
-        android:id="@+id/imgGiaoDien"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:scaleType="center"
-        android:src="@drawable/iconapp3" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout">
+        <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout">
 
-            <Button
-                android:id="@+id/btnLinkSigIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/custom"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:text="Đăng Nhập"/>
+        <fragment
+            android:name="com.ambientdigitalgroup.ambchat.FriendsFragment"
+            android:id="@+id/fragment1"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent" />
 
-            <Button
-                android:id="@+id/btnLinkRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/custom"
-                android:text="Đăng ký"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

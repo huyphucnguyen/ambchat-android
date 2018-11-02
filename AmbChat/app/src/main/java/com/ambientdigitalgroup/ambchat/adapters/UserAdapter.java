@@ -33,7 +33,7 @@ public class UserAdapter extends ArrayAdapter<User> {
         // Get the {@link AndroidFlavor} object located at this position in the list
         User currentAndroidFlavor = getItem(position);
         // Find the TextView in the list_item.xml layout with the ID version_name
-        TextView txtUserName = (TextView) listItemView.findViewById(R.id.txtUserNameDisplay);
+        TextView txtUserName = (TextView) listItemView.findViewById(R.id.user_single_name);
         // Get the version name from the current AndroidFlavor object and
         // set this text on the name TextView
         txtUserName.setText(currentAndroidFlavor.getUser_name());

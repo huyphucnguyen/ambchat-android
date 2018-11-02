@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-class SectionsPagerAdapter  extends FragmentPagerAdapter {
+class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -14,7 +14,7 @@ class SectionsPagerAdapter  extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
        switch (position){
            case 0:
-               RequestsFragment requestsFragment=new RequestsFragment();
+               RequestFragment requestsFragment=new RequestFragment();
                return  requestsFragment;
            case 1:
                ChatsFragment chatsFragment=new ChatsFragment();

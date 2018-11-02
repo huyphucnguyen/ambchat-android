@@ -7,4 +7,5 @@ public class ProfileUser {
    public static int gender;
    public static String email;
    public  static int userid;
+   public  static int  res;
 }

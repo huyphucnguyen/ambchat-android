@@ -34,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         arrUser = new ArrayList<User>();
+        new  GetListFriend().execute();
+        ShowMessage(getBaseContext(),String.valueOf(arrUser.size()));
         // Find a reference to the {@link ListView} in the layout
         ListView lvListFriend = (ListView) findViewById(R.id.lvListFriends);
         UserAdapter adapter=new UserAdapter(this,arrUser);

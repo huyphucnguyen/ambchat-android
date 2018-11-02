@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="5dp">
-    <LinearLayout
-        android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/user_single_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_account" />
+
+    <TextView
+        android:id="@+id/user_single_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ec90d7"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/imgAvatarUser"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:scaleType="center"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_images"
-            android:src="@drawable/iconuser" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:orientation="vertical">
+        android:layout_alignTop="@+id/user_single_image"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/user_single_image"
+        android:text="Display Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtUserNameDisplay"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:text="Tên người chat"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+    <TextView
+        android:id="@+id/user_single_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/user_single_name"
+        android:layout_below="@+id/user_single_name"
+        android:layout_marginTop="10dp"
+        android:text="User default Status" />
 
-            <TextView
-                android:id="@+id/txtMessLast"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="left"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="tin nhắn cuối"
-                android:textColor="@android:color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+   <!-- <ImageView
+        android:id="@+id/user_single_online_icon"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_single_name"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/user_single_name"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/online_icon" />-->
+
+</RelativeLayout>

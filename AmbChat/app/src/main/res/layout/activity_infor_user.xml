@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#d6cfcf"
     android:orientation="vertical"
-    tools:context=".InforUserFragment">
-  <!--  <include layout="@layout/app_bar_layout" android:id="@+id/infor_user_toolbar" />-->
+    tools:context=".InforUserActivity">
+    <!--  <include layout="@layout/app_bar_layout" android:id="@+id/infor_user_toolbar" />-->
     <ImageView
         android:id="@+id/imgAvatar"
         android:layout_width="match_parent"

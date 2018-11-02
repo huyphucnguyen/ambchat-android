@@ -52,7 +52,6 @@
                 android:textColor="#000"
                 />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/id_pass"
             android:layout_width="match_parent"
@@ -132,8 +131,4 @@
             android:textStyle="italic" />
         />
     </LinearLayout>
-
-
-
-
 </LinearLayout>

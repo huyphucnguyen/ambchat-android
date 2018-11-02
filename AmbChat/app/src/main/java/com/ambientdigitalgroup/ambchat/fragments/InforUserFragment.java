@@ -29,26 +29,24 @@ public class InforUserFragment extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_user);
-        GetView();;
+       getView();
         AddEvent();
-        GetInforUser();;
+       getInforUser();;
     }
 
-    public void GetView(){
+    public void getView(){
         edtUserNameInfor = findViewById(R.id.edtUserNameInfor);
         edtFullNameInfor = findViewById(R.id.edtFullNameInfor);
         edtPassWordInfor = findViewById(R.id.edtPassWordInfor);
         edtEmailInfor    = findViewById(R.id.edtEmailInfor);
-
         rdoMaleInfor=findViewById(R.id.radMaleInfor);
         rdoFeMaleInfor=findViewById(R.id.radFemaleInfor);
         btnUpdateInforUser=findViewById(R.id.btnUpdateInfor);
     }
     public  void AddEvent(){
-
     }
 
-    public void GetInforUser(){
+    public void getInforUser(){
         edtUserNameInfor.setText(ProfileUser.username);
         edtFullNameInfor.setText(ProfileUser.fullname);
         edtPassWordInfor.setText(ProfileUser.passsword);

@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "482308325890",
+    "firebase_url": "https://amchat-ff147.firebaseio.com",
+    "project_id": "amchat-ff147",
+    "storage_bucket": "amchat-ff147.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482308325890:android:a2599cf0d04e065b",
+        "android_client_info": {
+          "package_name": "com.ambientdigitalgroup.ambchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482308325890-l6856rpph0piu9s8u8e66g06eta5p7r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ambientdigitalgroup.ambchat",
+            "certificate_hash": "c62b8281f1fee25c72df03f68d3465a460b68392"
+          }
+        },
+        {
+          "client_id": "482308325890-hg8tjmlildt2cbuolrp6e7o1tgucnqd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDavVPzc1IZkBKLF0zkVy5vaomwB8eW8s4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482308325890-hg8tjmlildt2cbuolrp6e7o1tgucnqd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+
+}

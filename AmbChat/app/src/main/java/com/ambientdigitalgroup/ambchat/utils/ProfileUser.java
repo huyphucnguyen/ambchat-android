@@ -1,11 +1,11 @@
 package com.ambientdigitalgroup.ambchat.utils;
 
 public class ProfileUser {
-   public static String username;
-   public static String passsword;
-   public static String fullname;
-   public static int gender;
-   public static String email;
-   public  static int userid;
-   public  static int  res;
+   public String username;
+   public String passsword;
+   public String fullname;
+   public int gender;
+   public String email;
+   public int userid;
+   public int  res;
 }

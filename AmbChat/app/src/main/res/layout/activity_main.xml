@@ -30,7 +30,7 @@
 
         <fragment
             android:id="@+id/fragment1"
-            android:name="com.ambientdigitalgroup.ambchat.FriendsFragment"
+            android:name="com.ambientdigitalgroup.ambchat.fragments.FriendsFragment"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1" />

@@ -1,19 +1,10 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.activities;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,22 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.networks.AsyncTaskLogin;
+import com.ambientdigitalgroup.ambchat.utils.Extension;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class SignInActivity extends AppCompatActivity{

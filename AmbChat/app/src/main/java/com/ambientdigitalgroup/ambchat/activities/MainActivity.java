@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.activities;
 
 
 
@@ -12,6 +12,10 @@ import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.adapters.SectionsPagerAdapter;
+import com.ambientdigitalgroup.ambchat.fragments.InforUserFragment;
 
 
 public class MainActivity extends AppCompatActivity {

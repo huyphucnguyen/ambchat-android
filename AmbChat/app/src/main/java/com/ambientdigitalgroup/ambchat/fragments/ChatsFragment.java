@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.fragments;
 
 
 import android.os.Bundle;
@@ -8,20 +8,15 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.utils.ChatMessage;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import static com.ambientdigitalgroup.ambchat.R.layout.list_friend_items;
 
 
 /**

@@ -1,7 +1,9 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.ambientdigitalgroup.ambchat.R;
 
 public class InforUserActivity extends AppCompatActivity {
 

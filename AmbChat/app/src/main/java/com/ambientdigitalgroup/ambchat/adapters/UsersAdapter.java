@@ -1,13 +1,14 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.adapters;
 
 import android.content.Context;
-import android.media.MediaMetadata;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.utils.User;
 
 import java.util.List;
 

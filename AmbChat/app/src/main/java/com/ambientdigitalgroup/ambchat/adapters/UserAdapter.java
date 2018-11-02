@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.utils.User;
+
 import java.util.ArrayList;
-import java.util.Date;
 
 public class UserAdapter extends ArrayAdapter<User> {
 

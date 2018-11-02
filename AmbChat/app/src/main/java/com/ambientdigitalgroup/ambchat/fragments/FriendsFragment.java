@@ -1,7 +1,6 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,14 +9,15 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
+import com.ambientdigitalgroup.ambchat.utils.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -57,7 +57,7 @@ public class FriendsFragment extends ListFragment {
         arrUser.add(new User(3," Van lam","ThuyDuong"));
 
           ShowMessage(getContext(),String.valueOf(arrUser.size()));
-        UsersAdapter adapter=new UsersAdapter(getActivity(),R.layout.list_items_test,arrUser);
+        UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_items_test,arrUser);
         setListAdapter(adapter);
 
     }

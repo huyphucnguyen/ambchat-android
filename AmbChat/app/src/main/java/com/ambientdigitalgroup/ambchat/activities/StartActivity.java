@@ -1,11 +1,12 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
+
+import com.ambientdigitalgroup.ambchat.R;
 
 public class StartActivity extends AppCompatActivity
         {

@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.utils;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

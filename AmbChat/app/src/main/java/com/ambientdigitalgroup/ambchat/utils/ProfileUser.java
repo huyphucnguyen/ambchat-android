@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.utils;
 
 public class ProfileUser {
    public static String username;

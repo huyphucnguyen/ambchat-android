@@ -1,19 +1,15 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.fragments;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 
-import java.util.ArrayList;
+import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 
 public class InforUserFragment extends AppCompatActivity {
     EditText edtUserNameInfor;

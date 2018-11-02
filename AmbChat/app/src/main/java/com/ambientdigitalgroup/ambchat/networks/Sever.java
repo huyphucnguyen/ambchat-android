@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat;
+package com.ambientdigitalgroup.ambchat.networks;
 
 public class Sever {
     private static String url="https://ambchat.herokuapp.com/api/";

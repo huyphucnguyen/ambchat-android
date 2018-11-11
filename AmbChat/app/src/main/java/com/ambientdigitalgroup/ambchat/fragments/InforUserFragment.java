@@ -43,13 +43,13 @@ public class InforUserFragment extends AppCompatActivity {
     }
 
     public void getInforUser(){
-        edtUserNameInfor.setText(ProfileUser.username);
+        /*edtUserNameInfor.setText(ProfileUser.username);
         edtFullNameInfor.setText(ProfileUser.fullname);
         edtPassWordInfor.setText(ProfileUser.passsword);
         edtEmailInfor.setText(ProfileUser.email);
         if(ProfileUser.gender==1){
            // rdoMaleInfor.setfo
-        }
+        }*/
 
     }
 }

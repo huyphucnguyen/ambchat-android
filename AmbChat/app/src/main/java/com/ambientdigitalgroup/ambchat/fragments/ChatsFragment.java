@@ -57,7 +57,7 @@ public class ChatsFragment extends Fragment {
                         .push()
                         .setValue(new ChatMessage(
                                 edt_Mess.getText().toString(),
-                                ProfileUser.username
+                               "NGOC DANH"
                         ));
                 //clearn the input
                 edt_Mess.setText("");

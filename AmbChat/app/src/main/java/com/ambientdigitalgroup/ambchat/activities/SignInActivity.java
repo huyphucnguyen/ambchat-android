@@ -1,5 +1,6 @@
 package com.ambientdigitalgroup.ambchat.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
-import com.ambientdigitalgroup.ambchat.networks.AsyncTaskLogin;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
@@ -33,7 +33,7 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword, txtRegisterAcount;
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
-
+    private ProgressDialog mLoginProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class SignInActivity extends AppCompatActivity {
         ckbRememberpass = (CheckBox) findViewById(R.id.ckbRemmemberPass);
         btnSigIn = (Button) findViewById(R.id.btnLogIn);
         String pass = edtPassWord.getText().toString();
+        mLoginProgress = new ProgressDialog(this);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             String sss = Context.APPWIDGET_SERVICE;
@@ -76,9 +77,13 @@ public class SignInActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             @Override
             public void onClick(View view) {
-                // new DoLogIn("nana","6B4F2790D01A6815EC2C7AC8D0AF0F6862A012EDEA70D28FD73997E33DC393A7").execute();
-                //execut class dologin
 
+
+                mLoginProgress.setTitle("Logging In");
+                mLoginProgress.setMessage("Please wait while we check your credentials.");
+                mLoginProgress.setCanceledOnTouchOutside(false);
+
+                mLoginProgress.show();
                 String userName = edtUserName.getText().toString().trim();
                 String password = edtPassWord.getText().toString().trim();
 
@@ -89,6 +94,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void completed(Object obj) {
                         if (obj != null) {
+                            mLoginProgress.dismiss();
                             ProfileUser profileUser = (ProfileUser) obj;
                             if (profileUser.res == 0) {
                                 Intent intHomeActivity = new Intent(SignInActivity.this, MainActivity.class);
@@ -99,22 +105,12 @@ public class SignInActivity extends AppCompatActivity {
                             }
                         } else {
                             //ERROR
+                            mLoginProgress.hide();
                         }
                     }
                 });
                 request.execute(parameter);
-                //new AsyncTaskLogin(edtUserName.getText().toString().trim(),edtPassWord.getText().toString().trim()).execute();
 
-
-//                Toast.makeText(getBaseContext(),String.valueOf(ProfileUser.username),Toast.LENGTH_SHORT).show();
-//                if(ProfileUser.res==0){
-//                    Intent intHomeActivity=new Intent(SignInActivity.this,MainActivity.class);
-//                    startActivity(intHomeActivity);
-//                }
-//                else {
-//                  Toast.makeText(getBaseContext(),"Login fail",Toast.LENGTH_SHORT).show();
-//                  return;
-//                }
             }
         });
     }

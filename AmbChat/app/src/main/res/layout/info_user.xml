@@ -192,7 +192,6 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-
     <Button
         android:id="@+id/btnUpdateInfor"
         android:layout_width="match_parent"
@@ -206,7 +205,8 @@
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="@string/updateInfor"
-        android:textColor="white"
-        android:textAppearance="@style/textLarge" />
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 </LinearLayout>
+    <!-- android:textAppearance="@style/textLarge"-->
 

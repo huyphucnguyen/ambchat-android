@@ -23,63 +23,63 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:hint="Search mess" />
+            android:hint="@string/searchMess" />
 
         <Button
             android:id="@+id/btnSearchFr"
-            android:layout_width="53dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="Search"
+            android:hint="@string/Search"
             android:textColor="@android:color/black"
-            android:textSize="24sp" />
+            android:textAppearance="@style/textSmall" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
         android:layout_weight="8"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:background="#ec90d7"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgFriend"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:scaleType="centerInside"
-                android:src="@drawable/baseline_person_white_36" />
+                android:layout_weight="0.5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_person_pin_black_18dp" />
 
             <TextView
                 android:id="@+id/txtNameFr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
                 android:layout_weight="1"
-                android:text="Tên Người Chat"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:text="@string/nameFriendChat"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@android:color/black" />
 
             <ImageView
                 android:id="@+id/imgPhoneFr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/padding_username"
                 android:layout_weight="0.5"
                 android:src="@drawable/baseline_call_black_18dp"
 

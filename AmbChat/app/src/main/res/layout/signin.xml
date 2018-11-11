@@ -4,17 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-
     >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingBottom="50dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="50dp">
+        android:paddingBottom="@dimen/padding"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin"
+        android:paddingTop="@dimen/padding">
 
         <ImageView
             android:id="@+id/imgSignIn"
@@ -28,9 +27,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margin"
             android:layout_weight="1"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <ImageView
@@ -46,17 +45,18 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:hint="User name"
-                android:padding="7dp"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:hint="@string/userName"
+                android:padding="@dimen/padding_username"
+                android:textColor="@color/black"
+                android:textAppearance="@style/textMedium"
+                android:inputType="textPersonName"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/id_pass"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -73,11 +73,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="9"
-                android:hint="Password"
-                android:padding="7dp"
-                android:password="true"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:hint="@string/password"
+                android:padding="@dimen/padding_username"
+                android:textColor="@color/black"
+                android:textAppearance="@style/textMedium"
+                android:inputType="textPassword"/>
         </LinearLayout>
 
         <TextView
@@ -89,7 +89,7 @@
             android:text="Forgot Password"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textAppearance="@style/textMedium"
             android:textStyle="italic" />
 
 
@@ -98,35 +98,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Remember Password"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
-
+            android:layout_marginLeft="@dimen/margin0"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/rememberPassword"
+            android:textAppearance="@style/textMedium"
+            android:textColor="@android:color/black" />
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin"
             android:layout_weight="1"
-            android:background="#929894"
-            android:text="Log In"
+            android:background="@color/Xam"
+            android:text="@string/logIn"
             android:textAllCaps="true"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textAppearance="@style/textLarge" />
 
         <TextView
             android:id="@+id/txtRegisterAcount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="16dp"
-            android:text="Nếu chưa có tài khoản nhấn vào đây"
+            android:layout_marginLeft="@dimen/margin0"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/chuaCoACC"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
+            android:textAppearance="@style/textMedium"
             android:textStyle="italic" />
         />
     </LinearLayout>

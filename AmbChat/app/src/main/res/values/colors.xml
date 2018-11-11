@@ -3,4 +3,7 @@
     <color name="colorPrimary">#673bb7</color>
     <color name="colorPrimaryDark">#512da7</color>
     <color name="colorAccent">#ff5521</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="Xam">#929894</color>
 </resources>

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
+    android:layout_marginLeft="@dimen/margin"
+    android:layout_marginRight="@dimen/margin"
+    android:layout_marginTop="@dimen/margin"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:background="#95a39a"
+            android:background="@color/Xam"
             android:scaleType="fitCenter"
             android:src="@drawable/baseline_person_pin_white_48" />
     </LinearLayout>
@@ -32,7 +32,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -40,20 +40,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Full Name"
-                android:textColor="#000000" />
+                android:text="@string/fullName"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtFullName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="8" />
+                android:layout_weight="8"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -61,15 +62,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Gender"
-                android:textColor="#000000" />
+                android:text="@string/gender"
+                android:textColor="@color/black" />
 
             <RadioGroup
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/margin"
                 android:layout_weight="8"
                 android:orientation="horizontal">
 
@@ -79,15 +80,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16sp"
                     android:layout_marginRight="16sp"
-                    android:text="Male" />
+                    android:text="@string/male" />
 
                 <RadioButton
                     android:id="@+id/radFemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16sp"
-                    android:layout_marginRight="16sp"
-                    android:text="FeMale" />
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:text="@string/female" />
 
             </RadioGroup>
         </LinearLayout>
@@ -95,7 +96,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -103,8 +104,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Email"
-                android:textColor="#000000" />
+                android:text="@string/email"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtEmail"
@@ -117,7 +118,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -125,20 +126,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="UserName"
-                android:textColor="#000000" />
+                android:text="@string/userName"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtUserName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="8" />
+                android:layout_weight="8"
+                android:inputType="textPersonName"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -146,8 +149,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="PassWord"
-                android:textColor="#000000" />
+                android:text="@string/password"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtPassWord"
@@ -160,7 +163,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -170,8 +173,8 @@
                 android:layout_gravity="left|center"
                 android:layout_weight="3"
                 android:gravity="left"
-                android:text="Repeat Password"
-                android:textColor="#000000" />
+                android:text="@string/repeatPassword"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtRepeatPass"
@@ -186,11 +189,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16sp"
+            android:layout_marginTop="@dimen/margin"
             android:background="@color/colorPrimaryDark"
-            android:text="Register"
+            android:text="@string/register"
             android:textAllCaps="true"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+            android:textColor="@color/white"
+            android:textAppearance="@style/textMedium" />
     </LinearLayout>
 </LinearLayout>

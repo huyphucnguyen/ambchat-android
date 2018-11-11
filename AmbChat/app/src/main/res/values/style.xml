@@ -6,6 +6,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="textSmall" parent="@android:style/TextAppearance.Small">
+        <item name="size">20sp</item>
+    </style>
+    <style name="textMedium" parent="@android:style/TextAppearance.Medium"></style>
+    <style name="textLarge" parent="@android:style/TextAppearance.Large"></style>
 
 
 </resources>

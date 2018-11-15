@@ -28,6 +28,7 @@
             android:parentActivityName=".activities.StartActivity" />
         <activity android:name=".activities.InforUserActivity" />
 
+
     </application>
 
 </manifest>

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -58,9 +60,9 @@ public class SignInActivity extends AppCompatActivity {
         String pass = edtPassWord.getText().toString();
         mLoginProgress = new ProgressDialog(this);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             String sss = Context.APPWIDGET_SERVICE;
-        }
+        }*/
         //Test encode SHA256
 
        /* try {
@@ -96,13 +98,19 @@ public class SignInActivity extends AppCompatActivity {
                         if (obj != null) {
                             mLoginProgress.dismiss();
                             ProfileUser profileUser = (ProfileUser) obj;
-                            if (profileUser.res == 0) {
-                                Intent intHomeActivity = new Intent(SignInActivity.this, MainActivity.class);
-                                startActivity(intHomeActivity);
-                            } else {
-                                Toast.makeText(getBaseContext(), "Login fail", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
+                           /* if (profileUser.user_name!=null) {*/
+                                Intent main_activity = new Intent(SignInActivity.this, MainActivity.class);
+                                startActivity(main_activity);
+                          /*  } else {
+                              *//*  if(profileUser.res==1){
+                                    ShowMessage(getBaseContext(),"Login fail!");
+                                    return;
+                                }
+                                if(profileUser.res==2){
+                                    ShowMessage(getBaseContext(),"Login fail!");
+                                    return;
+                                }*//*
+                            }*/
                         } else {
                             //ERROR
                             mLoginProgress.hide();
@@ -128,6 +136,17 @@ public class SignInActivity extends AppCompatActivity {
         messageDigest.update(pass.getBytes());
         byte[] digest = messageDigest.digest();
         return android.util.Base64.encodeToString(digest, android.util.Base64.DEFAULT);
+    }
+    public  void ShowMessage(final Context context, final String msg) {
+        if (context != null && msg != null) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+
+                @Override
+                public void run() {
+                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }

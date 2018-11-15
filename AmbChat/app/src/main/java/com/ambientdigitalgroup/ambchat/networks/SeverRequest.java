@@ -45,13 +45,14 @@ public abstract class SeverRequest extends AsyncTask<Map<String, String>, Void, 
     }
 
     protected abstract Request prepare(Map<String, String> parameter);
-
+    protected abstract Request prepare();
     protected abstract Object process(String data);
 
 
     @Override
     protected void onPostExecute(Map<String, String> result) {
         String data = result.get("data");
+
         Object obj = process(data);
         mListener.completed(obj);
     }

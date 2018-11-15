@@ -1,6 +1,7 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,13 +40,20 @@ public class SignInRequest extends SeverRequest {
     }
 
     @Override
+    protected Request prepare() {
+        return null;
+    }
+
+    @Override
     protected Object process(String data) {
         try {
-            ProfileUser profile = new ProfileUser();
-
             JSONObject json = null;
             json = new JSONObject(data);
-
+            JSONObject object= json.getJSONObject("data");
+     /*       String json = "{\"user_name\":\"nana\",\"full_name\":\"BuiNa\",\"picture\":\"john@gmail.com\"}";*/
+            Gson gson=new Gson();
+            ProfileUser profile = gson.fromJson(String.valueOf(object), ProfileUser.class);
+           /* ProfileUser profile = new ProfileUser();
             final String serverResponse = json.getString("message");
             profile.res = json.getInt("error");
             //get profile user
@@ -54,7 +62,7 @@ public class SignInRequest extends SeverRequest {
             profile.fullname = ob_user.getString("full_name");
             //   profile.gender=ob_user.getInt("gender");
             profile.email = ob_user.getString("email");
-            profile.userid = ob_user.getInt("user_id");
+            profile.userid = ob_user.getInt("user_id");*/
             return profile;
         } catch (Exception e) {
             e.printStackTrace();

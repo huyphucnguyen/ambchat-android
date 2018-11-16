@@ -20,11 +20,6 @@ public class GetFriendsRequest extends SeverRequest {
 
     @Override
     protected Request prepare(Map<String, String> parameter) {
-       return null;
-    }
-
-    @Override
-    protected Request prepare() {
         Request request =new Request.Builder()
                 .url(URL+"getlistfriend.php")
                 .get()
@@ -33,8 +28,21 @@ public class GetFriendsRequest extends SeverRequest {
         return request;
     }
 
+   /* @Override
+    protected Request prepare(Map<String,String>) {
+        Request request =new Request.Builder()
+                .url(URL+"getlistfriend.php")
+                .get()
+                .build();
+
+        return request;
+    }*/
+
+
+
+
     @Override
-    protected ArrayList<User> process(String data) {
+    protected Object process(String data) {
 
             try {
                 ArrayList<User> arrUser=new ArrayList<User>();
@@ -47,8 +55,9 @@ public class GetFriendsRequest extends SeverRequest {
                             ob.getString("User_Name"),
                             ob.getString("Full_Name")
                     ));
-                    return  arrUser;
+
                 }
+                return  arrUser;
             } catch (Exception e){
                 e.printStackTrace();
             }

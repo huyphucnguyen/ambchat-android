@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.main_logout_btn){
 
-
         }
 
-        if(item.getItemId() == R.id.main_acount_btn){
+        if(item.getItemId() == R.id.main_account_btn){
 
-            Intent settingsIntent = new Intent(MainActivity.this, InforUserFragment.class);
+            Intent settingsIntent = new Intent(MainActivity.this, InforUserActivity.class);
             startActivity(settingsIntent);
+            finish();
         }
 
         if(item.getItemId() == R.id.main_all_btn){

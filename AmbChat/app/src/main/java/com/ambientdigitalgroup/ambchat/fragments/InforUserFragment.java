@@ -24,7 +24,7 @@ public class InforUserFragment extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_user);
+        setContentView(R.layout.activity_infor_user);
        getView();
         AddEvent();
        getInforUser();;

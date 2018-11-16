@@ -9,9 +9,9 @@ import android.widget.Button;
 import com.ambientdigitalgroup.ambchat.R;
 
 public class StartActivity extends AppCompatActivity
-        {
-            private Button lbtnSigIn;
-            private Button lbtnSigUp;
+ {
+     private Button lbtnSigIn;
+     private Button lbtnSigUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class StartActivity extends AppCompatActivity
         lbtnSigUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intActivitySignup=new Intent(StartActivity.this,SignUp.class);
+                Intent intActivitySignup=new Intent(StartActivity.this,SignUpActivity.class);
                 startActivity(intActivitySignup);
             }
         });

@@ -31,6 +31,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -52,7 +54,7 @@ public class FriendsFragment extends ListFragment {
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        arrUser = new ArrayList<User>();
+      /*  arrUser = new ArrayList<User>();
         // Inflate the layout for this fragment
         arrUser.add(new User(1," Ngoc Danh","ThuyDuong"));
         arrUser.add(new User(2," Thi Na","ThuyDuong"));
@@ -60,10 +62,28 @@ public class FriendsFragment extends ListFragment {
         arrUser.add(new User(3," Van lam","ThuyDuong"));
         arrUser.add(new User(3," Van lam","ThuyDuong"));
         arrUser.add(new User(3," Van lam","ThuyDuong"));
+*/
 
 
-        UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_items_test,arrUser);
-        setListAdapter(adapter);
+
+////////////////////////////////////
+        Map<String, String> parameter = new HashMap<>();
+        GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
+            @Override
+            public void completed(Object obj) {
+
+                if (obj != null) {
+                    ArrayList<User> arr= (ArrayList<User>) obj;
+                    UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_items_test,arr);
+                    setListAdapter(adapter);
+
+                } else {
+                    //ERROR
+                    Toast.makeText(getActivity().getBaseContext(),"lOI",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        request.execute(parameter);
 
 
     }

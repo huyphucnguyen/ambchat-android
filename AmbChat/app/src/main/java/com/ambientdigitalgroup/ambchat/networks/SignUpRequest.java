@@ -1,58 +1,65 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
+import android.widget.Toast;
+
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
-/**
- * Created by nguyenhuyphuc on 11/2/18.
- */
-
-public class SignInRequest extends SeverRequest {
-    public SignInRequest(SeverRequestListener listener) {
+public class SignUpRequest extends SeverRequest {
+    public SignUpRequest(SeverRequestListener listener) {
         super(listener);
     }
 
     @Override
     protected Request prepare(Map<String, String> parameter) {
+
         String user = parameter.get("username");
+        String fullname = parameter.get("fullname");
+        String email = parameter.get("email");
         String password = parameter.get("password");
+        String gender = parameter.get("gender");
+
+
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .addFormDataPart("username", user)
-                .addFormDataPart("password", password)
+                .addFormDataPart("fullname",fullname)
+                .addFormDataPart("email",email)
+                .addFormDataPart("password",password)
+                .addFormDataPart("gender", gender)
                 .setType(MultipartBody.FORM)
                 .build();
         Request request = new Request.Builder()
-                .url(URL + "sign_in.php")
+                .url(URL + "sign_up.php")
                 .post(requestBody)
                 .addHeader("Content-Type", "application/json")
                 .build();
         return request;
-    }
 
+    }
 
     @Override
     protected Object process(String data) {
         try {
-            JSONObject json = null;
-            json = new JSONObject(data);
-            JSONObject object= json.getJSONObject("data");
-     /*       String json = "{\"user_name\":\"nana\",\"full_name\":\"BuiNa\",\"picture\":\"john@gmail.com\"}";*/
-            Gson gson=new Gson();
-            ProfileUser profile = gson.fromJson(String.valueOf(object), ProfileUser.class);
-            return profile;
+            final JSONObject json = new JSONObject(data);
+            int error = json.getInt("error");
+            return error;
         } catch (Exception e) {
             e.printStackTrace();
+
         }
+
+
         return null;
     }
 }

@@ -137,7 +137,7 @@ public class SignInActivity extends AppCompatActivity {
     }
     public void doLogin(){
         finish();//đóng màn hình hiện tại"
-        Intent i=new Intent(this, RequestFragment.class);
+        Intent i=new Intent(this, HomeActivity.class);
         //truyền dữ liệu qua màn hình mới
         i.putExtra("userName", edtUserName.getText().toString());
         startActivity(i);//mở màn hình mới

@@ -66,6 +66,14 @@ public class ProfileUser {
       this.user_id = user_id;
    }
 
+   public void setFull_name(String full_name) {
+      this.full_name = full_name;
+   }
+
+   public String getFull_name() {
+      return full_name;
+   }
+
    public ProfileUser(String user_name, String full_name, String picture, String email, Date date_create, int gender, int user_id) {
       this.user_name = user_name;
       this.full_name = full_name;

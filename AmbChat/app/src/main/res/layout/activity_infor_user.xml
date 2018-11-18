@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".fragments.InforUserFragment">
+    tools:context=".activities.InforUserActivity">
     <!--  <include layout="@layout/app_bar_layout" android:id="@+id/infor_user_toolbar" />-->
     <ImageView
         android:id="@+id/imgAvatar"
@@ -34,7 +34,8 @@
             android:gravity="left"
             android:text="@string/fullName"
             android:textColor="@color/black"
-            android:textAppearance="@style/textMedium" />
+            android:textAppearance="@style/textMedium"
+           />
 
         <EditText
             android:id="@+id/edtFullNameInfor"
@@ -43,7 +44,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin"
             android:layout_weight="0.7"
-            android:text="@string/fullName" />
+            android:text="@string/fullName"
+            android:inputType="text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +80,8 @@
             android:gravity="left"
             android:text="@string/userName"
             android:textColor="@color/black"
-            android:textAppearance="@style/textMedium" />
+            android:textAppearance="@style/textMedium"
+            android:inputType="text"/>
 
     </LinearLayout>
 
@@ -110,8 +113,10 @@
             android:layout_weight="0.7"
             android:gravity="left"
             android:text="@string/password"
+            android:password="true"
             android:textColor="@color/black"
-            android:textAppearance="@style/textMedium" />
+            android:textAppearance="@style/textMedium"
+            android:inputType="textPassword"/>
 
     </LinearLayout>
 
@@ -178,7 +183,7 @@
             android:gravity="left"
             android:text="@string/email"
             android:textColor="#000000"
-            android:textSize="20sp" />
+           />
 
         <EditText
             android:id="@+id/edtEmailInfor"
@@ -189,7 +194,8 @@
             android:gravity="left"
             android:hint="@string/email"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:inputType="textEmailAddress"/>
     </LinearLayout>
 
     <Button
@@ -197,16 +203,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin"
         android:layout_marginLeft="@dimen/margin100"
         android:layout_marginRight="@dimen/margin100"
         android:layout_marginTop="@dimen/margin"
-        android:layout_marginBottom="@dimen/margin"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="@string/updateInfor"
-        android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textAppearance="@style/MessengerButton.White.Large"
+        android:textColor="#ffffff" />
 </LinearLayout>
     <!-- android:textAppearance="@style/textLarge"-->
 

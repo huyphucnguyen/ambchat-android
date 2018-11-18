@@ -1,5 +1,6 @@
 package com.ambientdigitalgroup.ambchat.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,17 @@ import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.networks.NetworkCallback;
+import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
+import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
+import com.ambientdigitalgroup.ambchat.networks.SignUpRequest;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -24,18 +31,20 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class SignUp extends AppCompatActivity implements NetworkCallback{
+public class SignUpActivity extends AppCompatActivity {
+
     private EditText edtFullName, edtEmail, edtUserName, edtPassWord, edtRepeatPass;
     private RadioButton radMale, radFemail;
     private Button btnRegister;
     public static final MediaType MEDIA_TYPE = MediaType.parse("application/json");
-    public static final String URL_CONNECT = "https://ambchat.herokuapp.com/api/sign_up.php";
+    public static final String USERNAME=null ;
+    public static final String PASSWORD = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
-
 
         addControls();
         addEvents();
@@ -53,70 +62,6 @@ public class SignUp extends AppCompatActivity implements NetworkCallback{
         btnRegister = findViewById(R.id.btnRegister);
     }
 
-    @Override
-    public void getResponse(String res) {
-        try {
-            final JSONObject root = new JSONObject(res);
-            String message = root.getString("message");
-            Toast.makeText(this,message,Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public class NetworkTask extends AsyncTask<String,Void,String>{
-        NetworkCallback networkCallback;
-        //String json;
-        OkHttpClient client = new OkHttpClient();
-        String username,fullname,email,password;
-        int gender;
-
-        public NetworkTask(NetworkCallback networkCallback,String username,String fullname,String email,String password,int gender){
-            //this.json = json;
-            this.networkCallback = networkCallback;
-            this.username = username;
-            this.fullname = fullname;
-            this.email = email;
-            this.password = password;
-            this.gender = gender;
-        }
-
-        public String  doPostRequest(String url) throws IOException{
-            RequestBody body=new MultipartBody.Builder()
-                    .addFormDataPart("username",username)
-                    .addFormDataPart("fullname",fullname)
-                    .addFormDataPart("email",email)
-                    .addFormDataPart("password",password)
-                    .addFormDataPart("gender",gender+"")
-                    .setType(MultipartBody.FORM)
-                    .build();
-            //RequestBody body = RequestBody.create(MEDIA_TYPE,json);
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            Response response = client.newCall(request).execute();
-            return response.body().string();
-        }
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                String response = doPostRequest(strings[0]);
-                return response;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            networkCallback.getResponse(s);
-        }
-    }
 
 
     private void addEvents() {
@@ -124,18 +69,58 @@ public class SignUp extends AppCompatActivity implements NetworkCallback{
             @Override
             public void onClick(View view) {
 
-                String username = edtUserName.getText().toString();
+                final String username = edtUserName.getText().toString();
                 String fullname = edtFullName.getText().toString();
                 String email = edtEmail.getText().toString();
-                String password = edtPassWord.getText().toString();
+                final String password = edtPassWord.getText().toString();
                 String rePassword = edtRepeatPass.getText().toString();
                 int gender = radMale.isChecked() ? 1 : 0;
 
                 boolean checkData = isEmptyField(username,fullname,email,password,rePassword);
                 if(checkData) return;
+                //-------------------------------su ly dang ky------------------------//
+                Map<String, String> parameter = new HashMap<>();
+                parameter.put("username", username);
+                parameter.put("fullname", fullname);
+                parameter.put("email",email);
+                parameter.put("password",password);
+                parameter.put("gender",String.valueOf(gender));
 
-                NetworkTask networkTask = new NetworkTask(SignUp.this,username,fullname,email,password,gender);
-                networkTask.execute(URL_CONNECT);
+                SignUpRequest request = new SignUpRequest(new SeverRequest.SeverRequestListener() {
+                    @Override
+                    public void completed(Object obj) {
+                        if (obj != null) {
+
+                            int error = (int) obj;
+                            /*Toast.makeText(getBaseContext(),mes,Toast.LENGTH_SHORT).show();*/
+
+                            if(error==0) {
+                                Intent signin_activity = new Intent(SignUpActivity.this, SignInActivity.class);
+                                signin_activity.putExtra(USERNAME,username);
+                                signin_activity.putExtra(PASSWORD,password);
+                                startActivity(signin_activity);
+                            }
+                            if(error==1){
+                                showMessage("User invalid");
+                            }
+                            if(error==2){
+                                showMessage("Password invalid");
+                            }
+                            if(error==3){
+                                showMessage("User is exist");
+                            }
+                            if(error==4){
+                                showMessage("Email is already registered by another account");
+                            }
+                        } else {
+                            //ERROR
+                            Toast.makeText(getBaseContext(),"Error Register!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                //thuc hien sau ????
+                request.execute(parameter);
+
             }
         });
     }
@@ -171,6 +156,11 @@ public class SignUp extends AppCompatActivity implements NetworkCallback{
         }
 
         return false;
+    }
+
+    //function show message
+    private void showMessage(String mess){
+        Toast.makeText(getBaseContext(),mess,Toast.LENGTH_SHORT).show();
     }
 
 }

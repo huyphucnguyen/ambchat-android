@@ -36,6 +36,12 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtForgotPassword, txtRegisterAcount;
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
+    public static final String USERNAME=null ;
+    public static final String FULLNAME = null;
+    public static final String USERID=null;
+    public static final String EMAIL=null;
+    String userName;
+    String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,15 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void addEvent() {
+        final Intent intent = getIntent();
+
+                    /*userName= intent.getStringExtra(SignUpActivity.USERNAME);
+                    password= intent.getStringExtra(SignUpActivity.PASSWORD);*/
+                    if(intent!=null){
+                        edtUserName.setText(intent.getStringExtra(SignUpActivity.USERNAME));
+                        edtPassWord.setText(intent.getStringExtra(SignUpActivity.PASSWORD));
+                    }
+
         //EVENT LOGIN
         btnSigIn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
@@ -81,13 +96,16 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
+
                 mLoginProgress.setTitle("Logging In");
-                mLoginProgress.setMessage("Please wait while we check your credentials.");
+                mLoginProgress.setMessage("Please wait while we check your account.");
                 mLoginProgress.setCanceledOnTouchOutside(false);
 
                 mLoginProgress.show();
-                String userName = edtUserName.getText().toString().trim();
-                String password = edtPassWord.getText().toString().trim();
+
+
+                userName = edtUserName.getText().toString().trim();
+                password = edtPassWord.getText().toString().trim();
 
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", userName);
@@ -98,9 +116,15 @@ public class SignInActivity extends AppCompatActivity {
                         if (obj != null) {
                             mLoginProgress.dismiss();
                             ProfileUser profileUser = (ProfileUser) obj;
+
+                            Intent main_activity = new Intent(SignInActivity.this, MainActivity.class);
+                            main_activity.putExtra(USERNAME,profileUser.getUser_name());
+                            main_activity.putExtra(FULLNAME,profileUser.getFull_name());
+                            main_activity.putExtra(USERID,profileUser.getUser_id());
+                            main_activity.putExtra(EMAIL,profileUser.getEmail());
+                            startActivity(main_activity);
                            /* if (profileUser.user_name!=null) {*/
-                                Intent main_activity = new Intent(SignInActivity.this, MainActivity.class);
-                                startActivity(main_activity);
+
                           /*  } else {
                               *//*  if(profileUser.res==1){
                                     ShowMessage(getBaseContext(),"Login fail!");
@@ -114,6 +138,7 @@ public class SignInActivity extends AppCompatActivity {
                         } else {
                             //ERROR
                             mLoginProgress.hide();
+                            ShowMessage(getBaseContext(),"Login fail!");
                         }
                     }
                 });

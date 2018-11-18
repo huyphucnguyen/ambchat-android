@@ -1,6 +1,7 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.SignInActivity;
 import com.ambientdigitalgroup.ambchat.utils.ChatMessage;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -30,6 +32,7 @@ public class ChatsFragment extends Fragment {
     ListView lvMess;
     View view;
     FirebaseDatabase db;
+
     public ChatsFragment() {
         // Required empty public constructor
     }
@@ -41,6 +44,9 @@ public class ChatsFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_chats, container, false);
         //get view
         getsView();
+        //get intent
+
+
         //send message
         sendMessage();
         displayChatMessages();
@@ -48,6 +54,7 @@ public class ChatsFragment extends Fragment {
         return  view;
     }
     public void sendMessage(){
+        final Intent intent = getActivity().getIntent();
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +64,7 @@ public class ChatsFragment extends Fragment {
                         .push()
                         .setValue(new ChatMessage(
                                 edt_Mess.getText().toString(),
-                               "NGOC DANH"
+                                intent.getStringExtra(SignInActivity.USERNAME)
                         ));
                 //clearn the input
                 edt_Mess.setText("");

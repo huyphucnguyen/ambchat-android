@@ -28,7 +28,6 @@ public class HomeActivity extends Activity {
                     finish();
                 }
             });
-
             Intent i=getIntent();
             txtMsg.setText("Hello : "+i.getStringExtra("userName"));
         }

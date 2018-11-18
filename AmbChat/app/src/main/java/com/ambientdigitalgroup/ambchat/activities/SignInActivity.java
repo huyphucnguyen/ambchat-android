@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,10 @@ import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -51,6 +56,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
         addControls();
+        ckbRememberpass.setOnClickListener((View.OnClickListener) this);
         // if(CheckInvalidData()==true){
         addEvent();
         // }-
@@ -114,7 +120,6 @@ public class SignInActivity extends AppCompatActivity {
                         if (obj != null) {
                             mLoginProgress.dismiss();
                             ProfileUser profileUser = (ProfileUser) obj;
-
                             Intent main_activity = new Intent(SignInActivity.this, MainActivity.class);
                             main_activity.putExtra(USERNAME,profileUser.getUser_name());
                             main_activity.putExtra(FULLNAME,profileUser.getFull_name());
@@ -130,7 +135,14 @@ public class SignInActivity extends AppCompatActivity {
                     }
                 });
                 request.execute(parameter);
-                doLogin();
+                //doLogin();
+                switch (view.getId()){
+                    case R.id.ckbRemmemberPass:
+                        saveDataDefault();
+                        break;
+                    default:
+                        break;
+                }
 
             }
         });
@@ -144,7 +156,7 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(i);//mở màn hình mới
     }
 
-    @Override
+  /*  @Override
     protected void onPause() {
         super.onPause();
         savingPreferences();
@@ -154,7 +166,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onResume();
         //gọi hàm đọc trạng thái ở đây
         restoringPreferences();
-    }
+    }*/
 
     private void savingPreferences() {
         SharedPreferences pre=getSharedPreferences(prefname, MODE_PRIVATE);
@@ -225,6 +237,38 @@ public class SignInActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void readData() {
+        try {
+            FileInputStream in = openFileInput("infoUser");
+            BufferedReader br= new BufferedReader(new InputStreamReader(in));
+            StringBuffer buffer = new StringBuffer();
+            String line = null;
+            while((line= br.readLine())!= null)  {
+                buffer.append(line).append("\n");
+            }
+            Log.d("read-data:",buffer.toString());
+
+        } catch (Exception e) {
+            Toast.makeText(this,"Error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void saveDataDefault() {
+        String fileName = "profileUser";
+        String content = "Thong tin user";
+
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(content.getBytes());
+            outputStream.close();
+            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -44,7 +44,7 @@ public class RequestFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
                 Intent i = getActivity().getIntent();
-                txtMsg.setText("Hello : " + i.getStringExtra("user"));
+                txtMsg.setText("Hello : " + i.getStringExtra("userName"));
                 System.exit(0);
             }
         });

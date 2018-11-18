@@ -3,12 +3,14 @@ package com.ambientdigitalgroup.ambchat.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.fragments.RequestFragment;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
@@ -34,6 +37,7 @@ public class SignInActivity extends AppCompatActivity {
     private Button btnSigIn;
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword, txtRegisterAcount;
+    String prefname="my_data";
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
     public static final String USERNAME=null ;
@@ -66,6 +70,7 @@ public class SignInActivity extends AppCompatActivity {
         String pass = edtPassWord.getText().toString();
         mLoginProgress = new ProgressDialog(this);
 
+
       /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             String sss = Context.APPWIDGET_SERVICE;
         }*/
@@ -94,19 +99,12 @@ public class SignInActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
             @Override
             public void onClick(View view) {
-
-
-
                 mLoginProgress.setTitle("Logging In");
                 mLoginProgress.setMessage("Please wait while we check your account.");
                 mLoginProgress.setCanceledOnTouchOutside(false);
-
                 mLoginProgress.show();
-
-
                 userName = edtUserName.getText().toString().trim();
                 password = edtPassWord.getText().toString().trim();
-
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", userName);
                 parameter.put("password", password);
@@ -143,9 +141,71 @@ public class SignInActivity extends AppCompatActivity {
                     }
                 });
                 request.execute(parameter);
+                doLogin();
 
             }
         });
+    }
+    public void doLogin(){
+        finish();//đóng màn hình hiện tại"
+//        Bundle arg = new Bundle();
+//        arg.putString("loichao","Hello "+edtUserName.getText().toString());
+        Intent i=new Intent(this, RequestFragment.class);
+        //truyền dữ liệu qua màn hình mới
+        i.putExtra("userName", edtUserName.getText().toString());
+        startActivity(i);//mở màn hình mới
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        savingPreferences();
+    }
+
+    private void savingPreferences() {
+        SharedPreferences pre=getSharedPreferences
+                (prefname, MODE_PRIVATE);
+        //tạo đối tượng Editor để lưu thay đổi
+        SharedPreferences.Editor editor=pre.edit();
+        String userName=edtUserName.getText().toString();
+        String passWord=edtPassWord.getText().toString();
+        boolean ckbRemem=ckbRememberpass.isChecked();
+        if(!ckbRemem)
+        {
+            //xóa mọi lưu trữ trước đó
+            editor.clear();
+        }
+        else
+        {
+            //lưu vào editor
+            editor.putString("user", userName);
+            editor.putString("pwd", passWord);
+            editor.putBoolean("checked", ckbRemem);
+        }
+        //chấp nhận lưu xuống file
+        editor.commit();
+    }
+    public void restoringPreferences()
+    {
+        SharedPreferences pre=getSharedPreferences
+                (prefname,MODE_PRIVATE);
+        //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
+        boolean checkAcc=pre.getBoolean("checked", false);
+        if(checkAcc)
+        {
+            //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
+            String user=pre.getString("user", "");
+            String pwd=pre.getString("pwd", "");
+            edtUserName.setText(user);
+            edtPassWord.setText(pwd);
+        }
+        ckbRememberpass.setChecked(checkAcc);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
     }
 
     public boolean checkInvalidData() {

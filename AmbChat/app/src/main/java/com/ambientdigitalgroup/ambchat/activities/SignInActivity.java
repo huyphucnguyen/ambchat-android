@@ -121,18 +121,7 @@ public class SignInActivity extends AppCompatActivity {
                             main_activity.putExtra(USERID,profileUser.getUser_id());
                             main_activity.putExtra(EMAIL,profileUser.getEmail());
                             startActivity(main_activity);
-                           /* if (profileUser.user_name!=null) {*/
 
-                          /*  } else {
-                              *//*  if(profileUser.res==1){
-                                    ShowMessage(getBaseContext(),"Login fail!");
-                                    return;
-                                }
-                                if(profileUser.res==2){
-                                    ShowMessage(getBaseContext(),"Login fail!");
-                                    return;
-                                }*//*
-                            }*/
                         } else {
                             //ERROR
                             mLoginProgress.hide();
@@ -148,8 +137,6 @@ public class SignInActivity extends AppCompatActivity {
     }
     public void doLogin(){
         finish();//đóng màn hình hiện tại"
-//        Bundle arg = new Bundle();
-//        arg.putString("loichao","Hello "+edtUserName.getText().toString());
         Intent i=new Intent(this, RequestFragment.class);
         //truyền dữ liệu qua màn hình mới
         i.putExtra("userName", edtUserName.getText().toString());
@@ -161,10 +148,15 @@ public class SignInActivity extends AppCompatActivity {
         super.onPause();
         savingPreferences();
     }
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        //gọi hàm đọc trạng thái ở đây
+        restoringPreferences();
+    }
 
     private void savingPreferences() {
-        SharedPreferences pre=getSharedPreferences
-                (prefname, MODE_PRIVATE);
+        SharedPreferences pre=getSharedPreferences(prefname, MODE_PRIVATE);
         //tạo đối tượng Editor để lưu thay đổi
         SharedPreferences.Editor editor=pre.edit();
         String userName=edtUserName.getText().toString();
@@ -178,9 +170,9 @@ public class SignInActivity extends AppCompatActivity {
         else
         {
             //lưu vào editor
-            editor.putString("user", userName);
-            editor.putString("pwd", passWord);
-            editor.putBoolean("checked", ckbRemem);
+            editor.putString("userName", userName);
+            editor.putString("passWord", passWord);
+            editor.putBoolean("checkAcc", ckbRemem);
         }
         //chấp nhận lưu xuống file
         editor.commit();
@@ -190,12 +182,12 @@ public class SignInActivity extends AppCompatActivity {
         SharedPreferences pre=getSharedPreferences
                 (prefname,MODE_PRIVATE);
         //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
-        boolean checkAcc=pre.getBoolean("checked", false);
+        boolean checkAcc=pre.getBoolean("checkAcc", false);
         if(checkAcc)
         {
             //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
-            String user=pre.getString("user", "");
-            String pwd=pre.getString("pwd", "");
+            String user=pre.getString("userName", "");
+            String pwd=pre.getString("passWord", "");
             edtUserName.setText(user);
             edtPassWord.setText(pwd);
         }

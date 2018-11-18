@@ -30,10 +30,8 @@ public class RequestFragment extends Fragment {
                              Bundle savedInstanceState) {
        // Inflate the layout for this fragment
        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_request, container, false);
-       txtMsg = view.findViewById(R.id.txtmsg);
-       btnThoat = view.findViewById(R.id.btnThoat);
-
-
+       txtMsg = root.findViewById(R.id.txtmsg);
+       btnThoat = root.findViewById(R.id.btnThoat);
        return root;
    }
 

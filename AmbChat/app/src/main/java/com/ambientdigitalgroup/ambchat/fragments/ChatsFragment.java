@@ -14,9 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ambientdigitalgroup.ambchat.R;
-import com.ambientdigitalgroup.ambchat.activities.SignInActivity;
 import com.ambientdigitalgroup.ambchat.utils.ChatMessage;
-import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -54,7 +52,12 @@ public class ChatsFragment extends Fragment {
         return  view;
     }
     public void sendMessage(){
-        final Intent intent = getActivity().getIntent();
+        Bundle args = getArguments();
+        String username = "";
+        if(args!=null){
+            username = args.getString(SignInFragment.USERNAME);
+        }
+        final String finalUsername = username;
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +67,7 @@ public class ChatsFragment extends Fragment {
                         .push()
                         .setValue(new ChatMessage(
                                 edt_Mess.getText().toString(),
-                                intent.getStringExtra(SignInActivity.USERNAME)
+                                finalUsername
                         ));
                 //clearn the input
                 edt_Mess.setText("");

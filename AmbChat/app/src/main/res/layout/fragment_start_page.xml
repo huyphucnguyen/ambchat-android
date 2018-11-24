@@ -8,7 +8,7 @@
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
     android:paddingTop="50dp"
-    tools:context=".activities.MainActivity">
+    tools:context=".fragments.MainFragment">
 
     <TextView
         android:layout_width="match_parent"

@@ -1,6 +1,12 @@
 package com.ambientdigitalgroup.ambchat.utils;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import com.ambientdigitalgroup.ambchat.R;
+
 import java.util.regex.*;
 public   class Extension {
     public static int checkUserName(String userName){
@@ -49,6 +55,14 @@ public   class Extension {
         }
     }
 
-
+    public static void replaceFragment(FragmentManager fgManager,Fragment fragment) {
+        FragmentTransaction transaction = null;
+        if (fgManager != null) {
+            transaction = fgManager.beginTransaction();
+            transaction.replace(R.id.flContainer, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+    }
 
 }

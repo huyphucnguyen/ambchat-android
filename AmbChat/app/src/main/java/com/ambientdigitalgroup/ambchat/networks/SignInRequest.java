@@ -45,7 +45,7 @@ public class SignInRequest extends SeverRequest {
         try {
             JSONObject json = null;
             json = new JSONObject(data);
-            JSONObject object= json.getJSONObject("data");
+            JSONObject object= json.getJSONObject("data"); //Có thể bị Value null at data
      /*       String json = "{\"user_name\":\"nana\",\"full_name\":\"BuiNa\",\"picture\":\"john@gmail.com\"}";*/
             Gson gson=new Gson();
             ProfileUser profile = gson.fromJson(String.valueOf(object), ProfileUser.class);

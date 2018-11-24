@@ -1,12 +1,7 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -17,26 +12,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
-import com.ambientdigitalgroup.ambchat.activities.MainActivity;
-import com.ambientdigitalgroup.ambchat.activities.SignInActivity;
 import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
-import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
-import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.ambientdigitalgroup.ambchat.utils.User;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 /**

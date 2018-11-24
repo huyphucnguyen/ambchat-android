@@ -1,4 +1,4 @@
-package com.ambientdigitalgroup.ambchat.activities;
+package com.ambientdigitalgroup.ambchat.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,11 +8,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
-import com.ambientdigitalgroup.ambchat.fragments.RequestFragment;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
@@ -35,9 +38,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.MODE_PRIVATE;
 
-public class SignInActivity extends AppCompatActivity {
-
+public class SignInFragment extends Fragment {
     private EditText edtUserName, edtPassWord;
     private Button btnSigIn;
     private CheckBox ckbRememberpass;
@@ -45,19 +48,46 @@ public class SignInActivity extends AppCompatActivity {
     String prefname="my_data";
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
-    public static final String USERNAME=null ;
-    public static final String FULLNAME = null;
-    public static final String USERID=null;
-    public static final String EMAIL=null;
+    public static final String USERNAME= "USERNAME" ;
+    public static final String FULLNAME = "FULLNAME";
+    public static final String USERID="USERID";
+    public static final String EMAIL="EMAIL";
     String userName;
     String password;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signin);
-        addControls();
-        ckbRememberpass.setOnClickListener((View.OnClickListener) this);
-        // if(CheckInvalidData()==true){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signin,container,false);
+        addControls(root);
+        return root;
+    }
+
+    public void addControls(ViewGroup root) {
+        edtUserName = (EditText) root.findViewById(R.id.edtUserName);
+        edtPassWord = (EditText) root.findViewById(R.id.edtPass);
+        txtForgotPassword = (TextView) root.findViewById(R.id.txtForgotPassword);
+        txtRegisterAcount = (TextView) root.findViewById(R.id.txtRegisterAcount);
+        ckbRememberpass = (CheckBox) root.findViewById(R.id.ckbRemmemberPass);
+        btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
+        mLoginProgress = new ProgressDialog(getContext());
+
+
+      /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            String sss = Context.APPWIDGET_SERVICE;
+        }
+        //Test encode SHA256
+
+        */
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //String pass = edtPassWord.getText().toString();
+
+//        ckbRememberpass.setOnClickListener((View.OnClickListener) this);
+//        // if(CheckInvalidData()==true){
         addEvent();
         // }-
         //  else{
@@ -66,39 +96,21 @@ public class SignInActivity extends AppCompatActivity {
         //  }
     }
 
-    public void addControls() {
-        edtUserName = (EditText) findViewById(R.id.edtUserName);
-        edtPassWord = (EditText) findViewById(R.id.edtPass);
-        txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
-        txtRegisterAcount = (TextView) findViewById(R.id.txtRegisterAcount);
-        ckbRememberpass = (CheckBox) findViewById(R.id.ckbRemmemberPass);
-        btnSigIn = (Button) findViewById(R.id.btnLogIn);
-        String pass = edtPassWord.getText().toString();
-        mLoginProgress = new ProgressDialog(this);
-
-
-      /*  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            String sss = Context.APPWIDGET_SERVICE;
-        }*/
-        //Test encode SHA256
-
-       /* try {
-            String encodeSHA256=SHA256(pass);
-            Toast.makeText(SignInActivity.this,encodeSHA256,Toast.LENGTH_LONG).show();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }*/
-    }
-
     public void addEvent() {
-        final Intent intent = getIntent();
+//        final Intent intent = getActivity().getIntent();
+//        //Get data from signup
+//                    /*userName= intent.getStringExtra(SignUpFragment.USERNAME);
+//                    password= intent.getStringExtra(SignUpFragment.PASSWORD);*/
+//        if(intent!=null){
+//            edtUserName.setText(intent.getStringExtra(SignUpFragment.USERNAME));
+//            edtPassWord.setText(intent.getStringExtra(SignUpFragment.PASSWORD));
+//        }
 
-                    /*userName= intent.getStringExtra(SignUpActivity.USERNAME);
-                    password= intent.getStringExtra(SignUpActivity.PASSWORD);*/
-                    if(intent!=null){
-                        edtUserName.setText(intent.getStringExtra(SignUpActivity.USERNAME));
-                        edtPassWord.setText(intent.getStringExtra(SignUpActivity.PASSWORD));
-                    }
+        Bundle args = getArguments();
+        if(args!=null){
+            edtUserName.setText(args.getString("username"));
+            edtPassWord.setText(args.getString("password"));
+        }
 
         //EVENT LOGIN
         btnSigIn.setOnClickListener(new View.OnClickListener() {
@@ -120,17 +132,26 @@ public class SignInActivity extends AppCompatActivity {
                         if (obj != null) {
                             mLoginProgress.dismiss();
                             ProfileUser profileUser = (ProfileUser) obj;
-                            Intent main_activity = new Intent(SignInActivity.this, MainActivity.class);
-                            main_activity.putExtra(USERNAME,profileUser.getUser_name());
-                            main_activity.putExtra(FULLNAME,profileUser.getFull_name());
-                            main_activity.putExtra(USERID,profileUser.getUser_id());
-                            main_activity.putExtra(EMAIL,profileUser.getEmail());
-                            startActivity(main_activity);
+//                            Intent main_activity = new Intent(getActivity(), MainFragment.class);
+//                            main_activity.putExtra(USERNAME,profileUser.getUser_name());
+//                            main_activity.putExtra(FULLNAME,profileUser.getFull_name());
+//                            main_activity.putExtra(USERID,profileUser.getUser_id());
+//                            main_activity.putExtra(EMAIL,profileUser.getEmail());
+//                            startActivity(main_activity);
+                            Fragment fragment = new MainFragment();
+                            Bundle args = new Bundle();
+                            args.putString(USERNAME,profileUser.getUser_name());
+                            args.putString(FULLNAME,profileUser.getFull_name());
+                            args.putInt(USERID,profileUser.getUser_id());
+                            args.putString(EMAIL,profileUser.getEmail());
+                            fragment.setArguments(args);
+
+                            Extension.replaceFragment(getFragmentManager(),fragment);
 
                         } else {
                             //ERROR
                             mLoginProgress.hide();
-                            ShowMessage(getBaseContext(),"Login fail!");
+                            ShowMessage(getContext(),"Login fail!");
                         }
                     }
                 });
@@ -148,12 +169,13 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
     public void doLogin(){
+        //TODO change fragment
+        Fragment fragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putString("userName",edtUserName.getText().toString());
+        fragment.setArguments(args);
+        Extension.replaceFragment(getFragmentManager(),fragment);
 
-        Intent i=new Intent(this, HomeActivity.class);
-        //truyền dữ liệu qua màn hình mới
-        i.putExtra("userName", edtUserName.getText().toString());
-        finish();//đóng màn hình hiện tại"
-        startActivity(i);//mở màn hình mới
     }
 
   /*  @Override
@@ -169,7 +191,7 @@ public class SignInActivity extends AppCompatActivity {
     }*/
 
     private void savingPreferences() {
-        SharedPreferences pre=getSharedPreferences(prefname, MODE_PRIVATE);
+        SharedPreferences pre=getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
         //tạo đối tượng Editor để lưu thay đổi
         SharedPreferences.Editor editor=pre.edit();
         String userName=edtUserName.getText().toString();
@@ -192,7 +214,7 @@ public class SignInActivity extends AppCompatActivity {
     }
     public void restoringPreferences()
     {
-        SharedPreferences pre=getSharedPreferences
+        SharedPreferences pre=getActivity().getSharedPreferences
                 (prefname,MODE_PRIVATE);
         //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
         boolean checkAcc=pre.getBoolean("checkAcc", false);
@@ -208,9 +230,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        return true;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main_menu,menu);
     }
 
     public boolean checkInvalidData() {
@@ -241,7 +263,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private void readData() {
         try {
-            FileInputStream in = openFileInput("infoUser");
+            FileInputStream in = getActivity().openFileInput("infoUser");
             BufferedReader br= new BufferedReader(new InputStreamReader(in));
             StringBuffer buffer = new StringBuffer();
             String line = null;
@@ -251,7 +273,7 @@ public class SignInActivity extends AppCompatActivity {
             Log.d("read-data:",buffer.toString());
 
         } catch (Exception e) {
-            Toast.makeText(this,"Error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -261,14 +283,13 @@ public class SignInActivity extends AppCompatActivity {
 
         FileOutputStream outputStream = null;
         try {
-            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream = getActivity().openFileOutput(fileName, MODE_PRIVATE);
             outputStream.write(content.getBytes());
             outputStream.close();
-            Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 }

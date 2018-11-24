@@ -19,13 +19,11 @@
             </intent-filter>
         </activity>
         <!-- <activity android:name=".InforUserFragment" /> -->
-        <activity android:name=".activities.SignInActivity" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".fragments.MainFragment"
             android:parentActivityName=".activities.StartActivity" />
-        <activity android:name=".activities.InforUserActivity"></activity>
 
-        <activity android:name=".activities.SignUpActivity"></activity>
+        <activity android:name=".fragments.SignUpFragment"></activity>
     </application>
 
 </manifest>

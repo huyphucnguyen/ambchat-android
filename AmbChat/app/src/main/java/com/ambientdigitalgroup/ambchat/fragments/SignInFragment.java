@@ -155,8 +155,10 @@ public class SignInFragment extends Fragment {
                         }
                     }
                 });
+
                 request.execute(parameter);
-                //doLogin();
+                doLogin();
+                readData();
                 switch (view.getId()){
                     case R.id.ckbRemmemberPass:
                         saveDataDefault();
@@ -178,17 +180,17 @@ public class SignInFragment extends Fragment {
 
     }
 
-  /*  @Override
-    protected void onPause() {
+  @Override
+  public void onPause() {
         super.onPause();
         savingPreferences();
     }
-    protected void onResume() {
+    public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
         //gọi hàm đọc trạng thái ở đây
         restoringPreferences();
-    }*/
+    }
 
     private void savingPreferences() {
         SharedPreferences pre=getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
@@ -211,6 +213,7 @@ public class SignInFragment extends Fragment {
         }
         //chấp nhận lưu xuống file
         editor.commit();
+
     }
     public void restoringPreferences()
     {
@@ -228,11 +231,17 @@ public class SignInFragment extends Fragment {
         }
         ckbRememberpass.setChecked(checkAcc);
     }
+    public void readData(){
+        SharedPreferences sharedPreferences =(getActivity()).getSharedPreferences(prefname, Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString("userName","");
+        System.out.print(name);
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu,menu);
+       // return true;
     }
 
     public boolean checkInvalidData() {
@@ -258,22 +267,6 @@ public class SignInFragment extends Fragment {
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 }
             });
-        }
-    }
-
-    private void readData() {
-        try {
-            FileInputStream in = getActivity().openFileInput("infoUser");
-            BufferedReader br= new BufferedReader(new InputStreamReader(in));
-            StringBuffer buffer = new StringBuffer();
-            String line = null;
-            while((line= br.readLine())!= null)  {
-                buffer.append(line).append("\n");
-            }
-            Log.d("read-data:",buffer.toString());
-
-        } catch (Exception e) {
-            Toast.makeText(getContext(),"Error:"+e.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -31,13 +31,14 @@ public class MainFragment extends Fragment {
     private TabLayout mTabLayout;
 
 
+    ViewGroup root;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.fragment_main,container,false);
+        root = ( ViewGroup ) inflater.inflate(R.layout.fragment_main,container,false);
         getView(root);
 
-        //Can be null
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolBar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("AbmChat");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,10 +51,15 @@ public class MainFragment extends Fragment {
         return root;
     }
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+    }
     /**
      * add control from layout
      * @param root is ViewGroup get from onCreateView method*/
-    public  void getView(ViewGroup root){
+    public  void getView(View root){
         mToolBar = root.findViewById(R.id.main_page_toolbar);
         //tab
         mViewPager = (ViewPager) root.findViewById(R.id.main_tabPager);
@@ -85,5 +91,31 @@ public class MainFragment extends Fragment {
 
         return true;
     }
+
+
+
+
+/*
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.activity_menu_item:
+
+                // Not implemented here
+                return false;
+            case R.id.fragment_menu_item:
+
+                // Do Fragment menu item stuff here
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+*/
 
 }

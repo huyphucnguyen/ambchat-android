@@ -123,9 +123,15 @@ public class SignInFragment extends Fragment {
                 mLoginProgress.show();
                 userName = edtUserName.getText().toString().trim();
                 password = edtPassWord.getText().toString().trim();
+                String sha256OfPassword = "";
+                try {
+                    sha256OfPassword = SHA256(password);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", userName);
-                parameter.put("password", password);
+                parameter.put("password", sha256OfPassword);
                 SignInRequest request = new SignInRequest(new SeverRequest.SeverRequestListener() {
                     @Override
                     public void completed(Object obj) {
@@ -256,7 +262,7 @@ public class SignInFragment extends Fragment {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(pass.getBytes());
         byte[] digest = messageDigest.digest();
-        return android.util.Base64.encodeToString(digest, android.util.Base64.DEFAULT);
+        return Extension.toHexString(digest);
     }
     public  void ShowMessage(final Context context, final String msg) {
         if (context != null && msg != null) {

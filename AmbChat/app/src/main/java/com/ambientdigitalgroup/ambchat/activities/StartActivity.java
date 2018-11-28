@@ -16,6 +16,8 @@ public class StartActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
+
+        //TODO neu user da login roi thi sao?
         StartPageFragment fragment = new StartPageFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();

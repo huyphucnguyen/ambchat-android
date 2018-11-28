@@ -65,4 +65,18 @@ public   class Extension {
         }
     }
 
+    private static final char[] HEX_CHARS = "0123456789abcdef".toCharArray();
+
+    public static String toHexString(final byte[] bytes) {
+        if (bytes == null) {
+            return "(null)";
+        }
+        int slen = bytes.length * 2;
+        StringBuilder ret = new StringBuilder(slen);
+        for (int i = 0; i < bytes.length; i++) {
+            ret.append(HEX_CHARS[(bytes[i] >> 4) & 0xF]);
+            ret.append(HEX_CHARS[(bytes[i] & 0xF)]);
+        }
+        return ret.toString();
+    }
 }

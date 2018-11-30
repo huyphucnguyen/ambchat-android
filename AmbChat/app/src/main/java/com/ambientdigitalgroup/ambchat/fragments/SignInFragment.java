@@ -28,6 +28,7 @@ import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.ambientdigitalgroup.ambchat.utils.Result;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -137,19 +138,15 @@ public class SignInFragment extends Fragment {
                     public void completed(Object obj) {
                         if (obj != null) {
                             mLoginProgress.dismiss();
-                            ProfileUser profileUser = (ProfileUser) obj;
-//                            Intent main_activity = new Intent(getActivity(), MainFragment.class);
-//                            main_activity.putExtra(USERNAME,profileUser.getUser_name());
-//                            main_activity.putExtra(FULLNAME,profileUser.getFull_name());
-//                            main_activity.putExtra(USERID,profileUser.getUser_id());
-//                            main_activity.putExtra(EMAIL,profileUser.getEmail());
-//                            startActivity(main_activity);
+                            Result res = (Result) obj;
+
+                            ProfileUser user=(ProfileUser) res.getData();
                             Fragment fragment = new MainFragment();
                             Bundle args = new Bundle();
-                            args.putString(USERNAME,profileUser.getUser_name());
-                            args.putString(FULLNAME,profileUser.getFull_name());
-                            args.putInt(USERID,profileUser.getUser_id());
-                            args.putString(EMAIL,profileUser.getEmail());
+                            args.putString(USERNAME,user.getUser_name());
+                            args.putString(FULLNAME,user.getFull_name());
+                            args.putInt(USERID,user.getUser_id());
+                            args.putString(EMAIL,user.getEmail());
                             fragment.setArguments(args);
 
                             Extension.replaceFragment(getFragmentManager(),fragment);

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
     <item
         android:id="@+id/main_account_btn"
-        android:title="Acount"
+        android:title="Account"
 
         />
     <item
@@ -11,6 +13,7 @@
         android:title="All user"/>
 
     <item
+
         android:id="@+id/main_logout_btn"
         android:title="Logout" />
 

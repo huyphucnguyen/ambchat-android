@@ -1,6 +1,9 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,16 +31,6 @@ public class GetFriendsRequest extends SeverRequest {
         return request;
     }
 
-   /* @Override
-    protected Request prepare(Map<String,String>) {
-        Request request =new Request.Builder()
-                .url(URL+"getlistfriend.php")
-                .get()
-                .build();
-
-        return request;
-    }*/
-
 
 
 
@@ -45,8 +38,15 @@ public class GetFriendsRequest extends SeverRequest {
     protected Object process(String data) {
 
             try {
+                Gson gson=new Gson();
+                Result res=gson.fromJson(data,Result.class);
+
+                JSONObject json = null;
+                json = new JSONObject(data);
+
+
                 ArrayList<User> arrUser=new ArrayList<User>();
-                JSONArray array_user= new JSONArray(data);
+                JSONArray array_user= json.getJSONArray("data");
                 for(int i=0;i<array_user.length();i++){
                     JSONObject ob=array_user.getJSONObject(i);
 
@@ -57,7 +57,8 @@ public class GetFriendsRequest extends SeverRequest {
                     ));
 
                 }
-                return  arrUser;
+                res.setData(arrUser);
+                return  res;
             } catch (Exception e){
                 e.printStackTrace();
             }

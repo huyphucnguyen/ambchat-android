@@ -15,6 +15,7 @@ import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
+import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
 
 import java.util.ArrayList;
@@ -37,26 +38,14 @@ public class FriendsFragment extends ListFragment {
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      /*  arrUser = new ArrayList<User>();
-        // Inflate the layout for this fragment
-        arrUser.add(new User(1," Ngoc Danh","ThuyDuong"));
-        arrUser.add(new User(2," Thi Na","ThuyDuong"));
-        arrUser.add(new User(3," Van lam","ThuyDuong"));
-        arrUser.add(new User(3," Van lam","ThuyDuong"));
-        arrUser.add(new User(3," Van lam","ThuyDuong"));
-        arrUser.add(new User(3," Van lam","ThuyDuong"));
-*/
-
-
-
-////////////////////////////////////
         Map<String, String> parameter = new HashMap<>();
         GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
             @Override
             public void completed(Object obj) {
 
                 if (obj != null) {
-                    ArrayList<User> arr= (ArrayList<User>) obj;
+                    Result res=(Result) obj;
+                    ArrayList<User> arr= (ArrayList<User>) res.getData();
                     UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_items_test,arr);
                     setListAdapter(adapter);
 

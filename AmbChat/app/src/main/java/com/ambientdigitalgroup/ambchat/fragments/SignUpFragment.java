@@ -18,6 +18,8 @@ import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignUpRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,11 +79,17 @@ public class SignUpFragment extends Fragment {
                 boolean checkData = isEmptyField(username, fullname, email, password, rePassword);
                 if (checkData) return;
                 //-------------------------------su ly dang ky------------------------//
+                String sha256OfPassword = "";
+                try {
+                    sha256OfPassword = SHA256(password);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", username);
                 parameter.put("fullname", fullname);
                 parameter.put("email", email);
-                parameter.put("password", password);
+                parameter.put("password", sha256OfPassword);
                 parameter.put("gender", String.valueOf(gender));
 
                 SignUpRequest request = new SignUpRequest(new SeverRequest.SeverRequestListener() {
@@ -165,6 +173,13 @@ public class SignUpFragment extends Fragment {
     //function show message
     private void showMessage(String mess) {
         Toast.makeText(getContext(), mess, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String SHA256(String pass) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        messageDigest.update(pass.getBytes());
+        byte[] digest = messageDigest.digest();
+        return Extension.toHexString(digest);
     }
 
 }

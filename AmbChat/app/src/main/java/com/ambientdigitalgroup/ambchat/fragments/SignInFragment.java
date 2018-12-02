@@ -46,20 +46,20 @@ public class SignInFragment extends Fragment {
     private Button btnSigIn;
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword, txtRegisterAcount;
-    String prefname="my_data";
+    String prefname = "my_data";
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
-    public static final String USERNAME= "USERNAME" ;
+    public static final String USERNAME = "USERNAME";
     public static final String FULLNAME = "FULLNAME";
-    public static final String USERID="USERID";
-    public static final String EMAIL="EMAIL";
+    public static final String USERID = "USERID";
+    public static final String EMAIL = "EMAIL";
     String userName;
     String password;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signin,container,false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signin, container, false);
         addControls(root);
         return root;
     }
@@ -73,42 +73,18 @@ public class SignInFragment extends Fragment {
         btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
         mLoginProgress = new ProgressDialog(getContext());
 
-
-      /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            String sss = Context.APPWIDGET_SERVICE;
-        }
-        //Test encode SHA256
-
-        */
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //String pass = edtPassWord.getText().toString();
-
-//        ckbRememberpass.setOnClickListener((View.OnClickListener) this);
-//        // if(CheckInvalidData()==true){
         addEvent();
-        // }-
-        //  else{
-        //  Toast.makeText(getBaseContext(),"User name or password Invalid",Toast.LENGTH_SHORT).show();
-        //   return;
-        //  }
+
     }
 
     public void addEvent() {
-//        final Intent intent = getActivity().getIntent();
-//        //Get data from signup
-//                    /*userName= intent.getStringExtra(SignUpFragment.USERNAME);
-//                    password= intent.getStringExtra(SignUpFragment.PASSWORD);*/
-//        if(intent!=null){
-//            edtUserName.setText(intent.getStringExtra(SignUpFragment.USERNAME));
-//            edtPassWord.setText(intent.getStringExtra(SignUpFragment.PASSWORD));
-//        }
-
         Bundle args = getArguments();
-        if(args!=null){
+        if (args != null) {
             edtUserName.setText(args.getString("username"));
             edtPassWord.setText(args.getString("password"));
         }
@@ -140,54 +116,34 @@ public class SignInFragment extends Fragment {
                             mLoginProgress.dismiss();
                             Result res = (Result) obj;
 
-                            ProfileUser user=(ProfileUser) res.getData();
+                            ProfileUser user = (ProfileUser) res.getData();
                             Fragment fragment = new MainFragment();
                             Bundle args = new Bundle();
-                            args.putString(USERNAME,user.getUser_name());
-                            args.putString(FULLNAME,user.getFull_name());
-                            args.putInt(USERID,user.getUser_id());
-                            args.putString(EMAIL,user.getEmail());
+                            args.putString(USERNAME, user.getUser_name());
+                            args.putString(FULLNAME, user.getFull_name());
+                            args.putInt(USERID, user.getUser_id());
+                            args.putString(EMAIL, user.getEmail());
                             fragment.setArguments(args);
-
-                            Extension.replaceFragment(getFragmentManager(),fragment);
-
+                            Extension.replaceFragment(getFragmentManager(), fragment);
                         } else {
                             //ERROR
                             mLoginProgress.hide();
-                            ShowMessage(getContext(),"Login fail!");
+                            ShowMessage(getContext(), "Login fail!");
                         }
                     }
                 });
 
                 request.execute(parameter);
-                doLogin();
-                readData();
-                switch (view.getId()){
-                    case R.id.ckbRemmemberPass:
-                        saveDataDefault();
-                        break;
-                    default:
-                        break;
-                }
 
             }
         });
     }
-    public void doLogin(){
-        //TODO change fragment
-        Fragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString("userName",edtUserName.getText().toString());
-        fragment.setArguments(args);
-        Extension.replaceFragment(getFragmentManager(),fragment);
-
-    }
-
-  @Override
-  public void onPause() {
+    @Override
+    public void onPause() {
         super.onPause();
         savingPreferences();
     }
+
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
@@ -196,55 +152,42 @@ public class SignInFragment extends Fragment {
     }
 
     private void savingPreferences() {
-        SharedPreferences pre=getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
+        SharedPreferences pre = getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
         //tạo đối tượng Editor để lưu thay đổi
-        SharedPreferences.Editor editor=pre.edit();
-        String userName=edtUserName.getText().toString();
-        String passWord=edtPassWord.getText().toString();
-        boolean ckbRemem=ckbRememberpass.isChecked();
-        if(!ckbRemem)
-        {
+        SharedPreferences.Editor editor = pre.edit();
+        String userName = edtUserName.getText().toString();
+        boolean ckbRemem = ckbRememberpass.isChecked();
+        if (!ckbRemem) {
             //xóa mọi lưu trữ trước đó
             editor.clear();
-        }
-        else
-        {
+        } else {
             //lưu vào editor
             editor.putString("userName", userName);
-            editor.putString("passWord", passWord);
             editor.putBoolean("checkAcc", ckbRemem);
         }
         //chấp nhận lưu xuống file
         editor.commit();
 
     }
-    public void restoringPreferences()
-    {
-        SharedPreferences pre=getActivity().getSharedPreferences
-                (prefname,MODE_PRIVATE);
+
+    // Không lưu password.
+    public void restoringPreferences() {
+        SharedPreferences pre = getActivity().getSharedPreferences
+                (prefname, MODE_PRIVATE);
         //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
-        boolean checkAcc=pre.getBoolean("checkAcc", false);
-        if(checkAcc)
-        {
+        boolean checkAcc = pre.getBoolean("checkAcc", false);
+        if (checkAcc) {
             //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
-            String user=pre.getString("userName", "");
-            String pwd=pre.getString("passWord", "");
+            String user = pre.getString("userName", "");
             edtUserName.setText(user);
-            edtPassWord.setText(pwd);
         }
         ckbRememberpass.setChecked(checkAcc);
     }
-    public void readData(){
-        SharedPreferences sharedPreferences =(getActivity()).getSharedPreferences(prefname, Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("userName","");
-        System.out.print(name);
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu,menu);
-       // return true;
+        inflater.inflate(R.menu.main_menu, menu);
+        // return true;
     }
 
     public boolean checkInvalidData() {
@@ -261,7 +204,8 @@ public class SignInFragment extends Fragment {
         byte[] digest = messageDigest.digest();
         return Extension.toHexString(digest);
     }
-    public  void ShowMessage(final Context context, final String msg) {
+
+    public void ShowMessage(final Context context, final String msg) {
         if (context != null && msg != null) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
 
@@ -273,19 +217,4 @@ public class SignInFragment extends Fragment {
         }
     }
 
-    public void saveDataDefault() {
-        String fileName = "profileUser";
-        String content = "Thong tin user";
-
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = getActivity().openFileOutput(fileName, MODE_PRIVATE);
-            outputStream.write(content.getBytes());
-            outputStream.close();
-            Toast.makeText(getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

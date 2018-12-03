@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -53,44 +54,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="left|center"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:id="@+id/txtEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/padding_username"
-                android:layout_weight="0.5"
-                android:gravity="left"
-                android:text="@string/userName"
-                android:textAppearance="@style/textMedium"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/edtUserNameInfor"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin0"
-                android:layout_weight="0.7"
-                android:gravity="left"
-                android:inputType="text"
-                android:text="@string/userName"
-                android:textAppearance="@style/textMedium"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
@@ -102,35 +65,21 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/padding_username"
-                android:layout_weight="0.7"
+                android:layout_weight="0.5"
                 android:gravity="left"
                 android:text="@string/gender"
                 android:textAppearance="@style/textMedium"
                 android:textColor="@color/black" />
-
-            <RadioGroup
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/padding_username"
-                android:layout_weight="2"
-                android:orientation="horizontal"
-                android:layout_marginStart="@dimen/padding_username">
-
-                <RadioButton
+                <TextView
                     android:id="@+id/radMaleInfor"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/textMedium"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin"
-                    android:text="@string/male" />
+                    android:text="@string/male"
+                    android:layout_marginStart="@dimen/margin" />
 
-                <RadioButton
-                    android:id="@+id/radFemaleInfor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin"
-                    android:text="@string/female" />
-            </RadioGroup>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,7 +101,7 @@
                 android:text="@string/birthday"
                 android:textAppearance="@style/textMedium"
                 android:textColor="@color/black"
-                />
+                android:layout_marginStart="@dimen/padding_username" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -207,7 +156,7 @@
             android:layout_marginTop="@dimen/margin"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/btnChangePass"
+                android:id="@+id/btnAddFriend"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -216,7 +165,21 @@
                 android:layout_marginRight="@dimen/margin"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:text="@string/changePass"
+                android:text="@string/addfr"
+                android:textAllCaps="true"
+                android:textAppearance="@style/textMedium"
+                android:textColor="#ffffff" />
+            <Button
+                android:id="@+id/btnSendMess"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="@string/sendmess"
                 android:textAllCaps="true"
                 android:textAppearance="@style/textMedium"
                 android:textColor="#ffffff" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -23,31 +24,29 @@
             android:layout_marginTop="@dimen/margin"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/padding_username"
-                android:gravity="left|center"
+                android:layout_weight="0.3"
+                android:gravity="left"
                 android:text="@string/fullName"
                 android:textAppearance="@style/textMedium"
-                android:textColor="@color/black"
-                android:layout_marginStart="@dimen/padding_username" />
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtFullNameInfor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/margin"
-                android:layout_marginStart="@dimen/margin"
-                android:gravity="left"
+                android:layout_weight="0.7"
                 android:inputType="text"
-                android:text="@string/fullName"
-                android:textAppearance="@style/textMedium" />
+                android:text="@string/fullName" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/padding_username"
-                android:layout_weight="0.5"
+                android:layout_weight="0.3"
                 android:gravity="left"
                 android:text="@string/userName"
                 android:textAppearance="@style/textMedium"
@@ -76,13 +75,82 @@
             <TextView
                 android:id="@+id/edtUserNameInfor"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin0"
                 android:layout_weight="0.7"
                 android:gravity="left"
                 android:inputType="text"
                 android:text="@string/userName"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/padding_username"
+                android:layout_weight="0.3"
+                android:gravity="left"
+                android:text="@string/password"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edtPassWordInfor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:inputType="textPassword"
+                android:text="@string/password"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/padding_username"
+                android:layout_weight="0.3"
+                android:gravity="left"
+                android:text="@string/repeatPassword"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/edtRepeatPasswordInfor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:inputType="textPassword"
+                android:text="@string/password"
                 android:textAppearance="@style/textMedium"
                 android:textColor="@color/black" />
 
@@ -122,13 +190,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
                     android:text="@string/male" />
 
                 <RadioButton
                     android:id="@+id/radFemaleInfor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginLeft="@dimen/margin0"
+                    android:layout_marginRight="@dimen/margin"
                     android:text="@string/female" />
             </RadioGroup>
         </LinearLayout>
@@ -162,7 +232,7 @@
                 android:textAppearance="@style/textMedium"
                 android:layout_height="wrap_content"
                 android:inputType="date"
-                />
+                tools:ignore="TextViewEdits" />
         </LinearLayout>
 
         <LinearLayout
@@ -200,28 +270,22 @@
                 android:textColor="@color/black" />
         </LinearLayout>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btnUpdateInfor"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin100"
+            android:layout_marginRight="@dimen/margin100"
             android:layout_marginTop="@dimen/margin"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btnChangePass"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="@string/changePass"
-                android:textAllCaps="true"
-                android:textAppearance="@style/textMedium"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/updateInfor"
+            android:textAllCaps="true"
+            android:textAppearance="@style/textMedium"
+            android:textColor="#ffffff" />
     </LinearLayout>
 </ScrollView>
 

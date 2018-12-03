@@ -40,70 +40,10 @@ public class ChatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_chats, container, false);
-        //get view
-        getsView();
-        //get intent
 
-
-        //send message
-        sendMessage();
-        displayChatMessages();
-        //send mess
         return  view;
     }
-    public void sendMessage(){
-        Bundle args = getArguments();
-        String username = "";
-        if(args!=null){
-            username = args.getString(SignInFragment.USERNAME);
-        }
-        final String finalUsername = username;
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                db.getInstance()
-                        .getReference("message")
-                        .push()
-                        .setValue(new ChatMessage(
-                                edt_Mess.getText().toString(),
-                                finalUsername
-                        ));
-                //clearn the input
-                edt_Mess.setText("");
-            }
-        });
-    }
-
-    public void displayChatMessages(){
-        ListView listOfMessages = (ListView)view.findViewById(R.id.lv_mess);
-
-
-         FirebaseListAdapter<ChatMessage> adapter = new FirebaseListAdapter<ChatMessage>(getActivity(),ChatMessage.class,
-                R.layout.list_message_items,db.getInstance().getReference("message")) {
-            @Override
-            protected void populateView(View v, ChatMessage model, int position) {
-                // Get references to the views of message.xml
-                TextView messageText = (TextView)v.findViewById(R.id.message_text);
-                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-                // Set their text
-                messageText.setText(model.getMessageText());
-                messageUser.setText(model.getMessageUser());
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMessageTime())
-                );
-            }
-        };
-
-        listOfMessages.setAdapter(adapter);
-    }
-   public void getsView(){
-       edt_Mess=view.findViewById(R.id.edt_mess);
-       btnSend=view.findViewById(R.id.fab);
-
-   }
 
 
 }

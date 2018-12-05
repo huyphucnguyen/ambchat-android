@@ -1,15 +1,19 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -125,6 +129,8 @@ public class SignInFragment extends Fragment {
                 userName = edtUserName.getText().toString().trim();
                 password = edtPassWord.getText().toString().trim();
                 String sha256OfPassword = "";
+
+                String deviceID = getDeviceID();
                 try {
                     sha256OfPassword = SHA256(password);
                 } catch (NoSuchAlgorithmException e) {
@@ -133,6 +139,7 @@ public class SignInFragment extends Fragment {
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", userName);
                 parameter.put("password", sha256OfPassword);
+                parameter.put("device_id",deviceID);
                 SignInRequest request = new SignInRequest(new SeverRequest.SeverRequestListener() {
                     @Override
                     public void completed(Object obj) {
@@ -173,6 +180,25 @@ public class SignInFragment extends Fragment {
             }
         });
     }
+
+    @SuppressLint("HardwareIds")
+    public String getDeviceID() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return "";
+            }
+            return  Build.getSerial();
+        }
+        return Build.SERIAL;
+    }
+
     public void doLogin(){
         //TODO change fragment
         Fragment fragment = new HomeFragment();

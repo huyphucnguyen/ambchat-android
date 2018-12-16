@@ -46,7 +46,7 @@ public class FriendsFragment extends ListFragment {
                 if (obj != null) {
                     Result res=(Result) obj;
                     ArrayList<User> arr= (ArrayList<User>) res.getData();
-                    UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_friend_items,arr);
+                    UsersAdapter adapter=new UsersAdapter(getActivity(), R.layout.list_items_test,arr);
                     setListAdapter(adapter);
 
                 } else {

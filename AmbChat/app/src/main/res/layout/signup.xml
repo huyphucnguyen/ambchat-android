@@ -22,15 +22,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:background="@color/Xam"
-                android:scaleType="fitCenter"
+                android:scaleType="center"
                 android:src="@drawable/baseline_person_pin_white_48" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin"
-            android:layout_weight="2"
             android:orientation="vertical">
 
             <LinearLayout
@@ -46,6 +45,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/fullName"
+                    android:gravity="center"
+                    android:layout_gravity="left"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />
 
@@ -73,6 +74,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/gender"
+                    android:gravity="center|left"
+                    android:layout_gravity="left"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />
 
@@ -115,9 +118,11 @@
                 <TextView
                     android:id="@+id/txtEmail"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/email"
+                    android:gravity="center|left"
+                    android:layout_gravity="left"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />
 
@@ -142,9 +147,11 @@
                 <TextView
                     android:id="@+id/txtUserName"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/userName"
+                    android:gravity="center"
+                    android:layout_gravity="left"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />
 
@@ -172,6 +179,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/password"
+                    android:gravity="center|left"
+                    android:layout_gravity="left"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />
 
@@ -199,7 +208,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="left|center"
                     android:layout_weight="4"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:text="@string/repeatPassword"
                     android:textAppearance="@style/textMedium"
                     android:textColor="@color/black" />

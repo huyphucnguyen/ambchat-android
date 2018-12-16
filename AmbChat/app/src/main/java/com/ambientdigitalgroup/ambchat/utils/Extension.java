@@ -4,11 +4,9 @@ package com.ambientdigitalgroup.ambchat.utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Base64;
 
 import com.ambientdigitalgroup.ambchat.R;
 
-import java.io.UnsupportedEncodingException;
 import java.util.regex.*;
 public   class Extension {
     public static int checkUserName(String userName){
@@ -80,19 +78,5 @@ public   class Extension {
             ret.append(HEX_CHARS[(bytes[i] & 0xF)]);
         }
         return ret.toString();
-    }
-
-    public static String decodeJWTToString(String token){
-        String tokenArr[] = token.split("\\.");
-        byte[] decodedBytes = Base64.decode(tokenArr[1],Base64.DEFAULT);
-
-        String decodedString = null;
-        try {
-            decodedString = new String(decodedBytes,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return decodedString;
     }
 }

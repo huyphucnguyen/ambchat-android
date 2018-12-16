@@ -1,6 +1,5 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
-import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.google.gson.Gson;
@@ -27,12 +26,10 @@ public class SignInRequest extends SeverRequest {
     protected Request prepare(Map<String, String> parameter) {
         String user = parameter.get("username");
         String password = parameter.get("password");
-        String device_id = parameter.get("device_id");
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .addFormDataPart("username", user)
                 .addFormDataPart("password", password)
-                .addFormDataPart("device_id",device_id)
                 .setType(MultipartBody.FORM)
                 .build();
         Request request = new Request.Builder()
@@ -45,9 +42,8 @@ public class SignInRequest extends SeverRequest {
 
 
     @Override
-    protected Object process(String rawData) {
+    protected Object process(String data) {
         try {
-            String data = Extension.decodeJWTToString(rawData);
             Gson gson=new Gson();
             Result res=gson.fromJson(data,Result.class);
 

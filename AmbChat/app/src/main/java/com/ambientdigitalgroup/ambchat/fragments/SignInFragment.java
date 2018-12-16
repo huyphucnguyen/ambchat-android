@@ -78,12 +78,11 @@ public class SignInFragment extends Fragment {
         mLoginProgress = new ProgressDialog(getContext());
 
 
-      /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            String sss = Context.APPWIDGET_SERVICE;
-        }
-        //Test encode SHA256
-
-        */
+        /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         String sss = Context.APPWIDGET_SERVICE;
+         }
+         //Test encode SHA256
+         */
     }
 
     @Override
@@ -167,11 +166,8 @@ public class SignInFragment extends Fragment {
                 });
 
                 request.execute(parameter);
-                doLogin();
-                readData();
                 switch (view.getId()){
                     case R.id.ckbRemmemberPass:
-                        saveDataDefault();
                         break;
                     default:
                         break;
@@ -199,18 +195,8 @@ public class SignInFragment extends Fragment {
         return Build.SERIAL;
     }
 
-    public void doLogin(){
-        //TODO change fragment
-        Fragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString("userName",edtUserName.getText().toString());
-        fragment.setArguments(args);
-        Extension.replaceFragment(getFragmentManager(),fragment);
-
-    }
-
-  @Override
-  public void onPause() {
+    @Override
+    public void onPause() {
         super.onPause();
         savingPreferences();
     }
@@ -226,7 +212,6 @@ public class SignInFragment extends Fragment {
         //tạo đối tượng Editor để lưu thay đổi
         SharedPreferences.Editor editor=pre.edit();
         String userName=edtUserName.getText().toString();
-        String passWord=edtPassWord.getText().toString();
         boolean ckbRemem=ckbRememberpass.isChecked();
         if(!ckbRemem)
         {
@@ -237,7 +222,6 @@ public class SignInFragment extends Fragment {
         {
             //lưu vào editor
             editor.putString("userName", userName);
-            editor.putString("passWord", passWord);
             editor.putBoolean("checkAcc", ckbRemem);
         }
         //chấp nhận lưu xuống file
@@ -254,23 +238,16 @@ public class SignInFragment extends Fragment {
         {
             //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
             String user=pre.getString("userName", "");
-            String pwd=pre.getString("passWord", "");
             edtUserName.setText(user);
-            edtPassWord.setText(pwd);
         }
         ckbRememberpass.setChecked(checkAcc);
-    }
-    public void readData(){
-        SharedPreferences sharedPreferences =(getActivity()).getSharedPreferences(prefname, Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("userName","");
-        System.out.print(name);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu,menu);
-       // return true;
+        // return true;
     }
 
     public boolean checkInvalidData() {
@@ -299,19 +276,4 @@ public class SignInFragment extends Fragment {
         }
     }
 
-    public void saveDataDefault() {
-        String fileName = "profileUser";
-        String content = "Thong tin user";
-
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = getActivity().openFileOutput(fileName, MODE_PRIVATE);
-            outputStream.write(content.getBytes());
-            outputStream.close();
-            Toast.makeText(getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

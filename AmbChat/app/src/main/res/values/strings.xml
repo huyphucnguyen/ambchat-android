@@ -13,6 +13,8 @@
     <string name="male">Male</string>
     <string name="gender">Gender</string>
     <string name="fullName">Full Name</string>
+    <string name="birthday">BirthDay</string>
+    <string name="date">10/10/1997</string>
     <string name="email">Email</string>
     <string name="userName">User Name</string>
     <string name="password">Password</string>
@@ -24,6 +26,11 @@
     <string name="searchMess">Search mess</string>
     <string name="Search">Search</string>
     <string name="nameFriendChat">Tên người chat"</string>
-    <string name="updateInfor">Update infor</string>
+    <string name="updateInfor">Update</string>
+    <string name="changePass">Chỉnh sửa</string>
     <string name="SearchFriend">Search friend</string>
+    <string name="FriendName">Tên người chat</string>
+    <string name="MessLast"> Tin nhắn cuối</string>
+    <string name="addfr">Thêm bạn</string>
+    <string name="sendmess">Nhắn tin</string>
 </resources>

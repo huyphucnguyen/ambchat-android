@@ -51,7 +51,7 @@ public class UsersAdapter extends BaseAdapter{
            holder=new ViewHolder();
            LayoutInflater inflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
            view=inflater.inflate(layout,null);
-           holder.txtDisplayName=(TextView) view.findViewById(R.id.user_single_name);
+           holder.txtDisplayName=(TextView) view.findViewById(R.id.txtname);
            view.setTag(holder);
        }else{
            holder =(ViewHolder) view.getTag();

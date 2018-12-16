@@ -77,12 +77,6 @@ public class SignInFragment extends Fragment {
         btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
         mLoginProgress = new ProgressDialog(getContext());
 
-
-        /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-         String sss = Context.APPWIDGET_SERVICE;
-         }
-         //Test encode SHA256
-         */
     }
 
     @Override
@@ -230,8 +224,7 @@ public class SignInFragment extends Fragment {
     }
     public void restoringPreferences()
     {
-        SharedPreferences pre=getActivity().getSharedPreferences
-                (prefname,MODE_PRIVATE);
+        SharedPreferences pre=getActivity().getSharedPreferences(prefname,MODE_PRIVATE);
         //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
         boolean checkAcc=pre.getBoolean("checkAcc", false);
         if(checkAcc)

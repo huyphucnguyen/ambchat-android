@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ambientdigitalgroup.ambchat.fragments.ChatsFragment;
 import com.ambientdigitalgroup.ambchat.fragments.FriendsFragment;
-import com.ambientdigitalgroup.ambchat.fragments.RequestFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

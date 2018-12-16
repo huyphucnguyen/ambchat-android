@@ -41,7 +41,7 @@ public class InforUserFragment extends Fragment {
         edtUserNameInfor = root.findViewById(R.id.edtUserNameInfor);
         edtFullNameInfor = root.findViewById(R.id.edtFullNameInfor);
         edtPassWordInfor = root.findViewById(R.id.edtPassWordInfor);
-        edtEmailInfor    = root.findViewById(R.id.edtEmailInfor);
+        edtEmailInfor    = root.findViewById(R.id.txtEmailInfor);
         rdoMaleInfor = root.findViewById(R.id.radMaleInfor);
         rdoFeMaleInfor= root.findViewById(R.id.radFemaleInfor);
         btnUpdateInforUser = root.findViewById(R.id.btnUpdateInfor);

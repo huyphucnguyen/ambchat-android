@@ -7,12 +7,15 @@ public class Result {
     private int error;
     @SerializedName("message")
     private String message;
-    Object data;
+    private Object data;
+    @SerializedName("sesson_key")
+    private String guid;
 
     public Result(int error, String message) {
 
         this.error = error;
         this.message = message;
+        this.guid = guid;
     }
 
     public int getError() {
@@ -37,5 +40,9 @@ public class Result {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public void setGuid(String guid){
+        this.guid = guid;
     }
 }

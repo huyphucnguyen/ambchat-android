@@ -19,17 +19,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/padding_username"
                 android:layout_weight="0.3"
@@ -51,12 +50,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
 
@@ -123,12 +121,11 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -158,16 +155,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1">
+            >
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/padding_username"
                 android:layout_weight="0.7"
@@ -180,7 +177,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/padding_username"
+                android:layout_marginLeft="@dimen/margin"
                 android:layout_weight="2"
                 android:orientation="horizontal"
                 android:layout_marginStart="@dimen/padding_username">
@@ -197,19 +194,17 @@
                     android:id="@+id/radFemaleInfor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin0"
                     android:layout_marginRight="@dimen/margin"
                     android:text="@string/female" />
             </RadioGroup>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -237,12 +232,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -273,13 +267,12 @@
         <Button
             android:id="@+id/btnUpdateInfor"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin"
             android:layout_marginLeft="@dimen/margin100"
             android:layout_marginRight="@dimen/margin100"
             android:layout_marginTop="@dimen/margin"
-            android:layout_weight="1"
             android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/updateInfor"

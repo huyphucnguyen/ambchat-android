@@ -15,6 +15,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -77,6 +79,10 @@ public class SignInFragment extends Fragment {
         btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
         mLoginProgress = new ProgressDialog(getContext());
 
+        Bundle bundle=getArguments();
+        if(bundle!=null){
+            edtUserName.setText(bundle.getString("username"));
+        }
     }
 
     @Override
@@ -107,7 +113,9 @@ public class SignInFragment extends Fragment {
         Bundle args = getArguments();
         if(args!=null){
             edtUserName.setText(args.getString("username"));
-            edtPassWord.setText(args.getString("password"));
+            if( args .getString("password") !=null ){
+                edtPassWord.setText(args.getString("password"));
+            }
         }
 
         //EVENT LOGIN
@@ -137,9 +145,11 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void completed(Object obj) {
                         if (obj != null) {
+
                             mLoginProgress.dismiss();
                             Result res = (Result) obj;
-
+                            String token= res.getToken();
+                            savingPreferences(token);
                             ProfileUser user=(ProfileUser) res.getData();
                             Fragment fragment = new MainFragment();
                             Bundle args = new Bundle();
@@ -148,8 +158,8 @@ public class SignInFragment extends Fragment {
                             args.putInt(USERID,user.getUser_id());
                             args.putString(EMAIL,user.getEmail());
                             fragment.setArguments(args);
-
                             Extension.replaceFragment(getFragmentManager(),fragment);
+                            ShowMessage(getContext(),"Login success!");
 
                         } else {
                             //ERROR
@@ -160,13 +170,6 @@ public class SignInFragment extends Fragment {
                 });
 
                 request.execute(parameter);
-                switch (view.getId()){
-                    case R.id.ckbRemmemberPass:
-                        break;
-                    default:
-                        break;
-                }
-
             }
         });
     }
@@ -189,11 +192,7 @@ public class SignInFragment extends Fragment {
         return Build.SERIAL;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        savingPreferences();
-    }
+
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
@@ -201,11 +200,11 @@ public class SignInFragment extends Fragment {
         restoringPreferences();
     }
 
-    private void savingPreferences() {
+    private void savingPreferences(String token) {
         SharedPreferences pre=getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
         //tạo đối tượng Editor để lưu thay đổi
         SharedPreferences.Editor editor=pre.edit();
-        String userName=edtUserName.getText().toString();
+        userName = edtUserName.getText().toString();
         boolean ckbRemem=ckbRememberpass.isChecked();
         if(!ckbRemem)
         {
@@ -215,7 +214,8 @@ public class SignInFragment extends Fragment {
         else
         {
             //lưu vào editor
-            editor.putString("userName", userName);
+            editor.putString("token", token);
+            editor.putString("username", userName);
             editor.putBoolean("checkAcc", ckbRemem);
         }
         //chấp nhận lưu xuống file
@@ -230,7 +230,7 @@ public class SignInFragment extends Fragment {
         if(checkAcc)
         {
             //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
-            String user=pre.getString("userName", "");
+            String user=pre.getString("username", "");
             edtUserName.setText(user);
         }
         ckbRememberpass.setChecked(checkAcc);
@@ -268,5 +268,6 @@ public class SignInFragment extends Fragment {
             });
         }
     }
+
 
 }

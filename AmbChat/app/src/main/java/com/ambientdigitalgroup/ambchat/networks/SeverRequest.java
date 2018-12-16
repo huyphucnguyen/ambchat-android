@@ -44,6 +44,7 @@ public abstract class SeverRequest extends AsyncTask<Map<String, String>, Void, 
         return result;
     }
 
+
     protected abstract Request prepare(Map<String, String> parameter);
 
     protected abstract Object process(String data);

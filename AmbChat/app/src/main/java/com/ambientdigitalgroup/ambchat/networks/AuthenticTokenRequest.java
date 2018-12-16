@@ -5,7 +5,6 @@ import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -14,25 +13,17 @@ import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-/**
- * Created by nguyenhuyphuc on 11/2/18.
- */
-
-public class SignInRequest extends SeverRequest {
-    public SignInRequest(SeverRequestListener listener) {
+public class AuthenticTokenRequest extends SeverRequest {
+    public AuthenticTokenRequest(SeverRequestListener listener) {
         super(listener);
     }
 
     @Override
     protected Request prepare(Map<String, String> parameter) {
-        String user = parameter.get("username");
-        String password = parameter.get("password");
-        String device_id = parameter.get("device_id");
+        String token = parameter.get("TOKEN");
 
         RequestBody requestBody = new MultipartBody.Builder()
-                .addFormDataPart("username", user)
-                .addFormDataPart("password", password)
-                .addFormDataPart("device_id",device_id)
+                .addFormDataPart("TOKEN", token)
                 .setType(MultipartBody.FORM)
                 .build();
         Request request = new Request.Builder()
@@ -42,7 +33,6 @@ public class SignInRequest extends SeverRequest {
                 .build();
         return request;
     }
-
 
     @Override
     protected Object process(String rawData) {

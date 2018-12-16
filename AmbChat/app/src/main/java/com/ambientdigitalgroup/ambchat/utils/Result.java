@@ -10,6 +10,16 @@ public class Result {
     private Object data;
     @SerializedName("sesson_key")
     private String guid;
+    private String token;
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Result(int error, String message) {
 

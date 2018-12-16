@@ -5,6 +5,8 @@ package com.ambientdigitalgroup.ambchat.fragments;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,8 +77,21 @@ public class MainFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-
         if(item.getItemId() == R.id.main_logout_btn){
+            Fragment fragment = getFragmentManager().findFragmentByTag("SIGN_IN");
+                FragmentTransaction transaction = null;
+                if (fragment==null) {
+                    SignInFragment signInFragment = new SignInFragment();
+                    transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.flContainer, signInFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }else {
+                    transaction.replace(R.id.flContainer, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+            }
+
 
         }
 

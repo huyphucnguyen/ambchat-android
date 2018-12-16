@@ -41,6 +41,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "CHATS";
             case 1:
                 return "FRIENDS";
+
             default:
                 return null;
         }

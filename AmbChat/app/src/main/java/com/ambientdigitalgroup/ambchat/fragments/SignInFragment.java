@@ -1,15 +1,19 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,20 +50,20 @@ public class SignInFragment extends Fragment {
     private Button btnSigIn;
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword, txtRegisterAcount;
-    String prefname = "my_data";
+    String prefname="my_data";
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
-    public static final String USERNAME = "USERNAME";
+    public static final String USERNAME= "USERNAME" ;
     public static final String FULLNAME = "FULLNAME";
-    public static final String USERID = "USERID";
-    public static final String EMAIL = "EMAIL";
+    public static final String USERID="USERID";
+    public static final String EMAIL="EMAIL";
     String userName;
     String password;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.signin, container, false);
+        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signin,container,false);
         addControls(root);
         return root;
     }
@@ -73,18 +77,41 @@ public class SignInFragment extends Fragment {
         btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
         mLoginProgress = new ProgressDialog(getContext());
 
+
+        /**  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+         String sss = Context.APPWIDGET_SERVICE;
+         }
+         //Test encode SHA256
+         */
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addEvent();
+        //String pass = edtPassWord.getText().toString();
 
+//        ckbRememberpass.setOnClickListener((View.OnClickListener) this);
+//        // if(CheckInvalidData()==true){
+        addEvent();
+        // }-
+        //  else{
+        //  Toast.makeText(getBaseContext(),"User name or password Invalid",Toast.LENGTH_SHORT).show();
+        //   return;
+        //  }
     }
 
     public void addEvent() {
+//        final Intent intent = getActivity().getIntent();
+//        //Get data from signup
+//                    /*userName= intent.getStringExtra(SignUpFragment.USERNAME);
+//                    password= intent.getStringExtra(SignUpFragment.PASSWORD);*/
+//        if(intent!=null){
+//            edtUserName.setText(intent.getStringExtra(SignUpFragment.USERNAME));
+//            edtPassWord.setText(intent.getStringExtra(SignUpFragment.PASSWORD));
+//        }
+
         Bundle args = getArguments();
-        if (args != null) {
+        if(args!=null){
             edtUserName.setText(args.getString("username"));
             edtPassWord.setText(args.getString("password"));
         }
@@ -101,6 +128,8 @@ public class SignInFragment extends Fragment {
                 userName = edtUserName.getText().toString().trim();
                 password = edtPassWord.getText().toString().trim();
                 String sha256OfPassword = "";
+
+                String deviceID = getDeviceID();
                 try {
                     sha256OfPassword = SHA256(password);
                 } catch (NoSuchAlgorithmException e) {
@@ -109,6 +138,7 @@ public class SignInFragment extends Fragment {
                 Map<String, String> parameter = new HashMap<>();
                 parameter.put("username", userName);
                 parameter.put("password", sha256OfPassword);
+                parameter.put("device_id",deviceID);
                 SignInRequest request = new SignInRequest(new SeverRequest.SeverRequestListener() {
                     @Override
                     public void completed(Object obj) {
@@ -116,34 +146,60 @@ public class SignInFragment extends Fragment {
                             mLoginProgress.dismiss();
                             Result res = (Result) obj;
 
-                            ProfileUser user = (ProfileUser) res.getData();
+                            ProfileUser user=(ProfileUser) res.getData();
                             Fragment fragment = new MainFragment();
                             Bundle args = new Bundle();
-                            args.putString(USERNAME, user.getUser_name());
-                            args.putString(FULLNAME, user.getFull_name());
-                            args.putInt(USERID, user.getUser_id());
-                            args.putString(EMAIL, user.getEmail());
+                            args.putString(USERNAME,user.getUser_name());
+                            args.putString(FULLNAME,user.getFull_name());
+                            args.putInt(USERID,user.getUser_id());
+                            args.putString(EMAIL,user.getEmail());
                             fragment.setArguments(args);
-                            Extension.replaceFragment(getFragmentManager(), fragment);
+
+                            Extension.replaceFragment(getFragmentManager(),fragment);
+
                         } else {
                             //ERROR
                             mLoginProgress.hide();
-                            ShowMessage(getContext(), "Login fail!");
+                            ShowMessage(getContext(),"Login fail!");
                         }
                     }
                 });
 
                 request.execute(parameter);
+                switch (view.getId()){
+                    case R.id.ckbRemmemberPass:
+                        break;
+                    default:
+                        break;
+                }
 
             }
         });
     }
+
+    @SuppressLint("HardwareIds")
+    public String getDeviceID() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return "";
+            }
+            return  Build.getSerial();
+        }
+        return Build.SERIAL;
+    }
+
     @Override
     public void onPause() {
         super.onPause();
         savingPreferences();
     }
-
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
@@ -152,15 +208,18 @@ public class SignInFragment extends Fragment {
     }
 
     private void savingPreferences() {
-        SharedPreferences pre = getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
+        SharedPreferences pre=getActivity().getSharedPreferences(prefname, MODE_PRIVATE);
         //tạo đối tượng Editor để lưu thay đổi
-        SharedPreferences.Editor editor = pre.edit();
-        String userName = edtUserName.getText().toString();
-        boolean ckbRemem = ckbRememberpass.isChecked();
-        if (!ckbRemem) {
+        SharedPreferences.Editor editor=pre.edit();
+        String userName=edtUserName.getText().toString();
+        boolean ckbRemem=ckbRememberpass.isChecked();
+        if(!ckbRemem)
+        {
             //xóa mọi lưu trữ trước đó
             editor.clear();
-        } else {
+        }
+        else
+        {
             //lưu vào editor
             editor.putString("userName", userName);
             editor.putBoolean("checkAcc", ckbRemem);
@@ -169,24 +228,25 @@ public class SignInFragment extends Fragment {
         editor.commit();
 
     }
-
-    // Không lưu password.
-    public void restoringPreferences() {
-        SharedPreferences pre = getActivity().getSharedPreferences
-                (prefname, MODE_PRIVATE);
+    public void restoringPreferences()
+    {
+        SharedPreferences pre=getActivity().getSharedPreferences
+                (prefname,MODE_PRIVATE);
         //lấy giá trị checked ra, nếu không thấy thì giá trị mặc định là false
-        boolean checkAcc = pre.getBoolean("checkAcc", false);
-        if (checkAcc) {
+        boolean checkAcc=pre.getBoolean("checkAcc", false);
+        if(checkAcc)
+        {
             //lấy user, pwd, nếu không thấy giá trị mặc định là rỗng
-            String user = pre.getString("userName", "");
+            String user=pre.getString("userName", "");
             edtUserName.setText(user);
         }
         ckbRememberpass.setChecked(checkAcc);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.main_menu,menu);
         // return true;
     }
 
@@ -204,8 +264,7 @@ public class SignInFragment extends Fragment {
         byte[] digest = messageDigest.digest();
         return Extension.toHexString(digest);
     }
-
-    public void ShowMessage(final Context context, final String msg) {
+    public  void ShowMessage(final Context context, final String msg) {
         if (context != null && msg != null) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
 

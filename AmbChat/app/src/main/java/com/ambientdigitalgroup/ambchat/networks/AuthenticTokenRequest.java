@@ -27,7 +27,7 @@ public class AuthenticTokenRequest extends SeverRequest {
                 .setType(MultipartBody.FORM)
                 .build();
         Request request = new Request.Builder()
-                .url(URL + "sign_in.php")
+                .url(URL + "check_token.php")
                 .post(requestBody)
                 .addHeader("Content-Type", "application/json")
                 .build();

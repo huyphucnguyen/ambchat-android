@@ -18,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -113,9 +114,14 @@ public class SignInFragment extends Fragment {
         Bundle args = getArguments();
         if(args!=null){
             edtUserName.setText(args.getString("username"));
+
             if( args .getString("password") !=null ){
                 edtPassWord.setText(args.getString("password"));
             }
+            if(args.getString("password")!=null){
+                edtPassWord.setText(args.getString("password"));
+            }
+
         }
 
         //EVENT LOGIN
@@ -161,6 +167,14 @@ public class SignInFragment extends Fragment {
                             Extension.replaceFragment(getFragmentManager(),fragment);
                             ShowMessage(getContext(),"Login success!");
 
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            //Fragment frag_signIn = getFragmentManager().findFragmentByTag("SIGN_IN");
+                            transaction.replace(R.id.flContainer, fragment,"MAIN");
+                            transaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
                         } else {
                             //ERROR
                             mLoginProgress.hide();
@@ -172,6 +186,16 @@ public class SignInFragment extends Fragment {
                 request.execute(parameter);
             }
         });
+    }
+
+    public static void addFragment(FragmentManager fgManager, Fragment fragment, String tagName) {
+        FragmentTransaction transaction = null;
+        if (fgManager != null) {
+            transaction = fgManager.beginTransaction();
+            transaction.add(R.id.flContainer, fragment,tagName);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     @SuppressLint("HardwareIds")
@@ -268,6 +292,4 @@ public class SignInFragment extends Fragment {
             });
         }
     }
-
-
 }

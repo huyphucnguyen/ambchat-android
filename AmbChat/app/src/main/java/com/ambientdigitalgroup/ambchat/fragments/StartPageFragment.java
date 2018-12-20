@@ -3,6 +3,7 @@ package com.ambientdigitalgroup.ambchat.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class StartPageFragment extends Fragment {
             public void onClick(View view) {
                 //open fragment sign_in
                 Fragment fragment = new SignInFragment();
-                Extension.replaceFragment(getFragmentManager(),fragment);
+                addFragment(getFragmentManager(),fragment,"SIGN_IN");
             }
         });
 
@@ -53,9 +54,20 @@ public class StartPageFragment extends Fragment {
             public void onClick(View view) {
                 //Opent fragment sign_up
                 Fragment fragment = new SignUpFragment();
-                Extension.replaceFragment(getFragmentManager(),fragment);
+                addFragment(getFragmentManager(),fragment,"SIGN_UP");
             }
         });
+    }
+
+    public void addFragment(FragmentManager fgManager, Fragment fragment,String tagName) {
+        FragmentTransaction transaction = null;
+
+        if (fgManager != null) {
+            transaction = fgManager.beginTransaction();
+            transaction.replace(R.id.flContainer, fragment,tagName);
+            transaction.addToBackStack("SIGN_IN");
+            transaction.commit();
+        }
     }
 
 

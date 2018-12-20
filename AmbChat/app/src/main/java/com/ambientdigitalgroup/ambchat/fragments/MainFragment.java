@@ -53,6 +53,11 @@ public class MainFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -108,29 +113,5 @@ public class MainFragment extends Fragment {
     }
 
 
-
-
-/*
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.activity_menu_item:
-
-                // Not implemented here
-                return false;
-            case R.id.fragment_menu_item:
-
-                // Do Fragment menu item stuff here
-                return true;
-
-            default:
-                break;
-        }
-
-        return false;
-    }
-*/
 
 }

@@ -15,6 +15,7 @@ import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.fragments.MainFragment;
 import com.ambientdigitalgroup.ambchat.fragments.SignInFragment;
 import com.ambientdigitalgroup.ambchat.fragments.StartPageFragment;
+import com.ambientdigitalgroup.ambchat.networks.AuthenticTokenRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
@@ -41,34 +42,37 @@ public class StartActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
-        mLoginProgress = new ProgressDialog(getApplicationContext());
+        mLoginProgress = new ProgressDialog(StartActivity.this);
         mLoginProgress.setTitle("Logging In");
         mLoginProgress.setMessage("Please wait while we check your account.");
         mLoginProgress.setCanceledOnTouchOutside(false);
+        mLoginProgress.show();
         username=readUsername();
         token = readToken();
         if(!token.isEmpty()){
-            mLoginProgress.show();
 
             Map<String, String> parameter = new HashMap<>();
-            parameter.put("TOKEN", token);
-            SignInRequest request = new SignInRequest(new SeverRequest.SeverRequestListener() {
+            parameter.put(TOKEN, token);
+            AuthenticTokenRequest request = new AuthenticTokenRequest(new SeverRequest.SeverRequestListener() {
                 @Override
                 public void completed(Object obj) {
                     if (obj != null) {
 
                         mLoginProgress.dismiss();
                         Result res = (Result) obj;
-                        token= res.getToken();
-                        ProfileUser user=(ProfileUser) res.getData();
-                        Fragment fragment = new MainFragment();
-                        Bundle args = new Bundle();
-                        args.putString(USERNAME,user.getUser_name());
-                        args.putString(FULLNAME,user.getFull_name());
-                        args.putInt(USERID,user.getUser_id());
-                        args.putString(EMAIL,user.getEmail());
-                        fragment.setArguments(args);
-                        Extension.replaceFragment(getSupportFragmentManager(),fragment);
+                        if(res.getError() == 0){
+                            token= res.getToken();
+                            ProfileUser user=(ProfileUser) res.getData();
+                            Fragment fragment = new MainFragment();
+                            Bundle args = new Bundle();
+                            args.putString(USERNAME,user.getUser_name());
+                            args.putString(FULLNAME,user.getFull_name());
+                            args.putInt(USERID,user.getUser_id());
+                            args.putString(EMAIL,user.getEmail());
+                            fragment.setArguments(args);
+                            Extension.replaceFragment(getSupportFragmentManager(),fragment);
+                        }
+
 
                     } else {
                         //ERROR
@@ -79,21 +83,28 @@ public class StartActivity extends AppCompatActivity
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.add(R.id.flContainer,fragment);
+                        transaction.replace(R.id.flContainer,fragment,"SIGN_IN");
+                        transaction.addToBackStack("SIGN_IN");
                         transaction.commit();
 
                     }
                 }
             });
-        }else{
-            StartPageFragment fragment = new StartPageFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.add(R.id.flContainer,fragment);
-            transaction.commit();
+            request.execute(parameter);
+        }
+        if(mLoginProgress.isShowing()){
+            mLoginProgress.dismiss();
         }
 
         //TODO neu user da login roi thi sao?
+        if(getFragmentManager()!=null){
+            Fragment fragment = new StartPageFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.flContainer,fragment,"START_PAGE");
+            transaction.commit();
+        }
+
 
     }
     public String readToken(){

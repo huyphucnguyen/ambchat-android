@@ -45,9 +45,9 @@ public class SignInRequest extends SeverRequest {
 
 
     @Override
-    protected Object process(String rawData) {
+    protected Object process(String data) {
         try {
-            String data = Extension.decodeJWTToString(rawData);
+
             Gson gson=new Gson();
             Result res=gson.fromJson(data,Result.class);
 
@@ -57,8 +57,6 @@ public class SignInRequest extends SeverRequest {
             ProfileUser profile = gson.fromJson(String.valueOf(object), ProfileUser.class);
 
             res.setData(profile);
-            res.setToken(rawData);
-
             return res;
         } catch (Exception e) {
             e.printStackTrace();

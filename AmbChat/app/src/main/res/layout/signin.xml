@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="#FFF"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding"
         android:paddingLeft="@dimen/margin"
@@ -47,10 +47,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:hint="@string/userName"
+                android:inputType="textPersonName"
                 android:padding="@dimen/padding_username"
-                android:textColor="@color/black"
                 android:textAppearance="@style/textMedium"
-                android:inputType="textPersonName"/>
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,10 +75,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="9"
                 android:hint="@string/password"
+                android:inputType="textPassword"
                 android:padding="@dimen/padding_username"
-                android:textColor="@color/black"
                 android:textAppearance="@style/textMedium"
-                android:inputType="textPassword"/>
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <TextView
@@ -89,8 +89,8 @@
             android:gravity="right|center_vertical"
             android:text="Forgot Password"
             android:textAllCaps="false"
-            android:textColor="@android:color/black"
             android:textAppearance="@style/textMedium"
+            android:textColor="@android:color/black"
             android:textStyle="italic" />
 
 
@@ -104,6 +104,7 @@
             android:text="@string/rememberPassword"
             android:textAppearance="@style/textMedium"
             android:textColor="@android:color/black" />
+
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="match_parent"
@@ -114,8 +115,8 @@
             android:background="@color/Xam"
             android:text="@string/logIn"
             android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textAppearance="@style/textLarge" />
+            android:textAppearance="@style/textLarge"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txtRegisterAcount"
@@ -125,9 +126,8 @@
             android:layout_marginLeft="@dimen/margin0"
             android:layout_marginTop="@dimen/margin"
             android:text="@string/chuaCoACC"
-            android:textColor="@android:color/black"
             android:textAppearance="@style/textMedium"
+            android:textColor="@android:color/black"
             android:textStyle="italic" />
-        />
     </LinearLayout>
 </LinearLayout>

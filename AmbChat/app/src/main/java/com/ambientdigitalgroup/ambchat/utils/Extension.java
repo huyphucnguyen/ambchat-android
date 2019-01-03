@@ -81,18 +81,4 @@ public   class Extension {
         }
         return ret.toString();
     }
-
-    public static String decodeJWTToString(String token){
-        String tokenArr[] = token.split("\\.");
-        byte[] decodedBytes = Base64.decode(tokenArr[1],Base64.DEFAULT);
-
-        String decodedString = null;
-        try {
-            decodedString = new String(decodedBytes,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return decodedString;
-    }
 }

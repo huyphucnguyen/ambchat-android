@@ -110,13 +110,11 @@ public class StartActivity extends AppCompatActivity
     public String readToken(){
         SharedPreferences sharedPreferences =getSharedPreferences(prefname, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("token","");
-        Toast.makeText(getApplicationContext(),token,Toast.LENGTH_LONG).show();
         return token;
     }
     public String readUsername(){
         SharedPreferences sharedPreferences =getSharedPreferences(prefname, Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username","");
-        Toast.makeText(getApplicationContext(),username,Toast.LENGTH_LONG).show();
         return username;
     }
 

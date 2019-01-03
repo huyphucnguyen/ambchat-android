@@ -8,8 +8,7 @@ public class Result {
     @SerializedName("message")
     private String message;
     private Object data;
-    @SerializedName("sesson_key")
-    private String guid;
+    @SerializedName("token")
     private String token;
 
 
@@ -21,11 +20,11 @@ public class Result {
         this.token = token;
     }
 
-    public Result(int error, String message) {
+    public Result(int error, String message, String token) {
 
         this.error = error;
         this.message = message;
-        this.guid = guid;
+        this.token = token;
     }
 
     public int getError() {
@@ -52,7 +51,4 @@ public class Result {
         this.data = data;
     }
 
-    public void setGuid(String guid){
-        this.guid = guid;
-    }
 }

@@ -33,4 +33,5 @@
     <string name="MessLast"> Tin nhắn cuối</string>
     <string name="addfr">Thêm bạn</string>
     <string name="sendmess">Nhắn tin</string>
+    <string name="tin_nhan_cuoi">Tin nhắn cuối</string>
 </resources>

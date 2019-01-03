@@ -20,6 +20,9 @@ import com.ambientdigitalgroup.ambchat.utils.ChatMessage;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +46,10 @@ public class ChatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_chats, container, false);
+        final TextView tv = (TextView) getActivity().findViewById(R.id.textView3);
+        Timer t = new Timer();
+        final int time=0;
+
 
         return  view;
     }

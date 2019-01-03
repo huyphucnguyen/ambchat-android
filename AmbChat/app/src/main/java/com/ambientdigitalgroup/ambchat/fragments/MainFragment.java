@@ -43,7 +43,7 @@ public class MainFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolBar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("AbmChat");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //tab
         mSectinosPagerAdapter =new SectionsPagerAdapter(getFragmentManager());
@@ -73,7 +73,7 @@ public class MainFragment extends Fragment {
         mTabLayout = root.findViewById(R.id.main_tabs);
     }
 
-    @Override
+       @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu,menu);
@@ -84,17 +84,17 @@ public class MainFragment extends Fragment {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.main_logout_btn){
             Fragment fragment = getFragmentManager().findFragmentByTag("SIGN_IN");
-                FragmentTransaction transaction = null;
-                if (fragment==null) {
-                    SignInFragment signInFragment = new SignInFragment();
-                    transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.flContainer, signInFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }else {
-                    transaction.replace(R.id.flContainer, fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+            FragmentTransaction transaction = null;
+            if (fragment==null) {
+                SignInFragment signInFragment = new SignInFragment();
+                transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.flContainer, signInFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }else {
+                transaction.replace(R.id.flContainer, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
 
 

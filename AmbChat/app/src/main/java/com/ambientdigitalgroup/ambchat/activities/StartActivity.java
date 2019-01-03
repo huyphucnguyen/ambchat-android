@@ -24,6 +24,8 @@ import com.ambientdigitalgroup.ambchat.utils.Result;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StartActivity extends AppCompatActivity
 {
@@ -73,6 +75,9 @@ public class StartActivity extends AppCompatActivity
                             Extension.replaceFragment(getSupportFragmentManager(),fragment);
                         }
 
+                        //
+
+
 
                     } else {
                         //ERROR
@@ -91,6 +96,9 @@ public class StartActivity extends AppCompatActivity
                 }
             });
             request.execute(parameter);
+
+
+
         }
         if(mLoginProgress.isShowing()){
             mLoginProgress.dismiss();
@@ -117,6 +125,7 @@ public class StartActivity extends AppCompatActivity
         String username = sharedPreferences.getString("username","");
         return username;
     }
+
 
 
 }

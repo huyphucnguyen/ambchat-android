@@ -108,6 +108,27 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/imgInsertCamera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_camera" />
+
+        <ImageView
+            android:id="@+id/imgInsertPhoto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/baseline_insert_photo_black_18dp"
+
+            />
+
         <EditText
             android:id="@+id/edtMess"
             android:layout_width="0dp"

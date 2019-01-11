@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import com.ambientdigitalgroup.ambchat.utils.Result;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class StartActivity extends AppCompatActivity
 {
@@ -42,6 +47,17 @@ public class StartActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
+
+       /* DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);*/
+        //auto sen request
+
         mLoginProgress = new ProgressDialog(StartActivity.this);
         mLoginProgress.setTitle("Logging In");
         mLoginProgress.setMessage("Please wait while we check your account.");
@@ -73,6 +89,9 @@ public class StartActivity extends AppCompatActivity
                             Extension.replaceFragment(getSupportFragmentManager(),fragment);
                         }
 
+                        //
+
+
 
                     } else {
                         //ERROR
@@ -91,13 +110,16 @@ public class StartActivity extends AppCompatActivity
                 }
             });
             request.execute(parameter);
+
+
+
         }
         if(mLoginProgress.isShowing()){
             mLoginProgress.dismiss();
         }
 
         //TODO neu user da login roi thi sao?
-        if(getFragmentManager()!=null){
+        if(getSupportFragmentManager()!=null){
             Fragment fragment = new StartPageFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -117,6 +139,7 @@ public class StartActivity extends AppCompatActivity
         String username = sharedPreferences.getString("username","");
         return username;
     }
+
 
 
 }

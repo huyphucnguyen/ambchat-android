@@ -157,6 +157,8 @@ public class SignInFragment extends Fragment {
                             String token= res.getToken();
                             savingPreferences(token);
                             ProfileUser user=(ProfileUser) res.getData();
+                            Extension.UserID=user.user_id;
+                            Extension.UserName=user.user_name;
                             Fragment fragment = new MainFragment();
                             Bundle args = new Bundle();
                             args.putString(USERNAME,user.getUser_name());
@@ -170,7 +172,6 @@ public class SignInFragment extends Fragment {
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             //Fragment frag_signIn = getFragmentManager().findFragmentByTag("SIGN_IN");
                             transaction.replace(R.id.flContainer, fragment,"MAIN");
-                            transaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
                             transaction.addToBackStack(null);
                             transaction.commit();
 

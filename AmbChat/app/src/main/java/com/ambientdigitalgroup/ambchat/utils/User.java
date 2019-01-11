@@ -4,11 +4,12 @@ public class User {
     private int user_id;
     private String user_name;
     private String full_name;
-
-    public User(int user_id, String user_name, String full_name) {
+    private String status;
+    public User(int user_id, String user_name, String full_name,String status) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.full_name = full_name;
+        this.status=status;
     }
 
     public int getUser_id() {
@@ -33,5 +34,13 @@ public class User {
 
     public void setFull_name(String full_name) {
         this.full_name = full_name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

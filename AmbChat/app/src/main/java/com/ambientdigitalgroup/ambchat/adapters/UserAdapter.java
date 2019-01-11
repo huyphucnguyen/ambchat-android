@@ -39,6 +39,9 @@ public class UserAdapter extends ArrayAdapter<User> {
         // Get the version name from the current AndroidFlavor object and
         // set this text on the name TextView
         txtUserName.setText(currentAndroidFlavor.getUser_name());
+
+        TextView txtStatus=(TextView) listItemView.findViewById(R.id.user_single_status);
+        txtStatus.setText(currentAndroidFlavor.getStatus());
         return listItemView;
     }
 }

@@ -10,9 +10,12 @@ import com.ambientdigitalgroup.ambchat.fragments.FriendsFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    public SectionsPagerAdapter(FragmentManager fm) {
-        super(fm);
+
+
+    public SectionsPagerAdapter(FragmentManager fragmentManager) {
+        super(fragmentManager);
     }
+
     @Override
     public Fragment getItem(int position) {
        switch (position){

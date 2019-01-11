@@ -11,6 +11,8 @@ import com.ambientdigitalgroup.ambchat.R;
 import java.io.UnsupportedEncodingException;
 import java.util.regex.*;
 public   class Extension {
+    public static int UserID;
+    public static String UserName="anymous";
     public static int checkUserName(String userName){
         if(userName.length()<8||userName.length()>30){
             return 0;

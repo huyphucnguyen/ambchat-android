@@ -53,7 +53,8 @@ public class GetFriendsRequest extends SeverRequest {
                     arrUser.add(new User(
                             ob.getInt("User_ID"),
                             ob.getString("User_Name"),
-                            ob.getString("Full_Name")
+                            ob.getString("Full_Name"),
+                            ob.getString("status")
                     ));
 
                 }

@@ -19,7 +19,7 @@ public class StartPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.fragment_start_page,container,false);
+        View root =  inflater.inflate(R.layout.fragment_start_page,container,false);
 
         getView(root);
         return root;
@@ -31,7 +31,7 @@ public class StartPageFragment extends Fragment {
         addEvent();
     }
 
-    public void getView(ViewGroup root){
+    public void getView(View root){
         lbtnSigIn =(Button) root.findViewById(R.id.btnLinkSigIn);
         lbtnSigUp=(Button) root.findViewById(R.id.btnLinkRegister);
 

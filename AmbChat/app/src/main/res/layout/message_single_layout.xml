@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message_single_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:weightSum="10">
+    android:orientation="horizontal"
+    android:padding="@dimen/margin"
+    >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/message_profile_layout"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_weight="0"
-        android:src="@drawable/default_avatar" />
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/message_profile_layout"
+            android:layout_width="@dimen/imageSize"
+            android:layout_height="@dimen/imageSize"
+            android:layout_gravity="center"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/default_avatar"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/message_text_layout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text_layout"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:padding="0dp"
-        android:text="Message Text"
-        android:textColor="#444444"
-        android:textSize="14sp" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/name_text_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display Name"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/textLarge"
+                android:textStyle="bold">
+            </TextView>
 
-    <TextView
-        android:id="@+id/name_text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:text="Display Name"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/time_text_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:text="@string/_00_00"
+                android:textAppearance="@style/textMedium" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/message_text_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_text_layout"
+                android:text="@string/message_text"
+                android:textColor="@color/colorMess"
+                android:textAppearance="@style/textLarge">
+            </TextView>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/time_text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_toEndOf="@+id/name_text_layout"
-        android:text="00:00"
-        android:textSize="12sp" />
-
-    <ImageView
-        android:id="@+id/message_image_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/message_text_layout"
-        android:layout_below="@+id/message_text_layout"
-        android:layout_marginLeft="0dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:padding="0dp"
-        android:scaleType="centerCrop" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+
+</LinearLayout>

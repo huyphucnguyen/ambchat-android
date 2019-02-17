@@ -18,9 +18,13 @@ import com.ambientdigitalgroup.ambchat.adapters.UserAdapter;
 import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
+import com.ambientdigitalgroup.ambchat.notification.Token;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +37,7 @@ import java.util.Map;
 public class FriendsFragment extends Fragment {
 
     private View mMainView;
+    private String mCurrentUserId;
     ListView lvListFriends;
     public static final String urlGetLitsFriend = "https://ambchat.herokuapp.com/api/getlistfriend.php";
     ArrayList<User> arrUser;
@@ -44,7 +49,7 @@ public class FriendsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
-
+        mCurrentUserId = String.valueOf(Extension.UserID);
         Map<String, String> parameter = new HashMap<>();
         lvListFriends = mMainView.findViewById(R.id.lvFriends);
         GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
@@ -71,15 +76,26 @@ public class FriendsFragment extends Fragment {
 
                 } else {
                     //ERROR
+
                     Toast.makeText(getActivity().getBaseContext(), "lOI", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getActivity().getBaseContext(),"Khong co danh sach ban be",Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
         request.execute(parameter);
-
+        updateToken(FirebaseInstanceId.getInstance().getToken());
 
         return mMainView;
     }
+    private void updateToken(String token){
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1=new Token(token);
+        databaseReference.child(mCurrentUserId).setValue(token1);
+
+    }
+
 
     private void replaceFragment(Fragment fConv) {
         if(getChildFragmentManager()!=null){

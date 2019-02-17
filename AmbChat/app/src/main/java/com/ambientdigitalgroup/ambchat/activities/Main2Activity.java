@@ -31,6 +31,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
+import com.ambientdigitalgroup.ambchat.fragments.MainFragment;
+import com.ambientdigitalgroup.ambchat.fragments.SignInFragment;
+import com.ambientdigitalgroup.ambchat.networks.AuthenticTokenRequest;
+import com.ambientdigitalgroup.ambchat.networks.CheckUserOnlineRequest;
+import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
+import com.ambientdigitalgroup.ambchat.utils.Extension;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.ambientdigitalgroup.ambchat.utils.Result;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
+
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;

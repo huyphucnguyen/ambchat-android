@@ -14,11 +14,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.notification.Client;
+import com.ambientdigitalgroup.ambchat.notification.DataNotification;
+import com.ambientdigitalgroup.ambchat.notification.MyResponses;
+import com.ambientdigitalgroup.ambchat.notification.Sender;
+import com.ambientdigitalgroup.ambchat.notification.Token;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.MessageAdapter;
 import com.ambientdigitalgroup.ambchat.utils.Messages;
+import com.ambientdigitalgroup.ambchat.utils.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
+
 
 public class ConventionFragment extends Fragment {
 
@@ -40,13 +51,11 @@ public class ConventionFragment extends Fragment {
     private DatabaseReference mRootRef;
 
 
-
-
     private String mCurrentUserId;
     private String mChatUser;
 
     private ImageButton mChatSendBtn;
-    private ImageButton  mChatAddBtn;
+    private ImageButton mChatAddBtn;
     private EditText mChatMessageView;
 
     private RecyclerView mMessagesList;
@@ -56,6 +65,7 @@ public class ConventionFragment extends Fragment {
     private LinearLayoutManager mLinearLayout;
     private MessageAdapter mAdapter;
 
+    APIService apiService;
 
     //New Solution
     private int itemPos = 0;
@@ -73,23 +83,23 @@ public class ConventionFragment extends Fragment {
     private static final int GALLERY_PICK = 1;
 
     // Storage Firebase
-
-
-
+    boolean notify=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        apiService = Client.getClient("https//fcm.googleapis.com/").create(APIService.class);
+
         View root = inflater.inflate(R.layout.fragment_convention, container, false);
-     if (getArguments() != null) {
-         mChatUser = String.valueOf(getArguments().getInt(USER_ID));
-     }
+        if (getArguments() != null) {
+            mChatUser = String.valueOf(getArguments().getInt(USER_ID));
+        }
         mCurrentUserId = String.valueOf(Extension.UserID);
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mChatSendBtn= root.findViewById(R.id.fab);
+        mChatSendBtn = root.findViewById(R.id.fab);
         mChatAddBtn = (ImageButton) root.findViewById(R.id.chat_add_btn);
-        mChatMessageView=root.findViewById(R.id.edt_mess);
+        mChatMessageView = root.findViewById(R.id.edt_mess);
         mMessagesList = (RecyclerView) root.findViewById(R.id.messages_list);
         mAdapter = new MessageAdapter(messagesList);
         mRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.message_swipe_layout);
@@ -103,7 +113,7 @@ public class ConventionFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.hasChild(mChatUser)){
+                if (!dataSnapshot.hasChild(mChatUser)) {
 
                     Map chatAddMap = new HashMap();
                     chatAddMap.put("seen", false);
@@ -117,7 +127,7 @@ public class ConventionFragment extends Fragment {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
-                            if(databaseError != null){
+                            if (databaseError != null) {
 
                                 Log.d("CHAT_LOG", databaseError.getMessage().toString());
 
@@ -139,22 +149,29 @@ public class ConventionFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                sendMessage();
+                notify=true;
+                String msg=mChatMessageView.getText().toString();
+                if(!msg.equals("")){
+                    sendMessage();
+                }else{
+                    Toast.makeText(getActivity(),"You can not seen empty message",Toast.LENGTH_SHORT).show();
+                }
+              mChatMessageView.setText("");
 
             }
         });
         //chose image
         mChatAddBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-                        Intent galleryIntent = new Intent();
-                        galleryIntent.setType("image/*");
-                        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                Intent galleryIntent = new Intent();
+                galleryIntent.setType("image/*");
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                        startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
-                    }
-                });
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
+            }
+        });
 
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -169,13 +186,14 @@ public class ConventionFragment extends Fragment {
 
             }
         });
+
         return root;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-            //Toast.makeText(getContext(), "user: " + user_id_friend, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "user: " + user_id_friend, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -188,6 +206,7 @@ public class ConventionFragment extends Fragment {
 
             String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
             String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+
 
             DatabaseReference user_message_push = mRootRef.child("messages")
                     .child(mCurrentUserId).child(mChatUser).push();
@@ -225,9 +244,71 @@ public class ConventionFragment extends Fragment {
                 }
             });
 
+            final  String msg=message;
+            mRootRef=FirebaseDatabase.getInstance().getReference("Users").child(mCurrentUserId);
+            mRootRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User us=dataSnapshot.getValue(User.class);
+                    if(notify){
+                        sendNotification(mChatUser,us.getUser_name(),msg);
+                    }
+
+                    notify=false;
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
         }
 
+
+
     }
+
+    private  void sendNotification(String mChatUser, final String username, final String mess){
+        DatabaseReference df=FirebaseDatabase.getInstance().getReference("Tokens");
+        Query qr=df.orderByKey().equalTo(mChatUser);
+        qr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot d: dataSnapshot.getChildren()){
+                    Token tk=d.getValue(Token.class);
+                    DataNotification dn=new DataNotification(mCurrentUserId,
+                                                    R.mipmap.ic_launcher,
+                                                   username+": "
+                                                    +mess,"New message",
+                                                    mCurrentUserId);
+                    Sender sd=new Sender(dn,tk.getToken());
+                    apiService.setNotification(sd).enqueue(new Callback<MyResponses>() {
+                        @Override
+                        public void onResponse(Response<MyResponses> response, Retrofit retrofit) {
+                            if(response.code()==200){
+                                if(response.body().success==1){
+                                    Toast.makeText(getActivity(),"fail",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void loadMessages() {
 
@@ -244,7 +325,7 @@ public class ConventionFragment extends Fragment {
 
                 itemPos++;
 
-                if(itemPos == 1){
+                if (itemPos == 1) {
 
                     String messageKey = dataSnapshot.getKey();
 
@@ -299,7 +380,7 @@ public class ConventionFragment extends Fragment {
                 Messages message = dataSnapshot.getValue(Messages.class);
                 String messageKey = dataSnapshot.getKey();
 
-                if(!mPrevKey.equals(messageKey)){
+                if (!mPrevKey.equals(messageKey)) {
 
                     messagesList.add(itemPos++, message);
 
@@ -310,7 +391,7 @@ public class ConventionFragment extends Fragment {
                 }
 
 
-                if(itemPos == 1) {
+                if (itemPos == 1) {
 
                     mLastKey = messageKey;
 
@@ -352,7 +433,8 @@ public class ConventionFragment extends Fragment {
 
 
 
-    private void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+   /* private void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == GALLERY_PICK && resultCode == ){
@@ -413,5 +495,5 @@ public class ConventionFragment extends Fragment {
 
         }
 
-    }
+    }*/
 }

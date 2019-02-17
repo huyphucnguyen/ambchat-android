@@ -10,5 +10,7 @@
     <dimen name="margin100">100dp</dimen>
     <dimen name="padding">50dp</dimen>
     <dimen name="padding_username">7dp</dimen>
+    <dimen name="textSize">16sp</dimen>
+    <dimen name="imageSize">36dp</dimen>
 
 </resources>

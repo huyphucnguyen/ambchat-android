@@ -156,6 +156,7 @@ public class SignInFragment extends Fragment {
                             Result res = (Result) obj;
                             String token= res.getToken();
                             savingPreferences(token);
+
                             ProfileUser user=(ProfileUser) res.getData();
                             Extension.UserID=user.user_id;
                             Extension.UserName=user.user_name;

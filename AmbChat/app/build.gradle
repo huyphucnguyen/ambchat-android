@@ -42,6 +42,8 @@ dependencies {
 
     //noinspection GradleCompatible
     //implementation 'com.google.firebase:firebase-core:11.8.0'
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -54,7 +56,10 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    // add library
+    implementation 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    implementation 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
 }
 
 apply plugin: 'com.google.gms.google-services'

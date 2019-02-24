@@ -85,7 +85,7 @@ public class FriendsFragment extends Fragment {
             }
         });
         request.execute(parameter);
-        updateToken(FirebaseInstanceId.getInstance().getToken());
+        //updateToken(FirebaseInstanceId.getInstance().getToken());
 
         return mMainView;
     }

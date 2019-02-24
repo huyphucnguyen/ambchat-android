@@ -89,7 +89,7 @@ public class ConventionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        apiService = Client.getClient("https//fcm.googleapis.com/").create(APIService.class);
+//        apiService = Client.getClient("https//fcm.googleapis.com/").create(APIService.class);
 
         View root = inflater.inflate(R.layout.fragment_convention, container, false);
         if (getArguments() != null) {
@@ -244,14 +244,14 @@ public class ConventionFragment extends Fragment {
                 }
             });
 
-            final  String msg=message;
+        /*    final  String msg=message;
             mRootRef=FirebaseDatabase.getInstance().getReference("Users").child(mCurrentUserId);
             mRootRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User us=dataSnapshot.getValue(User.class);
                     if(notify){
-                        sendNotification(mChatUser,us.getUser_name(),msg);
+                      *//*  sendNotification(mChatUser,us.getUser_name(),msg);*//*
                     }
 
                     notify=false;
@@ -263,14 +263,14 @@ public class ConventionFragment extends Fragment {
                 }
             });
 
-
+*/
         }
 
 
 
     }
 
-    private  void sendNotification(String mChatUser, final String username, final String mess){
+   /* private  void sendNotification(String mChatUser, final String username, final String mess){
         DatabaseReference df=FirebaseDatabase.getInstance().getReference("Tokens");
         Query qr=df.orderByKey().equalTo(mChatUser);
         qr.addValueEventListener(new ValueEventListener() {
@@ -307,7 +307,7 @@ public class ConventionFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 
 
     private void loadMessages() {

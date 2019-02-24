@@ -36,9 +36,10 @@ dependencies {
     //noinspection GradleCompatible
     /* implementation 'com.google.firebase:firebase-core:11.8.0'*/
     implementation 'com.firebaseui:firebase-ui:0.6.0'
-    /*implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.6.0'*/
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
 
     //noinspection GradleCompatible
     //implementation 'com.google.firebase:firebase-core:11.8.0'
@@ -60,6 +61,11 @@ dependencies {
     // add library
     implementation 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     implementation 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+
+    implementation ('com.facebook.android:audience-network-sdk:4.28.0',{
+        exclude group: 'com.google.android.gms'
+    })
+    implementation 'com.google.firebase:firebase-core:11.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

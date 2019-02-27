@@ -66,7 +66,6 @@ public   class Extension {
         if (fgManager != null) {
             transaction = fgManager.beginTransaction();
             transaction.replace(R.id.flContainer, fragment);
-            transaction.addToBackStack(null);
             transaction.commit();
         }
     }

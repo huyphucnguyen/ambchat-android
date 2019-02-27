@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.notification.Client;
 import com.ambientdigitalgroup.ambchat.notification.DataNotification;
 import com.ambientdigitalgroup.ambchat.notification.MyResponses;
@@ -92,6 +94,10 @@ public class ConventionFragment extends Fragment {
 //        apiService = Client.getClient("https//fcm.googleapis.com/").create(APIService.class);
 
         View root = inflater.inflate(R.layout.fragment_convention, container, false);
+
+        FragmentActivity activity = getActivity();
+        ((StartActivity )activity).setOnBackPressListener(null);
+
         if (getArguments() != null) {
             mChatUser = String.valueOf(getArguments().getInt(USER_ID));
         }

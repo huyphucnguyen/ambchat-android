@@ -22,7 +22,7 @@
     <string name="register">Register</string>
     <string name="rememberPassword">Remember Password</string>
     <string name="logIn">Log In</string>
-    <string name="chuaCoACC">Nếu chưa có tài khoản nhấn vào đây</string>
+    <string name="chuaCoACC">Nếu chưa có tài khoản nhấn vào </string>
     <string name="searchMess">Search mess</string>
     <string name="Search">Search</string>
     <string name="nameFriendChat">Tên người chat"</string>
@@ -41,4 +41,5 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="message_text">Message Text</string>
     <string name="_00_00">00:00</string>
+    <string name="click_dk">đây</string>
 </resources>

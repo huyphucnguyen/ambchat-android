@@ -1,10 +1,12 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.format.DateFormat;
@@ -16,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
+import com.ambientdigitalgroup.ambchat.utils.BaseBackPressListenerListener;
 import com.ambientdigitalgroup.ambchat.utils.ChatMessage;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,13 +49,13 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_chats, container, false);
-        final TextView tv = (TextView) view.findViewById(R.id.textView3);
+        view = inflater.inflate(R.layout.fragment_chats, container, false);
+        final TextView tv = ( TextView ) view.findViewById(R.id.textView3);
 
-
-        return  view;
+        Activity activity = getActivity();
+        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
+        return view;
     }
-
 
 
 }

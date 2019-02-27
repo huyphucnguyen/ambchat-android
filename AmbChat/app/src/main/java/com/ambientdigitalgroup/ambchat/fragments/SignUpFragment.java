@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,6 +107,12 @@ public class SignUpFragment extends Fragment {
                                 args.putString(USER_NAME,username);
                                 args.putString(PASSWORD_KEY,password);
                                 fragment.setArguments(args);
+                                Fragment signUpFragment = getFragmentManager().findFragmentByTag("SignUp");
+                                if(signUpFragment!=null&&signUpFragment.isAdded()){
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    transaction.remove(fragment);
+                                    Toast.makeText(getContext(),"Removed",Toast.LENGTH_LONG).show();
+                                }
                                 Extension.replaceFragment(getFragmentManager(),fragment);
                             }
                             if (error == 1) {

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFF"
-    android:orientation="vertical">
+    android:background="#FFF">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF44"
+        android:translationZ="-10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding"
         android:paddingLeft="@dimen/margin"
@@ -118,16 +122,40 @@
             android:textAppearance="@style/textLarge"
             android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/txtRegisterAcount"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
+            android:orientation="horizontal"
             android:layout_marginLeft="@dimen/margin0"
             android:layout_marginTop="@dimen/margin"
-            android:text="@string/chuaCoACC"
-            android:textAppearance="@style/textMedium"
-            android:textColor="@android:color/black"
-            android:textStyle="italic" />
+            android:layout_marginStart="@dimen/margin0">
+
+            <TextView
+                android:id="@+id/txtRegisterAcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:text="@string/chuaCoACC"
+                android:textAppearance="@style/textMedium"
+                android:textColor="@android:color/black"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txtClickDangKy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/click_dk"
+                android:textStyle="italic"
+                android:textColor="#FF00"
+
+                android:textAppearance="@style/textMedium"
+            />
+
+        </LinearLayout>
+
+
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

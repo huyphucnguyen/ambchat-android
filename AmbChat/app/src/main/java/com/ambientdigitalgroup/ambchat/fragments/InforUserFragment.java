@@ -3,6 +3,7 @@ package com.ambientdigitalgroup.ambchat.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 
 public class InforUserFragment extends Fragment {
     EditText edtUserNameInfor;
@@ -27,6 +29,10 @@ public class InforUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.fragment_infor_user,container,false);
         getView(root);
+
+        FragmentActivity activity = getActivity();
+        ((StartActivity )activity).setOnBackPressListener(null);
+
         return root;
     }
 

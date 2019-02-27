@@ -2,10 +2,11 @@ package com.ambientdigitalgroup.ambchat.fragments;
 
 
 
+import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.adapters.SectionsPagerAdapter;
+import com.ambientdigitalgroup.ambchat.utils.BaseBackPressListenerListener;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 
 
@@ -49,6 +53,7 @@ public class MainFragment extends Fragment {
         mSectinosPagerAdapter =new SectionsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mSectinosPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
 
         return root;
     }
@@ -84,18 +89,16 @@ public class MainFragment extends Fragment {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.main_logout_btn){
             Fragment fragment = getFragmentManager().findFragmentByTag("SIGN_IN");
-            FragmentTransaction transaction = null;
-            if (fragment==null) {
-                SignInFragment signInFragment = new SignInFragment();
-                transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.flContainer, signInFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }else {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            if(fragment!=null&&fragment.isAdded()){
                 transaction.replace(R.id.flContainer, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Toast.makeText(getContext(),"Sign_in fragment is exist",Toast.LENGTH_LONG).show();
             }
+            else {
+                SignInFragment signInFragment = new SignInFragment();
+                transaction.replace(R.id.flContainer, signInFragment);
+            }
+            transaction.commit();
 
 
         }
@@ -111,7 +114,7 @@ public class MainFragment extends Fragment {
 
         return true;
     }
-
-
-
 }
+
+
+

@@ -53,6 +53,7 @@ public class SignInFragment extends Fragment {
     private Button btnSigIn;
     private CheckBox ckbRememberpass;
     private TextView txtForgotPassword, txtRegisterAcount;
+    private TextView txtClickDangKy;
     String prefname="my_data";
     public static final String urlSignIn = "https://ambchat.herokuapp.com/api/sign_in.php";
     private ProgressDialog mLoginProgress;
@@ -66,18 +67,19 @@ public class SignInFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signin,container,false);
+        View root = inflater.inflate(R.layout.signin,container,false);
         addControls(root);
         return root;
     }
 
-    public void addControls(ViewGroup root) {
+    public void addControls(View root) {
         edtUserName = (EditText) root.findViewById(R.id.edtUserName);
         edtPassWord = (EditText) root.findViewById(R.id.edtPass);
         txtForgotPassword = (TextView) root.findViewById(R.id.txtForgotPassword);
         txtRegisterAcount = (TextView) root.findViewById(R.id.txtRegisterAcount);
         ckbRememberpass = (CheckBox) root.findViewById(R.id.ckbRemmemberPass);
         btnSigIn = (Button) root.findViewById(R.id.btnLogIn);
+        txtClickDangKy = (TextView ) root.findViewById(R.id.txtClickDangKy);
         mLoginProgress = new ProgressDialog(getContext());
 
         Bundle bundle=getArguments();
@@ -132,7 +134,6 @@ public class SignInFragment extends Fragment {
                 mLoginProgress.setTitle("Logging In");
                 mLoginProgress.setMessage("Please wait while we check your account.");
                 mLoginProgress.setCanceledOnTouchOutside(false);
-                mLoginProgress.show();
                 userName = edtUserName.getText().toString().trim();
                 password = edtPassWord.getText().toString().trim();
                 String sha256OfPassword = "";
@@ -147,45 +148,59 @@ public class SignInFragment extends Fragment {
                 parameter.put("username", userName);
                 parameter.put("password", sha256OfPassword);
                 parameter.put("device_id",deviceID);
+                mLoginProgress.show();
                 SignInRequest request = new SignInRequest(new SeverRequest.SeverRequestListener() {
                     @Override
                     public void completed(Object obj) {
+                        boolean success = false;
                         if (obj != null) {
-
-                            mLoginProgress.dismiss();
                             Result res = (Result) obj;
-                            String token= res.getToken();
-                            savingPreferences(token);
+                            success = true;
+                            if(res.getError()==0){
+                                String token= res.getToken();
+                                savingPreferences(token);
+                                ProfileUser user=(ProfileUser) res.getData();
+                                Extension.UserID=user.user_id;
+                                Extension.UserName=user.user_name;
+                                Fragment fragment = new MainFragment();
 
-                            ProfileUser user=(ProfileUser) res.getData();
-                            Extension.UserID=user.user_id;
-                            Extension.UserName=user.user_name;
-                            Fragment fragment = new MainFragment();
-                            Bundle args = new Bundle();
-                            args.putString(USERNAME,user.getUser_name());
-                            args.putString(FULLNAME,user.getFull_name());
-                            args.putInt(USERID,user.getUser_id());
-                            args.putString(EMAIL,user.getEmail());
-                            fragment.setArguments(args);
-                            Extension.replaceFragment(getFragmentManager(),fragment);
-                            ShowMessage(getContext(),"Login success!");
+                                Bundle args = new Bundle();
+                                args.putString(USERNAME,user.getUser_name());
+                                args.putString(FULLNAME,user.getFull_name());
+                                args.putInt(USERID,user.getUser_id());
+                                args.putString(EMAIL,user.getEmail());
+                                fragment.setArguments(args);
+                                ShowMessage(getContext(),"Login success!");
 
-                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            //Fragment frag_signIn = getFragmentManager().findFragmentByTag("SIGN_IN");
-                            transaction.replace(R.id.flContainer, fragment,"MAIN");
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+                                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                //Fragment frag_signIn = getFragmentManager().findFragmentByTag("SIGN_IN");
+                                transaction.add(R.id.flContainer, fragment,"MAIN");
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            }
 
-
-                        } else {
+                        } //obj!=null
+                        if(!success) {
                             //ERROR
-                            mLoginProgress.hide();
-                            ShowMessage(getContext(),"Login fail!");
+                            ShowMessage(getContext(), "Login fail!");
                         }
+                        mLoginProgress.dismiss();
                     }
                 });
 
                 request.execute(parameter);
+            }
+        });
+
+        txtClickDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                Fragment fragment = new SignUpFragment();
+                transaction.replace(R.id.flContainer,fragment,"SignUp")
+                .addToBackStack(null)
+                .commit();
             }
         });
     }

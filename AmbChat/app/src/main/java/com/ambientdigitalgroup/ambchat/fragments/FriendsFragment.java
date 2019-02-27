@@ -1,9 +1,11 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -14,11 +16,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.adapters.UserAdapter;
 import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.notification.Token;
+import com.ambientdigitalgroup.ambchat.utils.BaseBackPressListenerListener;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
@@ -49,6 +53,10 @@ public class FriendsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
+
+        Activity activity = getActivity();
+        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
+
         mCurrentUserId = String.valueOf(Extension.UserID);
         Map<String, String> parameter = new HashMap<>();
         lvListFriends = mMainView.findViewById(R.id.lvFriends);

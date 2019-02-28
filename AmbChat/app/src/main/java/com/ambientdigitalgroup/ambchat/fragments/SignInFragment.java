@@ -72,12 +72,6 @@ public class SignInFragment extends Fragment {
         View root = inflater.inflate(R.layout.signin,container,false);
         addControls(root);
 
-//        LinearLayout llSignIn = root.findViewById(R.id.llSignIn);
-//
-//        Button btnBackgroundSignIn = root.findViewById(R.id.btnBackgroundSignIn);
-//        llSignIn.bringChildToFront(llSignIn);
-//        btnBackgroundSignIn.invalidate();
-//        llSignIn.invalidate();
         return root;
     }
 

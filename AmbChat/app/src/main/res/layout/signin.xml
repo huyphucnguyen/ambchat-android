@@ -6,15 +6,6 @@
     android:id="@+id/rlSignInRoot"
     android:background="#FFF">
 
-    <!--<Button
-        android:id="@+id/btnBackgroundSignIn"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorAccent"
-        android:clickable="false"
-        />-->
-
     <LinearLayout
         android:clipChildren="false"
         android:layout_alignParentTop="true"

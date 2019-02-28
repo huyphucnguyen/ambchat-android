@@ -5,12 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFF">
 
-    <!--<Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF"
-        android:translationZ="-10dp"
-        tools:targetApi="lollipop" /> -->
 
     <ScrollView
         android:layout_width="match_parent"

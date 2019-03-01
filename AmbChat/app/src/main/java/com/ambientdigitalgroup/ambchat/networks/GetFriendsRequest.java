@@ -1,5 +1,6 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
+import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
@@ -49,13 +50,15 @@ public class GetFriendsRequest extends SeverRequest {
                 JSONArray array_user= json.getJSONArray("data");
                 for(int i=0;i<array_user.length();i++){
                     JSONObject ob=array_user.getJSONObject(i);
+                    if(ob.getInt("User_ID")!= Extension.UserID){
+                        arrUser.add(new User(
+                                ob.getInt("User_ID"),
+                                ob.getString("User_Name"),
+                                ob.getString("Full_Name"),
+                                ob.getString("status")
+                        ));
+                    }
 
-                    arrUser.add(new User(
-                            ob.getInt("User_ID"),
-                            ob.getString("User_Name"),
-                            ob.getString("Full_Name"),
-                            ob.getString("status")
-                    ));
 
                 }
                 res.setData(arrUser);

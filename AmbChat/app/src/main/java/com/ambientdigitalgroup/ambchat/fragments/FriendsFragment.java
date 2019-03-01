@@ -3,7 +3,6 @@ package com.ambientdigitalgroup.ambchat.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.adapters.UserAdapter;
-import com.ambientdigitalgroup.ambchat.adapters.UsersAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.notification.Token;
@@ -93,7 +91,7 @@ public class FriendsFragment extends Fragment {
             }
         });
         request.execute(parameter);
-        //updateToken(FirebaseInstanceId.getInstance().getToken());
+        updateToken(FirebaseInstanceId.getInstance().getToken());
 
         return mMainView;
     }
@@ -116,5 +114,15 @@ public class FriendsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mCurrentUserId = String.valueOf(Extension.UserID);
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mCurrentUserId = String.valueOf(Extension.UserID);
+    }
 }

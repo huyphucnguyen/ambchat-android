@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class ProfileUser {
+
     @SerializedName("user_name")
     public String user_name;
     @SerializedName("full_name")
@@ -20,7 +21,6 @@ public class ProfileUser {
     public int gender;
     @SerializedName("user_id")
     public int user_id;
-
     public String getUser_name() {
         return user_name;
     }

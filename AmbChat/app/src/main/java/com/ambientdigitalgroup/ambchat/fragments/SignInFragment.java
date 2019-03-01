@@ -37,6 +37,7 @@ import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 
 import java.io.BufferedReader;
@@ -156,15 +157,24 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void completed(Object obj) {
                         boolean success = false;
+
+
                         if (obj != null) {
                             Result res = (Result) obj;
                             success = true;
                             if(res.getError()==0){
                                 String token= res.getToken();
                                 savingPreferences(token);
+
                                 ProfileUser user=(ProfileUser) res.getData();
+                                ProfileUsers ob= ProfileUsers.getInstance();
+
+                                ob.setUser_id(((ProfileUser) res.getData()).user_id);
+                                ob.setUser_name(user.user_name);
+
                                 Extension.UserID=user.user_id;
                                 Extension.UserName=user.user_name;
+
                                 Fragment fragment = new MainFragment();
 
                                 Bundle args = new Bundle();
@@ -183,10 +193,41 @@ public class SignInFragment extends Fragment {
                             }
 
                         } //obj!=null
-                        if(!success) {
+                  /*      if(!success) {
+
+                            String token= res.getToken();
+                            savingPreferences(token);
+
+                            ProfileUser user=(ProfileUser) res.getData();
+                            ProfileUsers ob= ProfileUsers.getInstance();
+
+                            ob.setUser_id(((ProfileUser) res.getData()).user_id);
+                            ob.setUser_name(user.user_name);
+
+                            Extension.UserID=user.user_id;
+                            Extension.UserName=user.user_name;
+                            Fragment fragment = new MainFragment();
+                            Bundle args = new Bundle();
+                            args.putString(USERNAME,user.getUser_name());
+                            args.putString(FULLNAME,user.getFull_name());
+                            args.putInt(USERID,user.getUser_id());
+                            args.putString(EMAIL,user.getEmail());
+                            fragment.setArguments(args);
+                            Extension.replaceFragment(getFragmentManager(),fragment);
+                            ShowMessage(getContext(),"Login success!");
+
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            //Fragment frag_signIn = getFragmentManager().findFragmentByTag("SIGN_IN");
+                            transaction.replace(R.id.flContainer, fragment,"MAIN");
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
+                        } else {
+
                             //ERROR
                             ShowMessage(getContext(), "Login fail!");
-                        }
+                        }*/
                         mLoginProgress.dismiss();
                     }
                 });

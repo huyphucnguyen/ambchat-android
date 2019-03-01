@@ -1,27 +1,11 @@
 package com.ambientdigitalgroup.ambchat.notification;
 
 public class Sender {
-    public DataNotification dataNotification;
+    public Data data;
     public String to;
 
-    public Sender(DataNotification dataNotification, String to) {
-        this.dataNotification = dataNotification;
-        this.to = to;
-    }
-
-    public DataNotification getDataNotification() {
-        return dataNotification;
-    }
-
-    public void setDataNotification(DataNotification dataNotification) {
-        this.dataNotification = dataNotification;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
+    public Sender(Data data, String to) {
+        this.data = data;
         this.to = to;
     }
 }

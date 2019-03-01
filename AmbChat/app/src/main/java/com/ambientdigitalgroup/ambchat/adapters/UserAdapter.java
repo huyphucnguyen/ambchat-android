@@ -21,7 +21,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
     public UserAdapter(Activity context, ArrayList<User> androidFlavors) {
 
-        super(context, 0, androidFlavors);
+6        super(context, 0, androidFlavors);
     }
 
     @Override

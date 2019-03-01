@@ -2,6 +2,7 @@ package com.ambientdigitalgroup.ambchat.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,14 +21,14 @@ import android.widget.Toast;
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.notification.Client;
-import com.ambientdigitalgroup.ambchat.notification.DataNotification;
-import com.ambientdigitalgroup.ambchat.notification.MyResponses;
+import com.ambientdigitalgroup.ambchat.notification.Data;
+import com.ambientdigitalgroup.ambchat.notification.MyResponse;
 import com.ambientdigitalgroup.ambchat.notification.Sender;
 import com.ambientdigitalgroup.ambchat.notification.Token;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.MessageAdapter;
 import com.ambientdigitalgroup.ambchat.utils.Messages;
-import com.ambientdigitalgroup.ambchat.utils.User;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -91,7 +93,8 @@ public class ConventionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        apiService = Client.getClient("https//fcm.googleapis.com/").create(APIService.class);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+
 
         View root = inflater.inflate(R.layout.fragment_convention, container, false);
 
@@ -101,8 +104,9 @@ public class ConventionFragment extends Fragment {
         if (getArguments() != null) {
             mChatUser = String.valueOf(getArguments().getInt(USER_ID));
         }
-        mCurrentUserId = String.valueOf(Extension.UserID);
+        mCurrentUserId = String.valueOf(ProfileUsers.getInstance().getUser_id());
         mRootRef = FirebaseDatabase.getInstance().getReference();
+
         mChatSendBtn = root.findViewById(R.id.fab);
         mChatAddBtn = (ImageButton) root.findViewById(R.id.chat_add_btn);
         mChatMessageView = root.findViewById(R.id.edt_mess);
@@ -157,6 +161,7 @@ public class ConventionFragment extends Fragment {
 
                 notify=true;
                 String msg=mChatMessageView.getText().toString();
+
                 if(!msg.equals("")){
                     sendMessage();
                 }else{
@@ -250,70 +255,59 @@ public class ConventionFragment extends Fragment {
                 }
             });
 
-        /*    final  String msg=message;
-            mRootRef=FirebaseDatabase.getInstance().getReference("Users").child(mCurrentUserId);
-            mRootRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User us=dataSnapshot.getValue(User.class);
-                    if(notify){
-                      *//*  sendNotification(mChatUser,us.getUser_name(),msg);*//*
-                    }
 
-                    notify=false;
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            final  String msg=message;
+            if(notify)
+            {
+                sendNotifiaction(mChatUser,ProfileUsers.getInstance().user_name,msg);
+            }
+            notify=false;
 
-                }
-            });
-
-*/
         }
 
 
 
     }
 
-   /* private  void sendNotification(String mChatUser, final String username, final String mess){
-        DatabaseReference df=FirebaseDatabase.getInstance().getReference("Tokens");
-        Query qr=df.orderByKey().equalTo(mChatUser);
-        qr.addValueEventListener(new ValueEventListener() {
+    private void sendNotifiaction(final String receiver, final String username, final String message){
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(mChatUser);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot d: dataSnapshot.getChildren()){
-                    Token tk=d.getValue(Token.class);
-                    DataNotification dn=new DataNotification(mCurrentUserId,
-                                                    R.mipmap.ic_launcher,
-                                                   username+": "
-                                                    +mess,"New message",
-                                                    mCurrentUserId);
-                    Sender sd=new Sender(dn,tk.getToken());
-                    apiService.setNotification(sd).enqueue(new Callback<MyResponses>() {
-                        @Override
-                        public void onResponse(Response<MyResponses> response, Retrofit retrofit) {
-                            if(response.code()==200){
-                                if(response.body().success==1){
-                                    Toast.makeText(getActivity(),"fail",Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Token token = snapshot.getValue(Token.class);
+                    Data data = new Data(mCurrentUserId, R.mipmap.ic_launcher, username+": "+message, "New Message",
+                            mChatUser);
+
+                    Sender sender = new Sender(data, token.getToken());
+
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Response<MyResponse> response, Retrofit retrofit) {
+                                    if (response.code() == 200){
+                                        if (response.body().success != 1){
+                                            Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
                                 }
-                            }
-                        }
 
-                        @Override
-                        public void onFailure(Throwable t) {
+                                @Override
+                                public void onFailure(Throwable t) {
 
-                        }
-                    });
+                                }
+                            });
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-    }*/
+    }
 
 
     private void loadMessages() {
@@ -437,10 +431,18 @@ public class ConventionFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mCurrentUserId=String.valueOf(ProfileUsers.getInstance().user_id);
+    }
 
-
-
-   /* private void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        mCurrentUserId=String.valueOf(ProfileUsers.getInstance().user_id);
+    }
+    /* private void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == GALLERY_PICK && resultCode == ){

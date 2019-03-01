@@ -1,19 +1,21 @@
 package com.ambientdigitalgroup.ambchat.notification;
 
-public class DataNotification {
+public class Data {
     private String user;
+    private int icon;
     private String body;
     private String title;
     private String sented;
 
-    public DataNotification(String user, String body, String title, String sented) {
+    public Data(String user, int icon, String body, String title, String sented) {
         this.user = user;
+        this.icon = icon;
         this.body = body;
         this.title = title;
         this.sented = sented;
     }
 
-    public DataNotification(String mCurrentUserId, int ic_launcher, String s, String new_message, String currentUserId) {
+    public Data() {
     }
 
     public String getUser() {
@@ -22,6 +24,14 @@ public class DataNotification {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
     public String getBody() {

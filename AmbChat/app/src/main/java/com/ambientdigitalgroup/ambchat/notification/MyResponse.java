@@ -1,5 +1,6 @@
 package com.ambientdigitalgroup.ambchat.notification;
 
-public class MyResponses {
+public class MyResponse {
+
     public int success;
 }

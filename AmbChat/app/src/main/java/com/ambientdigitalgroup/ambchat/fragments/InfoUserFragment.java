@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 
-public class InforUserFragment extends Fragment {
+public class InfoUserFragment extends Fragment {
     EditText edtUserNameInfor;
     EditText edtPassWordInfor;
     EditText edtFullNameInfor;

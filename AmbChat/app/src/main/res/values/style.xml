@@ -10,5 +10,8 @@
     <style name="textMedium" parent="@android:style/TextAppearance.Medium"></style>
     <style name="textLarge" parent="@android:style/TextAppearance.Large"></style>
 
+    <style name="MenuStyle" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+    </style>
 
 </resources>

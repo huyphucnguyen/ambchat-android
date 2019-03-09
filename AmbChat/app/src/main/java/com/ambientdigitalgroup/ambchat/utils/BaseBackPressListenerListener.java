@@ -9,6 +9,7 @@ public class BaseBackPressListenerListener implements OnBackPressListener {
     }
     @Override
     public void doBack() {
+        //XU LY SU KIEN NUT QUAY LAI
         //activity.getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         activity.finish();
     }

@@ -22,5 +22,18 @@
         android:orderInCategory="100"
         android:title="Settings"
         app:showAsAction="never" />
+    <item
+
+        android:id="@+id/menu_action_search"
+
+        android:orderInCategory="1"
+
+        android:icon="@drawable/ic_search_black_24dp"
+
+        app:iconTint="#ffffff"
+
+        app:showAsAction="always"
+
+        android:title="menu search"/>
 
 </menu>

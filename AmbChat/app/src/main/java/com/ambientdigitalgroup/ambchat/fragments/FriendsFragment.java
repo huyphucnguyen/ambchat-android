@@ -73,7 +73,7 @@ public class FriendsFragment extends Fragment {
                             User us = arr.get(i);
                             Bundle bundle = new Bundle();
                             bundle.putInt("UserID", us.getUser_id());
-                             ConventionFragment fConv = new ConventionFragment();
+                            ConvertionFragment fConv = new ConvertionFragment();
                             fConv.setArguments(bundle);
 
                              replaceFragment(fConv);

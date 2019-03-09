@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/profile_image"
+        android:src="@drawable/baseline_person_pin_black_18dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="display name"
+        android:id="@+id/fullname"
+        android:layout_toRightOf="@id/profile_image"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:textAppearance="@style/textLarge"/>
+
+    <Button
+
+        android:id="@+id/btnAdd"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/button_left"
+        android:layout_marginStart="@dimen/button_start"
+        android:layout_marginRight="@dimen/button_right"
+        android:layout_toEndOf="@id/username"
+        android:textColor="@color/cardview_light_background"
+        android:layout_toRightOf="@id/username"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center"
+        android:textAppearance="@style/textSmall"
+        android:text="@string/add_friend" />
+
+</RelativeLayout>

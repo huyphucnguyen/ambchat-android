@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
@@ -47,6 +49,7 @@ public class MainFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolBar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("AbmChat");
+
        // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //tab
@@ -81,8 +84,12 @@ public class MainFragment extends Fragment {
        @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
         inflater.inflate(R.menu.main_menu,menu);
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -104,15 +111,28 @@ public class MainFragment extends Fragment {
         }
 
         if(item.getItemId() == R.id.main_account_btn){
-            Fragment fragment = new InforUserFragment();
+            Fragment fragment = new InfoUserFragment();
             Extension.replaceFragment(getFragmentManager(),fragment);
         }
 
         if(item.getItemId() == R.id.main_all_btn){
 
         }
-
+        if(item.getItemId() == R.id.menu_action_search){
+            SearchFargment fConv = new SearchFargment();
+            replaceFragment(fConv);
+        }
         return true;
+    }
+    private void replaceFragment(Fragment fConv) {
+        if(getChildFragmentManager()!=null){
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.flContainer, fConv,"chat");
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
     }
 }
 

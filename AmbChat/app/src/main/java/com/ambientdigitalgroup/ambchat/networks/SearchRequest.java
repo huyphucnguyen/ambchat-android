@@ -43,26 +43,25 @@ public class SearchRequest extends SeverRequest {
         try {
             Gson gson=new Gson();
             Result res=gson.fromJson(data,Result.class);
-
             JSONObject json = null;
             json = new JSONObject(data);
-
-
             ArrayList<User> arrUser=new ArrayList<User>();
             JSONArray array_user= json.getJSONArray("data");
             for(int i=0;i<array_user.length();i++){
                 JSONObject ob=array_user.getJSONObject(i);
-
                     arrUser.add(new User(
-                            ob.getInt("User_ID"),
-                            "no",
-                            ob.getString("Full_Name"),
-                            ob.getString("status")
-                    ));
+                            ob.getInt("user_id"),
+                            null,
+                            ob.getString("full_name"),
+                            null,
+                            null,
+                            -1,
+                            null
 
+                    ));
             }
             res.setData(arrUser);
-            return  res;
+            return  res.getData();
         } catch (Exception e){
             e.printStackTrace();
         }

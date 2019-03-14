@@ -2,6 +2,7 @@ package com.ambientdigitalgroup.ambchat.networks;
 
 import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
 import com.google.gson.Gson;
@@ -24,45 +25,48 @@ public class GetFriendsRequest extends SeverRequest {
 
     @Override
     protected Request prepare(Map<String, String> parameter) {
-        Request request =new Request.Builder()
-                .url(URL+"getlistfriend.php")
-                .get()
+
+        String userid = parameter.get("user_id");
+        RequestBody requestBody = new MultipartBody.Builder()
+                .addFormDataPart("user_id", userid)
+                .setType(MultipartBody.FORM)
                 .build();
 
-        return request;
+        Request request =new Request.Builder()
+                .url(URL+"getlistfriend.php")
+                .post(requestBody)
+                .build();
+
+
+       return  request;
     }
-
-
 
 
     @Override
     protected Object process(String data) {
 
             try {
-                Gson gson=new Gson();
-                Result res=gson.fromJson(data,Result.class);
 
-                JSONObject json = null;
-                json = new JSONObject(data);
-
-
+                JSONObject json=new JSONObject(data);
                 ArrayList<User> arrUser=new ArrayList<User>();
-                JSONArray array_user= json.getJSONArray("data");
+                JSONArray array_user=json.getJSONArray("data") ;
                 for(int i=0;i<array_user.length();i++){
                     JSONObject ob=array_user.getJSONObject(i);
-                    if(ob.getInt("User_ID")!= Extension.UserID){
+                    if(ob.getInt("user_id")!= ProfileUsers.getInstance().getUser_id()){
                         arrUser.add(new User(
-                                ob.getInt("User_ID"),
-                                ob.getString("User_Name"),
-                                ob.getString("Full_Name"),
-                                ob.getString("status")
+                                ob.getInt("user_id"),
+                                null,
+                                ob.getString("full_name"),
+                                null,
+                                null,
+                                -1,
+                                null
+
                         ));
                     }
-
-
                 }
-                res.setData(arrUser);
-                return  res;
+
+                return  arrUser;
             } catch (Exception e){
                 e.printStackTrace();
             }

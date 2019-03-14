@@ -22,6 +22,7 @@ import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.notification.Token;
 import com.ambientdigitalgroup.ambchat.utils.BaseBackPressListenerListener;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
 import com.google.firebase.database.DatabaseReference;
@@ -51,20 +52,18 @@ public class FriendsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
-
         Activity activity = getActivity();
         ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
-
         mCurrentUserId = String.valueOf(Extension.UserID);
         Map<String, String> parameter = new HashMap<>();
+        parameter.put("user_id",ProfileUsers.getInstance().user_id+"");
         lvListFriends = mMainView.findViewById(R.id.lvFriends);
         GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
             @Override
             public void completed(Object obj) {
-
                 if (obj != null) {
-                    Result res = (Result) obj;
-                    final ArrayList<User> arr = (ArrayList<User>) res.getData();
+
+                    final ArrayList<User> arr = (ArrayList<User>)obj;
                     UserAdapter adapter = new UserAdapter(getActivity(),arr);
                     lvListFriends.setAdapter(adapter);
                     lvListFriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,18 +74,14 @@ public class FriendsFragment extends Fragment {
                             bundle.putInt("UserID", us.getUser_id());
                             ConvertionFragment fConv = new ConvertionFragment();
                             fConv.setArguments(bundle);
-
                              replaceFragment(fConv);
                         }
                     });
 
                 } else {
                     //ERROR
-
                     Toast.makeText(getActivity().getBaseContext(), "lOI", Toast.LENGTH_SHORT).show();
-
                     Toast.makeText(getActivity().getBaseContext(),"Khong co danh sach ban be",Toast.LENGTH_SHORT).show();
-
                 }
             }
         });

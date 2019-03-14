@@ -36,10 +36,10 @@ public class SearchAdapter extends ArrayAdapter<User> {
         // Get the {@link AndroidFlavor} object located at this position in the list
         User currentAndroidFlavor = getItem(position);
         // Find the TextView in the list_item.xml layout with the ID version_name
-        TextView txtUserName = (TextView) listItemView.findViewById(R.id.fullname);
+        TextView txtFullName = (TextView) listItemView.findViewById(R.id.fullname);
         // Get the version name from the current AndroidFlavor object and
         // set this text on the name TextView
-        txtUserName.setText(currentAndroidFlavor.getUser_name());
+        txtFullName.setText(currentAndroidFlavor.getFull_name());
 
         Button btnAdd=(Button) listItemView.findViewById(R.id.btnAdd);
         /*TextView txtStatus=(TextView) listItemView.findViewById(R.id.user_single_status);

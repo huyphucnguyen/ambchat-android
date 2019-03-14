@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -17,40 +17,35 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/txtTitle"
+                android:text="Search"/>
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/edtxtKey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enter your name"
-                    android:layout_weight="6"/>
-
-                <Button
-                    android:id="@+id/btnSearch"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="4"
-                    android:text="Search"
-                    android:background="#ffffff"/>
-
-            </LinearLayout>
-
+                android:layout_height="match_parent"
+               >
+            </android.support.v7.widget.SearchView>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
+   <!-- <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="453dp"
         android:layout_above="@id/bottom"
         android:layout_below="@id/bar_layout"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp" />-->
+    <ListView
+        android:id="@+id/lvResSearchs"
+        android:layout_width="match_parent"
+        android:layout_height="513dp"
 
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="54dp">
 
-
-
+    </ListView>
 </RelativeLayout>

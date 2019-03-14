@@ -181,7 +181,7 @@ ChatsFragment extends Fragment {
                 }
             }
         });
-        request.execute(parameter);
+       // request.execute(parameter);
 
     }
 

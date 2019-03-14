@@ -19,10 +19,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
+import com.ambientdigitalgroup.ambchat.adapters.SearchAdapter;
+import com.ambientdigitalgroup.ambchat.adapters.UserAdapter;
 import com.ambientdigitalgroup.ambchat.networks.SearchRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignInRequest;
@@ -31,9 +34,12 @@ import com.ambientdigitalgroup.ambchat.utils.Extension;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUser;
 import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.ambientdigitalgroup.ambchat.utils.Result;
+import com.ambientdigitalgroup.ambchat.utils.User;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,6 +51,9 @@ public class SearchFargment extends Fragment {
     EditText editText;
     Button imgSearch;
     AlertDialog mLoginProgress;
+    ListView lvResSearch;
+    View view;
+    ArrayList<User> arrUser;
     public SearchFargment() {
         // Required empty public constructor
     }
@@ -54,7 +63,7 @@ public class SearchFargment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_searchs, container, false);
+        view= inflater.inflate(R.layout.fragment_searchs, container, false);
 
         Activity activity = getActivity();
 
@@ -74,47 +83,40 @@ public class SearchFargment extends Fragment {
         // Inflate the layout for this fragment
 
         // searchView=(SearchView)view.findViewById(R.id.search);
-        editText=(EditText) view.findViewById(R.id.edtxtKey);
-        imgSearch=(Button) view.findViewById(R.id.btnSearch);
 
+
+        getViews();
         LoadUser();
        return  view;
     }
 
+    public void getViews(){
+
+        lvResSearch=view.findViewById(R.id.lvResSearchs);
+
+    }
+
     public void LoadUser(){
-       imgSearch.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
 
 
-               String keySearch = editText.getText().toString().trim();
-
-
-
-
+               String keySearch = "danh";
                Map<String, String> parameter = new HashMap<>();
                parameter.put("keysearch", keySearch);
-
-
                SearchRequest request = new SearchRequest(new SeverRequest.SeverRequestListener() {
                    @Override
                    public void completed(Object obj) {
                        boolean success = false;
-
-
                        if (obj != null) {
-                           Result res = (Result) obj;
 
-
+                            arrUser = (ArrayList<User>) obj;
+                           SearchAdapter adapter = new SearchAdapter(getActivity(),arrUser);
+                           lvResSearch.setAdapter(adapter);
                        }
 
                    }
                });
 
                request.execute(parameter);
-           }
-       });
-
 
     }
 }

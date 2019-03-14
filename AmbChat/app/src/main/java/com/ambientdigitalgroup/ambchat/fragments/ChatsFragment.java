@@ -63,7 +63,6 @@ ChatsFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,8 +70,8 @@ ChatsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_chats, container, false);
 
 
-        Activity activity = getActivity();
-        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
+//        Activity activity = getActivity();
+//        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
 
 
         recyclerView = view.findViewById(R.id.recycler_view);

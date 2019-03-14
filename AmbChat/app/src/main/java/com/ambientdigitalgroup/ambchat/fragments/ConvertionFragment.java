@@ -89,8 +89,8 @@ public class ConvertionFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_convertion, container, false);
 
         Activity activity = getActivity();
+        ((StartActivity )activity).setOnBackPressListener(null);
 
-        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener((FragmentActivity) activity));
         if (getArguments() != null) {
             userid = String.valueOf(getArguments().getInt(USER_ID));
         }

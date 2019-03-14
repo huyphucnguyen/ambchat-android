@@ -1,5 +1,6 @@
 package com.ambientdigitalgroup.ambchat.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
+import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
 import com.ambientdigitalgroup.ambchat.networks.SignUpRequest;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
@@ -43,6 +45,8 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signup, container, false);
         addControls(root);
+        Activity activity = getActivity();
+        ((StartActivity )activity).setOnBackPressListener(null);
         return root;
     }
 

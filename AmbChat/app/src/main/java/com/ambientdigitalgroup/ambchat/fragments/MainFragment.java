@@ -99,10 +99,11 @@ public class MainFragment extends Fragment {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             if(fragment!=null&&fragment.isAdded()){
                 transaction.replace(R.id.flContainer, fragment);
-                Toast.makeText(getContext(),"Sign_in fragment is exist",Toast.LENGTH_LONG).show();
             }
             else {
                 SignInFragment signInFragment = new SignInFragment();
+                transaction.remove(getChildFragmentManager().findFragmentById(R.id.flContainer));
+                getFragmentManager().popBackStack();
                 transaction.replace(R.id.flContainer, signInFragment);
             }
             transaction.commit();

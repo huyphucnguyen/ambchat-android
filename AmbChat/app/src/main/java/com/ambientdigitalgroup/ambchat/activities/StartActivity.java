@@ -66,13 +66,19 @@ public class StartActivity extends AppCompatActivity {
                             token = res.getToken();
                             ProfileUser user = ( ProfileUser ) res.getData();
                             Fragment fragment = new MainFragment();
+                            //Create bundle to send data
                             Bundle args = new Bundle();
                             args.putString(USERNAME, user.getUser_name());
                             args.putString(FULLNAME, user.getFull_name());
                             args.putInt(USERID, user.getUser_id());
                             args.putString(EMAIL, user.getEmail());
                             fragment.setArguments(args);
-                            Extension.replaceFragment(getSupportFragmentManager(), fragment);
+                            //add fragment
+                            FragmentTransaction transaction = getSupportFragmentManager()
+                                    .beginTransaction();
+                            transaction.add(R.id.flContainer, fragment,"MAIN")
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     }//obj != null
                     if (!success) {
@@ -84,8 +90,10 @@ public class StartActivity extends AppCompatActivity {
                         }
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.flContainer, fragment, "SIGN_IN");
-                        transaction.commit();
+                        transaction
+                                .add(R.id.flContainer, fragment, "SIGN_IN")
+                                .addToBackStack(null)
+                                .commit();
                     }
                     mLoginProgress.dismiss();
                 }
@@ -103,6 +111,7 @@ public class StartActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.add(R.id.flContainer, fragment, "SIGN_IN");
+            transaction.addToBackStack(null);
             transaction.commit();
         }
 

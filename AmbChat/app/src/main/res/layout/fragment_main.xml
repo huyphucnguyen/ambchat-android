@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainFragment">
 
-
-    <Button
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFF"
-        android:translationZ="-10dp"
-        tools:targetApi="lollipop" />
+        android:clickable="false"/>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

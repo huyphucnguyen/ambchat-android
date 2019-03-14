@@ -56,7 +56,7 @@ public class FriendsFragment extends Fragment {
         ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
         mCurrentUserId = String.valueOf(Extension.UserID);
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("user_id",ProfileUsers.getInstance().user_id+"");
+        parameter.put("user_id",String.valueOf(ProfileUsers.getInstance().user_id));
         lvListFriends = mMainView.findViewById(R.id.lvFriends);
         GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
             @Override

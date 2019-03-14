@@ -1,7 +1,9 @@
 package com.ambientdigitalgroup.ambchat.networks;
 
 import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
+import com.ambientdigitalgroup.ambchat.utils.Result;
 import com.ambientdigitalgroup.ambchat.utils.User;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,11 +22,11 @@ public class AddFriendRequest extends  SeverRequest {
 
     @Override
     protected Request prepare(Map<String, String> parameter) {
-        String from_id = parameter.get("from_id");
+        String user_id = parameter.get("user_id");
         String friend_id = parameter.get("friend_id");
         RequestBody requestBody = new MultipartBody.Builder()
-                .addFormDataPart("user_id", userid)
-                .addFormDataPart("friend_id")
+                .addFormDataPart("user_id",user_id)
+                .addFormDataPart("friend_id",friend_id)
                 .setType(MultipartBody.FORM)
                 .build();
 
@@ -39,10 +41,10 @@ public class AddFriendRequest extends  SeverRequest {
     @Override
     protected Object process(String data) {
         try {
-
-            JSONObject json=new JSONObject(data);
-
-            }
+            Gson gson=new Gson();
+            Result res=gson.fromJson(data,Result.class);
+            res.setData(null);
+            return res;
 
 
         } catch (Exception e){

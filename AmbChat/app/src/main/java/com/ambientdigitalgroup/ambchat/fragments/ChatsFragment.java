@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ambientdigitalgroup.ambchat.R;
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
+import com.ambientdigitalgroup.ambchat.adapters.ChatUserAdapter;
 import com.ambientdigitalgroup.ambchat.adapters.MessageAdapter;
 import com.ambientdigitalgroup.ambchat.networks.GetFriendsRequest;
 import com.ambientdigitalgroup.ambchat.networks.SeverRequest;
@@ -50,7 +51,7 @@ ChatsFragment extends Fragment {
     FirebaseDatabase db;
     private RecyclerView recyclerView;
 
-    private MessageAdapter.ChatsUserAdapter chatUserAdapter;
+    private ChatUserAdapter chatUserAdapter;
     private List<User> mUsers;
 
     String  mCurentUserID;
@@ -93,7 +94,7 @@ ChatsFragment extends Fragment {
                     usersList.add(chatlist);
                 }
 
-                chatList();
+               chatList();
             }
 
             @Override
@@ -114,40 +115,18 @@ ChatsFragment extends Fragment {
     }
 
     private void chatList() {
-       /* mUsers = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsers.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
-                    for (Chatlist chatlist : usersList){
-                        // if (user.getId().equals(chatlist.getId())){
-                        if(user.getId().compareTo(chatlist.getId())==0)
-                            mUsers.add(user);
-                        // }
-                    }
-                }
-                userAdapter = new UserAdapter(getContext(), mUsers, true);
-                recyclerView.setAdapter(userAdapter);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
         Map<String, String> parameter = new HashMap<>();
+        parameter.put("user_id",String.valueOf(ProfileUsers.getInstance().user_id));
         mUsers = new ArrayList<>();
         GetFriendsRequest request = new GetFriendsRequest(new SeverRequest.SeverRequestListener() {
             @Override
             public void completed(Object obj) {
 
                 if (obj != null) {
-                    Result res = (Result) obj;
 
-                    final ArrayList<User> arr = (ArrayList<User>) res.getData();
+
+                    final ArrayList<User> arr = (ArrayList<User>) obj;
 
                     for (int i=0;i<usersList.size();i++){
                         for(int j=0;j<arr.size();j++){
@@ -156,7 +135,7 @@ ChatsFragment extends Fragment {
                             // }
                         }
                     }
-                    chatUserAdapter = new MessageAdapter.ChatsUserAdapter(getContext(), mUsers, true);
+                    chatUserAdapter = new ChatUserAdapter(getContext(), mUsers, true);
                     recyclerView.setAdapter(chatUserAdapter);
                   /*  lvListFriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -176,12 +155,12 @@ ChatsFragment extends Fragment {
 
                     Toast.makeText(getActivity().getBaseContext(), "lOI", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getActivity().getBaseContext(),"Khong co danh sach ban be",Toast.LENGTH_SHORT).show();
+
 
                 }
             }
         });
-       // request.execute(parameter);
+        request.execute(parameter);
 
     }
 

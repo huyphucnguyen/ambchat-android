@@ -239,7 +239,7 @@ public class ConvertionFragment extends Fragment {
                                 public void onResponse(Response<MyResponse> response, Retrofit retrofit) {
                                     if (response.code() == 200){
                                         if (response.body().success != 1){
-                                            Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
+                                           Toast.makeText(getActivity(), "Failed!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }

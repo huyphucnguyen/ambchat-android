@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +48,9 @@ import java.util.Map;
  */
 public class SearchFargment extends Fragment {
 
-    SearchView searchView;
+
     EditText editText;
-    Button imgSearch;
-    AlertDialog mLoginProgress;
+    ImageButton imgSearch;
     ListView lvResSearch;
     View view;
     ArrayList<User> arrUser;
@@ -82,24 +82,21 @@ public class SearchFargment extends Fragment {
         });
         // Inflate the layout for this fragment
 
-        // searchView=(SearchView)view.findViewById(R.id.search);
-
-
         getViews();
-        LoadUser();
+       AddVent();
        return  view;
     }
 
     public void getViews(){
 
         lvResSearch=view.findViewById(R.id.lvResSearchs);
+        editText =view.findViewById(R.id.edtSear);
+        imgSearch=view.findViewById(R.id.imgSear);
 
     }
 
     public void LoadUser(){
-
-
-               String keySearch = "danh";
+               String keySearch = editText.getText().toString();
                Map<String, String> parameter = new HashMap<>();
                parameter.put("keysearch", keySearch);
                SearchRequest request = new SearchRequest(new SeverRequest.SeverRequestListener() {
@@ -108,9 +105,14 @@ public class SearchFargment extends Fragment {
                        boolean success = false;
                        if (obj != null) {
 
-                            arrUser = (ArrayList<User>) obj;
+                           arrUser = (ArrayList<User>) obj;
                            SearchAdapter adapter = new SearchAdapter(getActivity(),arrUser);
                            lvResSearch.setAdapter(adapter);
+                       }
+
+                       else{
+                           //kong tim tay
+
                        }
 
                    }
@@ -118,5 +120,18 @@ public class SearchFargment extends Fragment {
 
                request.execute(parameter);
 
+    }
+
+    public void AddVent(){
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( editText.getText().toString()!=null){
+                    LoadUser();
+                }else{
+                    Toast.makeText(getContext(),"So dien toai kong duo de trong",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

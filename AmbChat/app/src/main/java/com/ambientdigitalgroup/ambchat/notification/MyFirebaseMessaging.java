@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.ambientdigitalgroup.ambchat.activities.StartActivity;
 import com.ambientdigitalgroup.ambchat.utils.Extension;
+import com.ambientdigitalgroup.ambchat.utils.ProfileUsers;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -26,25 +27,25 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-       /* String sented = remoteMessage.getData().get("sented");
-        String user = remoteMessage.getData().get("user");*/
+        String sented = remoteMessage.getData().get("sented");
+        String user = remoteMessage.getData().get("user");
 
-      /*  SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
-        String currentUser = preferences.getString("currentuser", "none");
+       // SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
+       // String currentUser = preferences.getString("currentuser", "none");
 
        // FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (Extension.UserName != null && sented.equals(Extension.UserID)){
-            if (!currentUser.equals(user)) {
+
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     sendOreoNotification(remoteMessage);
                 } else {
                     sendNotification(remoteMessage);
                 }
-            }
 
-        }*/
-        sendNotification(remoteMessage);
+
+
+      //  sendNotification(remoteMessage);
     }
 
     private void sendOreoNotification(RemoteMessage remoteMessage){

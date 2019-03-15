@@ -145,8 +145,6 @@ public class ConvertionFragment extends Fragment {
 
         seenMessage(userid);
 
-
-
         return  view;
     }
 

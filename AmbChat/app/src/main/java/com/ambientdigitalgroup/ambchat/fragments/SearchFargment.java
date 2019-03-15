@@ -108,10 +108,11 @@ public class SearchFargment extends Fragment {
                            arrUser = (ArrayList<User>) obj;
                            SearchAdapter adapter = new SearchAdapter(getActivity(),arrUser);
                            lvResSearch.setAdapter(adapter);
+
                        }
 
                        else{
-                           //kong tim tay
+                           //kHong tim tay
 
                        }
 
@@ -126,10 +127,10 @@ public class SearchFargment extends Fragment {
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if( editText.getText().toString()!=null){
+                if( !editText.getText().toString().equals("")){
                     LoadUser();
                 }else{
-                    Toast.makeText(getContext(),"So dien toai kong duo de trong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"So dien toai kong duoc de trong",Toast.LENGTH_SHORT).show();
                 }
             }
         });

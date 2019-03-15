@@ -5,7 +5,21 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:padding="10dp"
 android:layout_height="wrap_content">
 
-<de.hdodenhof.circleimageview.CircleImageView
+    <Button
+        android:id="@+id/btnExc"
+        android:layout_width="61dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@+id/profile_image"
+        android:layout_alignStart="@+id/btnAdd"
+        android:background="@drawable/custom"
+
+        android:gravity="center"
+        android:text="X"
+        android:textAppearance="@style/textSmall"
+        android:textColor="#f90303"
+        android:layout_alignLeft="@+id/btnAdd" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:id="@+id/profile_image"
@@ -23,17 +37,17 @@ android:layout_height="wrap_content">
     android:textAppearance="@style/textLarge"/>
 
     <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="90dp"
-        android:layout_height="30dp"
+        android:id="@+id/btnAcept"
+        android:layout_width="61dp"
+        android:layout_height="26dp"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="7dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="23dp"
         android:background="@drawable/custom"
         android:gravity="center"
         android:text="+"
         android:textAppearance="@style/textSmall"
         android:textColor="@color/cardview_light_background"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="7dp" />
+        android:layout_marginRight="23dp" />
 </RelativeLayout>

@@ -78,7 +78,6 @@ public class SearchAdapter extends ArrayAdapter<User> {
             @Override
             public void completed(Object obj) {
                 if (obj != null) {
-
                     final ArrayList<User> arr = (ArrayList<User>)obj;
                     for (int i=0;i<arr.size();i++){
                         if(arr.get(i).getUser_id()==currentAndroidFlavor.getUser_id()){
@@ -87,7 +86,6 @@ public class SearchAdapter extends ArrayAdapter<User> {
                             btnAdd.setEnabled(false);
                         }
                     }
-
                 } else {
                     //ERROR
                     Toast.makeText(getContext(), "lOI", Toast.LENGTH_SHORT).show();

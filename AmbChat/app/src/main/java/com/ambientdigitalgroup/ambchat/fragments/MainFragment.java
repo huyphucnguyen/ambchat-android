@@ -45,12 +45,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = ( ViewGroup ) inflater.inflate(R.layout.fragment_main,container,false);
         getView(root);
-
-
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolBar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("AbmChat");
-
-       // ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //tab
         mSectinosPagerAdapter =new SectionsPagerAdapter(getChildFragmentManager());
@@ -96,19 +92,26 @@ public class MainFragment extends Fragment {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.main_logout_btn){
             Fragment fragment = getFragmentManager().findFragmentByTag("SIGN_IN");
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if(fragment!=null&&fragment.isAdded()){
-                transaction.replace(R.id.flContainer, fragment);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if(fragmentManager.getBackStackEntryCount()>0){
+                for(int i = 0;i<fragmentManager.getBackStackEntryCount();i++){
+                    fragmentManager.popBackStackImmediate();
+                }
+            }
+            if(fragment!=null){
+                transaction.replace(R.id.flContainer, fragment)
+                .addToBackStack(null)
+                .commit();
             }
             else {
                 SignInFragment signInFragment = new SignInFragment();
                 transaction.remove(getChildFragmentManager().findFragmentById(R.id.flContainer));
                 getFragmentManager().popBackStack();
-                transaction.replace(R.id.flContainer, signInFragment);
+                transaction.add(R.id.flContainer, signInFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
-            transaction.commit();
-
-
         }
 
         if(item.getItemId() == R.id.main_account_btn){

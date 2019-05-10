@@ -29,9 +29,6 @@ public class RequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        Activity activity = getActivity();
-        ((StartActivity )activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
-
         return inflater.inflate(R.layout.fragment_request, container, false);
     }
 

@@ -52,10 +52,6 @@ public class FriendsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
-
-        Activity activity = getActivity();
-        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener(( FragmentActivity ) activity));
-
         mCurrentUserId = String.valueOf(Extension.UserID);
         Map<String, String> parameter = new HashMap<>();
         parameter.put("user_id",String.valueOf(ProfileUsers.getInstance().user_id));
@@ -104,7 +100,7 @@ public class FriendsFragment extends Fragment {
         if(getChildFragmentManager()!=null){
             FragmentManager manager = getActivity().getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.flContainer, fConv,"chat");
+            transaction.add(R.id.flContainer, fConv,"chat");
             transaction.addToBackStack(null);
             transaction.commit();
         }

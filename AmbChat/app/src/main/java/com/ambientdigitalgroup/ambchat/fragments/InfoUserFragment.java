@@ -29,10 +29,6 @@ public class InfoUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.fragment_infor_user,container,false);
         getView(root);
-
-        FragmentActivity activity = getActivity();
-        ((StartActivity )activity).setOnBackPressListener(null);
-
         return root;
     }
 

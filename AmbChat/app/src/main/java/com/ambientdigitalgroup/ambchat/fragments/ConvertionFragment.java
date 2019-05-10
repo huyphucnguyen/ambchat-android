@@ -88,9 +88,6 @@ public class ConvertionFragment extends Fragment {
 
        View view = inflater.inflate(R.layout.fragment_convertion, container, false);
 
-        Activity activity = getActivity();
-        ((StartActivity )activity).setOnBackPressListener(null);
-
         if (getArguments() != null) {
             userid = String.valueOf(getArguments().getInt(USER_ID));
         }
@@ -101,8 +98,9 @@ public class ConvertionFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // and this
-                startActivity(new Intent(getContext(), StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+               if(getFragmentManager().getBackStackEntryCount()>0){
+                   getFragmentManager().popBackStack();
+               }
             }
         });
 

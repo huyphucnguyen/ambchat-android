@@ -34,7 +34,6 @@ public class StartActivity extends AppCompatActivity {
     public static final String FULLNAME = "FULLNAME";
     public static final String USERID = "USERID";
     public static final String EMAIL = "EMAIL";
-    protected OnBackPressListener onBackPressListener;
 
 
     @Override
@@ -133,18 +132,14 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-       if(onBackPressListener !=null){
-           Toast.makeText(this,"Day la custom back press",Toast.LENGTH_LONG).show();
-           onBackPressListener.doBack();
-       }else{
-           Toast.makeText(this,"Day la super back press",Toast.LENGTH_LONG).show();
-           super.onBackPressed();
-       }
-    }
-
-    public void setOnBackPressListener(OnBackPressListener onBackPressListener){
-        this.onBackPressListener = onBackPressListener;
+        if(getSupportFragmentManager().getBackStackEntryCount()<1) {
+            System.exit(0);
+        }
+        if(getSupportFragmentManager().findFragmentById(R.id.flContainer) != null){
+            if (getSupportFragmentManager().findFragmentById(R.id.flContainer).getTag().equals("SIGN_IN")){
+                System.exit(0);
+            }
+        }
     }
 
 }

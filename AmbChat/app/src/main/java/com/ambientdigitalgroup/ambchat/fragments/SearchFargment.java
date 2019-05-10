@@ -67,8 +67,6 @@ public class SearchFargment extends Fragment {
 
         Activity activity = getActivity();
 
-        ((StartActivity)activity).setOnBackPressListener(new BaseBackPressListenerListener((FragmentActivity) activity));
-
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         /*((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Search");*/
@@ -77,7 +75,9 @@ public class SearchFargment extends Fragment {
             @Override
             public void onClick(View view) {
                 // and this
-                startActivity(new Intent(getContext(), StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                if(getFragmentManager().getBackStackEntryCount()>0){
+                    getFragmentManager().popBackStack();
+                }
             }
         });
         // Inflate the layout for this fragment
@@ -108,7 +108,6 @@ public class SearchFargment extends Fragment {
                            arrUser = (ArrayList<User>) obj;
                            SearchAdapter adapter = new SearchAdapter(getActivity(),arrUser);
                            lvResSearch.setAdapter(adapter);
-
                        }
 
                        else{

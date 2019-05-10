@@ -45,8 +45,6 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup root = ( ViewGroup ) inflater.inflate(R.layout.signup, container, false);
         addControls(root);
-        Activity activity = getActivity();
-        ((StartActivity )activity).setOnBackPressListener(null);
         return root;
     }
 

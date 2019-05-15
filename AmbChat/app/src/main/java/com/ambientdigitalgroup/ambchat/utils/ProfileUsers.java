@@ -19,6 +19,13 @@ public class ProfileUsers {
     public int gender;
     @SerializedName("user_id")
     public int user_id;
+    @SerializedName("phone")
+    public String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
     public String getUser_name() {
         return user_name;
     }

@@ -15,5 +15,6 @@
     <dimen name="button_left" />
     <dimen name="button_start" />
     <dimen name="button_right" />
+    <dimen name="distant_com_sign">20dp</dimen>
 
 </resources>

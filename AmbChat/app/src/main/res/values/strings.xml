@@ -13,7 +13,7 @@
     <string name="male">Male</string>
     <string name="gender">Gender</string>
     <string name="fullName">Full Name</string>
-    <string name="birthday">BirthDay</string>
+    <string name="birthday">Birthday</string>
     <string name="date">10/10/1997</string>
     <string name="email">Email</string>
     <string name="userName">User Name</string>
@@ -43,4 +43,12 @@
     <string name="_00_00">00:00</string>
     <string name="click_dk">đây</string>
     <string name="add_friend">Add</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget_password">Forget password</string>
+    <string name="type_a_message">Type a message...</string>
+    <string name="add_fr">ADD</string>
+    <string name="phone">Phone</string>
+    <string name="phone_number">Phone number</string>
+    <string name="title">Title</string>
+    <string name="close">CLOSE</string>
 </resources>

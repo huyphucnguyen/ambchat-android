@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:layout_gravity="center">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/transparent">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="4dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/hint_card"
+            app:cardBackgroundColor="#FAFAFA"
+            app:cardElevation="0dp"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblTitleHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/title"
+                    android:textColor="@android:color/primary_text_light"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/lblMessageHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="sấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdassấdsdsadasdsaddasdasdasdssdas"
+                    tools:text="You've d displayed this awesome pop up view " />
+
+                <Button
+                    android:id="@+id/btnCloseHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/background_card"
+                    android:text="@string/close"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <ImageView
+            android:id="@+id/imgIconHint"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/tick_green"
+            android:padding="1dp"
+            android:src="@drawable/ic_lightbulb_outline_black_24dp" />
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

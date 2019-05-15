@@ -9,12 +9,12 @@ android:layout_height="wrap_content">
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:id="@+id/profile_image"
-    android:src="@drawable/baseline_person_pin_black_18dp"/>
+    android:src="@drawable/online_icon"/>
 
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="display name"
+    android:text="Display name"
     android:id="@+id/fullname"
     android:layout_toRightOf="@id/profile_image"
     android:layout_toEndOf="@id/profile_image"
@@ -31,7 +31,7 @@ android:layout_height="wrap_content">
         android:layout_marginEnd="7dp"
         android:background="@drawable/custom"
         android:gravity="center"
-        android:text="+"
+        android:text="@string/add_fr"
         android:textAppearance="@style/textSmall"
         android:textColor="@color/cardview_light_background"
         android:layout_alignParentRight="true"
